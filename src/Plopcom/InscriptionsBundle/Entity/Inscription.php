@@ -61,7 +61,7 @@ class Inscription
     /**
      * @ORM\ManyToOne(targetEntity="Race", inversedBy="inscriptions", cascade={"persist", "merge"})
      * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="race_id", referencedColumnName="id")
+     *  @ORM\JoinColumn(name="race_id", referencedColumnName="id",onDelete="CASCADE")
      * })
      */
     protected $race;
