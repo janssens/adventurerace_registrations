@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Editer événement
+{% endblock %}
+
+{% block body %}
+    <h1>Editer événement</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <button type="submit"  class="btn btn-primary">Sauver</button>
+    {{ form_end(edit_form) }}
+
+    <table>
+        <tr>
+            <td>
+                <a href="{{ path('event_index') }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour</a>
+            </td>
+            <td>
+                {{ form_start(delete_form) }}
+                <button type="submit"  class="btn btn-danger"><i class="fa fa-fw fa-trash"></i>Supprimer</button>
+                {{ form_end(delete_form) }}
+            </td>
+        </tr>
+    </table>
+
+{% endblock %}

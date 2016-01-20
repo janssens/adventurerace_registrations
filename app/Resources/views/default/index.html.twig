@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <a href="{{ path('type_index') }}" class="btn btn-default">
+            Gérer les types de course
+        </a>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+
+        <h2>Mes événements</h2>
+        <ul class="events-list">
+            {% for event in my_events %}
+                <li>
+                    {{ include('event/event_details.html.twig', { 'event': event }) }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ path('event_new') }}" class="btn btn-default">
+            <i class="fa fa-fw fa-plus"></i>
+            Créer un nouvel événement
+        </a>
+
+    {% endif %}
+
+    <h2>Evénements</h2>
+    <ul class="events-list">
+        {% for event in events %}
+            <li>
+                {{ include('event/event_details.html.twig', { 'event': event }) }}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block stylesheets %}
+<style></style>
+{% endblock %}

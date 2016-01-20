@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ race.title }}&nbsp;<span class="label label-default">{{ race.type.title }}</span></h1>
+    <h3>{% if race.date %}{{ race.date|date('d M Y') }}{% endif %}</h3>
+    <p>{{ race.description }}</p>
+    <p><small>{{ race.resume }}</small></p>
+
+    <a href="{{ path('inscription_new', { 'slug': race.slug }) }}" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i>Nouvelle inscription</a>
+
+    <h1>Liste des inscrits</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Dossard</th>
+            {% for i in 1..race.numberOfAthlete %}
+                <th>Athlete {{ loop.index }}</th>
+            {% endfor %}
+            <th>Team</th>
+            <th>Inscrit le</th>
+            <th>Mise à jour le</th>
+            <th>Status</th>
+            <th>Status Payement</th>
+            {% if is_granted('ROLE_ADMIN') %}
+                <th>Actions</th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for inscription in race.inscriptions %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                {% for athlete in inscription.athletes %}
+                    <td>{{ athlete.firstname|lower|capitalize }} {{ athlete.lastname|upper }}</td>
+                {% endfor %}
+                <td>{{ inscription.title }}</td>
+                <td>{% if inscription.created %}{{ inscription.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if inscription.updated %}{{ inscription.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ inscription.status|human_status|raw }}</td>
+                <td>{{ inscription.payementStatus|human_payement_status|raw }}</td>
+                <td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('inscription_show', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-default btn-sm"><i class="fa fa-search fa-fw"></i>Détails</a>
+                    <a href="{{ path('inscription_edit', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil fa-fw"></i>Editer</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <table>
+        <tr>
+            <td>
+                <a href="{{ path('event_show', { 'slug': race.event.slug }) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à l'événement</a>
+            </td>
+            {% if is_granted('ROLE_ADMIN') %}
+                {% if race.event.owner == app.user %}
+                    <td>
+                        <a href="{{ path('race_edit', { 'id': race.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i>Editer cette course</a>
+                    </td>
+                    <td>
+                        {{ form_start(delete_form) }}
+                        <button type="submit"  class="btn btn-danger"><i class="fa fa-fw fa-trash"></i>Supprimer</button>
+                        {{ form_end(delete_form) }}
+                    </td>
+                {% endif %}
+            {% endif %}
+        </tr>
+    </table>
+{% endblock %}

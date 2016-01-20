@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ event.title }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ event.title }}</h1>
+
+<p>
+    {{ event.description }}
+</p>
+
+    <h2>Liste des courses de cet événement</h2>
+    <div class="races-list row">
+        {% for race in event.races %}
+            {{ include('race/race_details.html.twig', { 'race': race }) }}
+        {% endfor %}
+    </div>
+    <hr>
+    <table>
+        <tr>
+            <td>
+                <a href="{{ path('event_index') }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à la liste</a>
+            </td>
+            {% if is_granted("ROLE_ADMIN") %}
+                {% if event.owner == app.user %}
+                <td>
+                    <a href="{{ path('event_edit', { 'id': event.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i>Editer ce événement</a>
+                </td>
+                <td>
+                    <a href="{{ path('race_new', { 'event_id': event.id }) }}" class="btn btn-default"><i class="fa fa-fw fa-plus"></i>Ajouter une course</a>
+                </td>
+                <td>
+                    {{ form_start(delete_form) }}
+                    <button type="submit"  class="btn btn-danger"><i class="fa fa-fw fa-trash"></i>Supprimer l'événement</button>
+                    {{ form_end(delete_form) }}
+                </td>
+                {% endif %}
+            {% endif %}
+        </tr>
+    </table>
+
+{% endblock %}

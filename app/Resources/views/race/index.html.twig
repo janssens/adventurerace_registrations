@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des courses</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Evénement</th>
+                <th>Distance</th>
+                <th>Elevation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for race in races %}
+            <tr>
+                <td><a href="{{ path('race_show', { 'slug': race.slug }) }}">{{ race.id }}</a></td>
+                <td>{{ race.title }}</td>
+                <td>{% if race.date %}{{ race.date|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ race.description }}</td>
+                <td>{% if race.event %}<a href="{{ path("event_show",{ 'id' : race.event.id }) }}">{{ race.event.title }}</a>{% endif %}</td>
+                <td>{{ race.distance/1000 }} km</td>
+                <td>{{ race.elevation }} d+</td>
+                <td>
+                    <a href="{{ path('race_show', { 'slug': race.slug }) }}" class="btn btn-default">voir</a>
+                    <a href="{{ path('race_edit', { 'id': race.id }) }}" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i>Editer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

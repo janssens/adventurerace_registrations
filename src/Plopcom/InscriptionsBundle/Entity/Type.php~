@@ -1,0 +1,49 @@
+<?php
+// src/Plopcom/InscriptionsBundle/Entity/Type.php
+
+namespace Plopcom\InscriptionsBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="type")
+ */
+class Type
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     */
+    protected $code;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Race", inversedBy="type")
+     */
+    protected $races;
+
+    public function __construct()
+    {
+        $this->races = new ArrayCollection();
+    }
+}

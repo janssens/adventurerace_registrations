@@ -1,0 +1,47 @@
+<?php
+
+namespace Plopcom\InscriptionsBundle\Form;
+
+use Proxies\__CG__\Plopcom\InscriptionsBundle\Entity\Document;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class RaceType extends AbstractType
+{
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('title',TextType::class,array('label'=>'titre','attr' => array('placeholder'=>'Nom de votre course','class'=>'form-control')))
+            ->add('slug',TextType::class,array('label'=>'identifiant','attr' => array('placeholder'=>'nom-de-votre-course','class'=>'form-control',/*'disabled'=>'true'*/)))
+            ->add('type',EntityType::class,array('class'=>'PlopcomInscriptionsBundle:Type','choice_label'=>'title','label'  => 'Type de manifestation','multiple' => false, 'expanded' => true))
+            ->add('illustration', DocumentType::class)
+            ->add('date', DateType::class,array('attr' => array('class'=>'form-control')))
+            ->add('description',TextareaType::class,array('label'=>'description','attr' => array('class'=>'form-control')))
+            ->add('number_of_athlete',IntegerType::class,array('label'=>'Nombre de coureurs par inscription','attr' => array('class'=>'form-control')))
+            ->add('distance',IntegerType::class,array('label'=>'Distance à parcourir en metres','required'=>false,'attr' => array('class'=>'form-control')))
+            ->add('elevation',IntegerType::class,array('label'=>'Gain en dénivelé en metres','required'=>false,'attr' => array('class'=>'form-control')))
+            ->add('paypal_button_url',TextType::class,array('label'=>'url du bouton paypal','required'=>false,'attr' => array('class'=>'form-control')))
+        ;
+    }
+    
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Plopcom\InscriptionsBundle\Entity\Race'
+        ));
+    }
+}

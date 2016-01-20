@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme edit_form _self %}
+
+{% block file_widget %}
+    {% spaceless %}
+
+        {% if file_url is not null %}
+            <div>
+                <a href="{{ file_url }}"><i class="fa fa-fw fa-file-{{ file_url|ext|ext_type }}-o"></i>{{ file_url }}</a>
+                &nbsp;<a href="#" class="toggle btn btn-default btn-sm">Changer</a>
+            </div>
+            <div id="file_field" style="display:none">
+                {{ block('form_widget') }}
+                <a href="#" class="toggle btn btn-danger">Annuler</a>
+            </div>
+        {% else %}
+            {{ block('form_widget') }}
+        {% endif %}
+
+    {% endspaceless %}
+{% endblock %}
+
+{% block body %}
+    <h1>Inscription edit</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_row(edit_form.title) }}
+    {% if is_granted("ROLE_ADMIN") %}
+        {{ form_row(edit_form.status) }}
+        {{ form_row(edit_form.payement_status) }}
+        {{ form_row(edit_form.admin_comment) }}
+    {% endif %}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Edit" />
+    {{ form_end(edit_form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('inscription_index') }}">Back to the list</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

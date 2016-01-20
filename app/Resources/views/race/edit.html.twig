@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Editer course
+{% endblock %}
+
+{% form_theme edit_form _self %}
+
+{% block file_widget %}
+    {% spaceless %}
+
+        {% if file_url is not null %}
+            <a href="/{{ file_url }}"><i class="fa fa-fw fa-file-{{ file_url|ext|ext_type }}-o"></i>{{ file_name }}</a>
+            {{ block('form_widget') }}
+        {% else %}
+            {{ block('form_widget') }}
+        {% endif %}
+
+    {% endspaceless %}
+{% endblock %}
+
+{% block body %}
+    <h1>Editer course</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <button type="submit" class="btn btn-primary" >Sauver</button>
+    {{ form_end(edit_form) }}
+
+    <table>
+        <tr>
+            <td>
+                <a href="{{ path('race_index') }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour</a>
+            </td>
+            <td>
+                {{ form_start(delete_form) }}
+                <button type="submit"  class="btn btn-danger"><i class="fa fa-fw fa-trash"></i>Supprimer</button>
+                {{ form_end(delete_form) }}
+            </td>
+        </tr>
+    </table>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Nouvelle course
+{% endblock %}
+
+{% block body %}
+    <h1>Nouvelle course</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary" ><i class="fa fa-fw fa-plus"></i>Créer</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('event_index') }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour</a>
+{% endblock %}

@@ -1,0 +1,48 @@
+{# src/Plopcom/InscriptionsBundle/Resources/views/Inscription/new.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}
+   Inscription {{ race.title }}
+{% endblock %}
+
+{% block body %}
+    <h1> Nouvelle inscription <b>{{ race.title }}</b> </h1>
+    {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {% if is_granted("ROLE_ADMIN") %}
+            <div style="display: none;">
+                {{ form_row(edit_form.status) }}
+                {{ form_row(edit_form.payement_status) }}
+                {{ form_row(edit_form.admin_comment) }}
+            </div>
+        {% endif %}
+        {% if race.numberOfAthlete > 1 %}
+        <h3>athletes</h3>
+        {%  endif %}
+        <div class="athletes">
+            {% for athlete in form.athletes %}
+                <div class="athlete">
+                {% if race.numberOfAthlete > 1 %}
+                    <h4>Athlete #{{ loop.index }}</h4>
+                {%  endif %}
+                    {{ form_row(athlete.firstname) }}
+                    {{ form_row(athlete.lastname) }}
+                    {{ form_row(athlete.email) }}
+                    {{ form_row(athlete.dob) }}
+                    {{ form_row(athlete.address.line_1) }}
+                    {{ form_row(athlete.address.line_2) }}
+                    {#{{ form_row(athlete.address.line_3) }}#}
+                    {{ form_row(athlete.address.city) }}
+                    {#{{ form_row(athlete.address.county_province) }}#}
+                    {{ form_row(athlete.address.zip_or_postcode) }}
+                    {{ form_row(athlete.address.country) }}
+                    {{ form_row(athlete.phone) }}
+                    {{ form_row(athlete.document) }}
+                </div>
+            {% endfor %}
+        </div>
+
+        {{ form_row(form.save) }}
+        {{ form_row(form.reset) }}
+    {{ form_end(form) }}
+{% endblock %}
