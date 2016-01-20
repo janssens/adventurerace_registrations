@@ -67,7 +67,16 @@
 
 <div class="container">
     {% for flashMessage in app.session.flashbag.get('error') %}
-        <div class="alert alert-danger" role="alert">{{ flashMessage }}</div>
+        <div class="alert alert-danger" role="alert"><i class="fa fa-fw fa-exclamation-triangle"></i>{{ flashMessage }}</div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-info" role="alert"><i class="fa fa-check fa-fw"></i>{{ flashMessage }}</div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success" role="alert"><i class="fa fa-check fa-fw"></i>{{ flashMessage }}</div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('warning') %}
+        <div class="alert alert-warning" role="alert">{{ flashMessage }}</div>
     {% endfor %}
 
     {% block body %}{% endblock %}

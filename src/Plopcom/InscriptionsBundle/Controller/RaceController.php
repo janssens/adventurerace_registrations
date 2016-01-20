@@ -78,9 +78,7 @@ class RaceController extends Controller
     /**
      * Back from paypal.
      *
-     * @Route("/{slug}/paypalipn", name="
-     *
-     *     ")
+     * @Route("/{slug}/paypalipn", name="race_paypalipn")
      * @Method("POST")
      */
     public function paypalipnAction(Race $race,Request $request)
@@ -117,9 +115,25 @@ class RaceController extends Controller
      * @Route("/{slug}", name="race_show")
      * @Method("GET")
      */
-    public function showAction(Race $race)
+    public function showAction(Request $request,Race $race)
     {
         $deleteForm = $this->createDeleteForm($race);
+
+        if ($request->get("msg")){
+            switch($request->get("msg")){
+                case 'full':
+                    $this->get('session')->getFlashBag()->add('warning', 'Désolé! La course est complète');
+                    break;
+                case 'cancel':
+                    $this->get('session')->getFlashBag()->add('error', 'Vous avez annulé le payment, essayez à nouveau');
+                    break;
+                case 'succes':
+                case 'success':
+                case 'yes':
+                    $this->get('session')->getFlashBag()->add('success', 'Votre payement a été enregistré, merci.');
+                    break;
+            }
+        }
 
         return $this->render('race/show.html.twig', array(
             'race' => $race,

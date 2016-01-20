@@ -27,22 +27,22 @@
     {{ form_start(edit_form) }}
         {{ form_row(edit_form.title) }}
     {% if is_granted("ROLE_ADMIN") %}
+        <hr>
         {{ form_row(edit_form.status) }}
         {{ form_row(edit_form.payement_status) }}
         {{ form_row(edit_form.admin_comment) }}
+        <hr>
     {% endif %}
         {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('inscription_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <hr>
+            <a href="{{ path('race_show',{"slug":inscription.race.slug}) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à la course</a>
+            {% if is_granted("ROLE_ADMIN") %}
+                {% if inscription.race.event.owner == app.user %}
+                    {{ form_start(delete_form) }}
+                        <input type="submit" value="Supprimer" class="btn btn-danger">
+                    {{ form_end(delete_form) }}
+                {% endif %}
+            {% endif %}
 {% endblock %}

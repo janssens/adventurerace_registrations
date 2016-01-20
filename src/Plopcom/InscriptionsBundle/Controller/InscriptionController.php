@@ -90,6 +90,20 @@ class InscriptionController extends Controller
                     $em->persist($inscription);
                     $em->flush();
 
+                    $message = \Swift_Message::newInstance()
+                        ->setSubject('Bienvenue au '.$race->getTitle())
+                        ->setFrom($race->getEvent()->getEmail())
+                        ->setTo('janssensgaetan@gmail.com')
+                        ->setBody(
+                            $this->renderView(
+                            // app/Resources/views/Emails/registration.html.twig
+                                'Emails/registration.html.twig',
+                                array('inscription' => $inscription)
+                            ),
+                            'text/html'
+                        );
+                    $this->get('mailer')->send($message);
+
                     return $this->redirectToRoute('inscription_show', array('id' => $inscription->getId(),'secret' => $inscription->getSalt()));
                 }
 

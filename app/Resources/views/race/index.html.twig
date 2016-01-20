@@ -23,7 +23,7 @@
                 <td>{{ race.title }}</td>
                 <td>{% if race.date %}{{ race.date|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ race.description }}</td>
-                <td>{% if race.event %}<a href="{{ path("event_show",{ 'id' : race.event.id }) }}">{{ race.event.title }}</a>{% endif %}</td>
+                <td>{% if race.event %}<a href="{{ path("event_show",{ 'slug' : race.event.slug }) }}">{{ race.event.title }}</a>{% endif %}</td>
                 <td>{{ race.distance/1000 }} km</td>
                 <td>{{ race.elevation }} d+</td>
                 <td>
