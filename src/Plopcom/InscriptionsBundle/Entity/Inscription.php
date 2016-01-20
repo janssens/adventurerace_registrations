@@ -85,7 +85,7 @@ class Inscription
     }
 
     /**
-     * @ORM\preUpdate
+     * @ORM\PreUpdate()
      */
     public function setUpdatedValue()
     {
@@ -309,7 +309,4 @@ class Inscription
         return $this->admin_comment;
     }
 
-    public function setUpdatedValue(){
-
-    }
 }
