@@ -4,7 +4,7 @@ prod:
     pass: AIz9s03Z77M3BlW
     scheme: sftp
     revision: .rev
-    exclude: ["dploy.yaml"]
+    exclude: ["dploy.yaml",".idea/*"]
     path:
         local: /
         remote: /home/www/hebergement/inscriptions
