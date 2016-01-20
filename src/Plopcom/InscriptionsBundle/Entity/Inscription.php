@@ -308,4 +308,8 @@ class Inscription
     {
         return $this->admin_comment;
     }
+
+    public function setUpdatedValue(){
+
+    }
 }
