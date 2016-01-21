@@ -16,7 +16,7 @@
     Status inscription : <b>{{ inscription.status|human_status|raw }}</b> <br>
     Status payement : <b>{{ inscription.payementStatus|human_payement_status|raw }}</b>
     <hr>
-    {% if inscription.payementStatus == 2 || inscription.payementStatus == 0 %}
+    {% if (inscription.payementStatus == 2 or inscription.payementStatus == 0) %}
         {% if inscription.race.paypalButtonUrl %}
             <input type="hidden" id="invoice_id" value="{{ inscription.id }}">
             <input type="hidden" id="nom" value="{{ inscription.athletes.first.fullname }}">
