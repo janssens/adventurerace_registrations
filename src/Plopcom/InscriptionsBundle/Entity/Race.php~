@@ -77,7 +77,7 @@ class Race
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $paypal_button_url;
+    protected $paypal_hosted_button_id;
 
     /**
      * @ORM\ManyToOne(targetEntity="Type")

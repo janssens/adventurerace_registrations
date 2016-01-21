@@ -32,7 +32,7 @@ class RaceType extends AbstractType
             ->add('number_of_athlete',IntegerType::class,array('label'=>'Nombre de coureurs par inscription','attr' => array('class'=>'form-control')))
             ->add('distance',IntegerType::class,array('label'=>'Distance à parcourir en metres','required'=>false,'attr' => array('class'=>'form-control')))
             ->add('elevation',IntegerType::class,array('label'=>'Gain en dénivelé en metres','required'=>false,'attr' => array('class'=>'form-control')))
-            ->add('paypal_button_url',TextType::class,array('label'=>'url du bouton paypal','required'=>false,'attr' => array('class'=>'form-control')))
+            ->add('paypal_hosted_button_id',TextType::class,array('label'=>'Id du bouton paypal','required'=>false,'attr' => array('class'=>'form-control')))
         ;
     }
     

@@ -77,7 +77,7 @@ class Race
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $paypal_button_url;
+    protected $paypal_hosted_button_id;
 
     /**
      * @ORM\ManyToOne(targetEntity="Type")
@@ -489,5 +489,29 @@ class Race
     public function getMaxAttendee()
     {
         return $this->max_attendee;
+    }
+
+    /**
+     * Set paypalHostedButtonId
+     *
+     * @param string $paypalHostedButtonId
+     *
+     * @return Race
+     */
+    public function setPaypalHostedButtonId($paypalHostedButtonId)
+    {
+        $this->paypal_hosted_button_id = $paypalHostedButtonId;
+
+        return $this;
+    }
+
+    /**
+     * Get paypalHostedButtonId
+     *
+     * @return string
+     */
+    public function getPaypalHostedButtonId()
+    {
+        return $this->paypal_hosted_button_id;
     }
 }

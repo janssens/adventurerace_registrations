@@ -161,8 +161,12 @@ class RaceController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
             $illu = $race->getIllustration();
-            $illu->upload();
-            $race->setIllustration($illu);
+            if ($illu&&$illu->getFile()){
+                $illu->upload();
+                $race->setIllustration($illu);
+            }else{
+                $race->setIllustration(null);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($race);
