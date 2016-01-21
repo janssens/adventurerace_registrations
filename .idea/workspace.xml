@@ -22,16 +22,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="new.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/event/new.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.461538">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="event_details.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/event/event_details.html.twig">
           <provider selected="true" editor-type-id="text-editor">
@@ -55,8 +45,8 @@
       <file leaf-file-name="InscriptionController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/InscriptionController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.8461537">
-              <caret line="72" column="49" selection-start-line="72" selection-start-column="32" selection-end-line="72" selection-end-column="49" />
+            <state vertical-scroll-proportion="-27.461538">
+              <caret line="132" column="54" selection-start-line="132" selection-start-column="38" selection-end-line="132" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -65,38 +55,48 @@
       <file leaf-file-name="Race.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Race.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.230769">
+            <state vertical-scroll-proportion="-20.923077">
               <caret line="72" column="105" selection-start-line="72" selection-start-column="105" selection-end-line="72" selection-end-column="105" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/event/edit.html.twig">
+      <file leaf-file-name="RaceController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/RaceController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.8846154">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="12" selection-end-column="29" />
+            <state vertical-scroll-proportion="-17.0">
+              <caret line="64" column="36" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="registration.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/Emails/registration.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.21494253">
+              <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="new.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/race/new.html.twig">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/inscription/new.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="-9.615385">
+              <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RaceController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/RaceController.php">
+      <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/inscription/show.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.508046">
-              <caret line="64" column="36" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
+            <state vertical-scroll-proportion="-1.3076923">
+              <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -150,7 +150,6 @@
         <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Document.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/race/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/InscriptionType.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/inscription/new.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/event/show.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/race/race_details.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/race/show.html.twig" />
@@ -159,11 +158,8 @@
         <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Event.php" />
         <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Resources/public/js/inscriptions.js" />
-        <option value="$PROJECT_DIR$/app/Resources/views/inscription/show.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/race/index.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/inscription/edit.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/Emails/registration.html.twig" />
-        <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/InscriptionController.php" />
         <option value="$PROJECT_DIR$/dploy.yaml" />
         <option value="$PROJECT_DIR$/web/.htaccess" />
         <option value="$PROJECT_DIR$/.gitignore" />
@@ -178,6 +174,10 @@
         <option value="$PROJECT_DIR$/app/Resources/views/event/event_details.html.twig" />
         <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Race.php" />
         <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/RaceController.php" />
+        <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/InscriptionController.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/inscription/new.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/inscription/show.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/Emails/registration.html.twig" />
       </list>
     </option>
   </component>
@@ -955,16 +955,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/inscription/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.115385">
-          <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
-          <folding>
-            <element signature="e#375#397#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/race/edit.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.5">
@@ -1061,14 +1051,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/inscription/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077">
-          <caret line="19" column="79" selection-start-line="19" selection-start-column="79" selection-end-line="19" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/race/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-16.346153">
@@ -1081,14 +1063,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-21.038462">
           <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/Emails/registration.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3076923">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1258,14 +1232,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/event/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.8076923">
-          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/athlete/athlete_details.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
@@ -1290,26 +1256,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/InscriptionController.php">
+    <entry file="file://$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/RaceController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.8461537">
-          <caret line="72" column="49" selection-start-line="72" selection-start-column="32" selection-end-line="72" selection-end-column="49" />
+        <state vertical-scroll-proportion="-17.0">
+          <caret line="64" column="36" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Race.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769">
+        <state vertical-scroll-proportion="-20.923077">
           <caret line="72" column="105" selection-start-line="72" selection-start-column="105" selection-end-line="72" selection-end-column="105" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/RaceController.php">
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/inscription/new.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.508046">
-          <caret line="64" column="36" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
+        <state vertical-scroll-proportion="-9.615385">
+          <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/event/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.8076923">
+          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/InscriptionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-27.461538">
+          <caret line="132" column="54" selection-start-line="132" selection-start-column="38" selection-end-line="132" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/inscription/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.3076923">
+          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/Emails/registration.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21494253">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
           <folding />
         </state>
       </provider>

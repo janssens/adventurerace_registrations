@@ -90,10 +90,16 @@ class InscriptionController extends Controller
                     $em->persist($inscription);
                     $em->flush();
 
+                    //first email
+                    $dest = array();
+                    $dest['janssensgaetan@gmail.com'] = 'developpeur';
+                    foreach($inscription->getAthletes() as $athlete){
+                        $dest[$athlete->getEmail()]=$athlete->getFullName();
+                    }
                     $message = \Swift_Message::newInstance()
                         ->setSubject('Bienvenue au '.$race->getTitle())
-                        ->setFrom($race->getEvent()->getEmail())
-                        ->setTo('janssensgaetan@gmail.com')
+                        ->setFrom(array($race->getEvent()->getEmail() => $race->getTitle()))
+                        ->setTo($dest)
                         ->setBody(
                             $this->renderView(
                             // app/Resources/views/Emails/registration.html.twig

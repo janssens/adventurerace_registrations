@@ -11,9 +11,9 @@
         {{ form_row(form.title) }}
         {% if is_granted("ROLE_ADMIN") %}
             <div style="display: none;">
-                {{ form_row(edit_form.status) }}
-                {{ form_row(edit_form.payement_status) }}
-                {{ form_row(edit_form.admin_comment) }}
+                {{ form_row(form.status) }}
+                {{ form_row(form.payement_status) }}
+                {{ form_row(form.admin_comment) }}
             </div>
         {% endif %}
         {% if race.numberOfAthlete > 1 %}
