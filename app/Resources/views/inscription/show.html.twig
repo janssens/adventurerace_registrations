@@ -16,11 +16,15 @@
     Status inscription : <b>{{ inscription.status|human_status|raw }}</b> <br>
     Status payement : <b>{{ inscription.payementStatus|human_payement_status|raw }}</b>
     <hr>
-    <input type="hidden" id="invoice_id" value="{{ inscription.id }}">
-    <input type="hidden" id="nom" value="{{ inscription.athletes.first.fullname }}">
-    <a class="btn btn-success" href="#" id="pay" data-notifyurl="{{ path('race_paypalipn',{'slug' : inscription.race.slug }) }}" data-payurl="{{ inscription.race.paypalButtonUrl }}">Payer et Valider</a>
-    <h3><i class="fa fa-fw fa-cc-paypal"></i>&nbsp;<i class="fa fa-fw fa-cc-mastercard"></i>&nbsp;<i class="fa fa-fw fa-cc-visa"></i>&nbsp;<i class="fa fa-fw fa-credit-card"></i></h3>
-    <hr>
+    {% if inscription.payementStatus == 2 || inscription.payementStatus == 0 %}
+        {% if inscription.race.paypalButtonUrl %}
+            <input type="hidden" id="invoice_id" value="{{ inscription.id }}">
+            <input type="hidden" id="nom" value="{{ inscription.athletes.first.fullname }}">
+            <a class="btn btn-success" href="#" id="pay" data-notifyurl="{{ path('race_paypalipn',{'slug' : inscription.race.slug }) }}" data-payurl="{{ inscription.race.paypalButtonUrl }}">Payer et Valider</a>
+            <h3><i class="fa fa-fw fa-cc-paypal"></i>&nbsp;<i class="fa fa-fw fa-cc-mastercard"></i>&nbsp;<i class="fa fa-fw fa-cc-visa"></i>&nbsp;<i class="fa fa-fw fa-credit-card"></i></h3>
+            <hr>
+        {% endif %}
+    {% endif %}
     <a href="{{ path('race_show',{'slug' : inscription.race.slug }) }}" class="btn btn-default"><i class="fa fa-chevron-left fa-fw"></i>Retour {{ inscription.race.title }}</a>
     {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ path('inscription_edit', { 'id': inscription.id, 'secret' : inscription.salt }) }}" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i>Editer cette inscription</a>
