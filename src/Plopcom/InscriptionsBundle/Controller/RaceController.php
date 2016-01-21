@@ -80,10 +80,11 @@ class RaceController extends Controller
     }
 
     /**
-     * Back from paypal.
+     * IPN from paypal.
      *
      * @Route("/{slug}/paypalipn", name="race_paypalipn")
      * @Method("POST")
+     *
      */
     public function paypalipnAction(Race $race,Request $request)
     {
@@ -99,11 +100,33 @@ class RaceController extends Controller
                         if ($payment_status == 'Completed') { //payement complet
                             $inscription->setPayementStatus(Inscription::PAYEMENT_STATUS_PAYED);
                             $em->persist($inscription);
-                            //send_mail($team_id, TEAM_STATUS_PAYMENT_OK);
+                            $em->flush();
+
+                            //email payement ok
+                            $dest = array();
+                            foreach($inscription->getAthletes() as $athlete){
+                                $dest[$athlete->getEmail()]=$athlete->getFullName();
+                            }
+                            $message = \Swift_Message::newInstance()
+                                ->setSubject('['.$race->getTitle().'] Paiement reçu')
+                                ->setFrom(array($race->getEvent()->getEmail() => $race->getTitle()))
+                                ->setTo($dest)
+                                ->setCc("janssensgaetan@gmail.com")
+                                ->setBody(
+                                    $this->renderView(
+                                    // app/Resources/views/Emails/registration.html.twig
+                                        'Emails/payement.html.twig',
+                                        array('inscription' => $inscription)
+                                    ),
+                                    'text/html'
+                                );
+                            $this->get('mailer')->send($message);
+
                         } else {
                             $inscription->setPayementStatus(Inscription::PAYEMENT_STATUS_FAILED);
-                            $inscription->setAdminMessage($payment_status);
+                            $inscription->setAdminComment($payment_status);
                             $em->persist($inscription);
+                            $em->flush();
                         }
                         return $this->redirectToRoute("race_show",array('slug' => $race->getSlug()));
                     }
@@ -187,6 +210,7 @@ class RaceController extends Controller
      *
      * @Route("/{id}", name="race_delete")
      * @Method("DELETE")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, Race $race)
     {

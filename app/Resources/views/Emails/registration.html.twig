@@ -4,7 +4,7 @@
         Bonjour {{ athlete.fullname }},<br>
     {% endfor %}
     Votre inscription à la course "<b>{{ inscription.race.title }}</b>" a bien été enregistrée. <br>
-    Cette dernière ne sera validé que si elle est complète et seulement une fois que le payement aura été effectué. <br>
+    Cette dernière ne sera validée que si elle est complète et seulement une fois que le paiement aura été effectué et reçu. <br>
     Retrouvez votre inscription à cette adresse : <a href="{{ url("inscription_show",{'id' : inscription.id, 'secret' : inscription.salt }) }}">{{ url("inscription_show",{'id' : inscription.id, 'secret' : inscription.salt }) }}</a>
     <br>
     Bonne préparation et rendez-vous le {{ inscription.race.date|date('d M Y') }} en pleine forme.

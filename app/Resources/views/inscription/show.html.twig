@@ -12,6 +12,9 @@
             {{ include('athlete/athlete_details.html.twig', { 'athlete': athlete }) }}
         {% endfor %}
     </div>
+    {% if inscription.adminComment %}
+        <div class="alert alert-info" role="alert">{{ inscription.adminComment }}</div>
+    {% endif %}
     <br>
     Status inscription : <b>{{ inscription.status|human_status|raw }}</b> <br>
     Status payement : <b>{{ inscription.payementStatus|human_payement_status|raw }}</b>
