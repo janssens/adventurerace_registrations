@@ -1,4 +1,7 @@
-<a href="{{ path('event_show', { 'slug': event.slug }) }}">
-    <span class="title">{{ event.title }}</span>
-    <span class="description">{{ event.description }}</span>
-</a>
+<div class="panel panel-default col-xs-6 col-md-4">
+    <div class="panel-heading">{{ event.title }}</div>
+    <div class="panel-body">
+        <p class="description">{{ event.description }}</p>
+        <a href="{{ path('event_show', { 'slug': event.slug }) }}" class="btn btn-default"><i class="fa fa-search fa-fw"></i>Voir</a>
+    </div>
+</div>

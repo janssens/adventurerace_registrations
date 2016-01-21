@@ -56,13 +56,13 @@ class Athlete
 
     /**
      * @ORM\ManyToOne(targetEntity="Inscription", inversedBy="athletes")
-     * @ORM\JoinColumn(name="inscription_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="inscription_id", referencedColumnName="id",onDelete="CASCADE")
      */
     protected $inscription;
 
     /**
      * @ORM\OneToOne(targetEntity="Address", cascade={"persist"})
-     * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="address_id", referencedColumnName="id",onDelete="CASCADE")
      */
     protected $address;
 

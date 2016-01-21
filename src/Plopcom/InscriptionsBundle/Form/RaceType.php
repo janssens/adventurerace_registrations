@@ -28,6 +28,7 @@ class RaceType extends AbstractType
             ->add('illustration', DocumentType::class)
             ->add('date', DateType::class,array('attr' => array('class'=>'form-control')))
             ->add('description',TextareaType::class,array('label'=>'description','attr' => array('class'=>'form-control')))
+            ->add('max_attendee',IntegerType::class,array('label'=>'Nombre de coureurs total max','attr' => array('class'=>'form-control')))
             ->add('number_of_athlete',IntegerType::class,array('label'=>'Nombre de coureurs par inscription','attr' => array('class'=>'form-control')))
             ->add('distance',IntegerType::class,array('label'=>'Distance à parcourir en metres','required'=>false,'attr' => array('class'=>'form-control')))
             ->add('elevation',IntegerType::class,array('label'=>'Gain en dénivelé en metres','required'=>false,'attr' => array('class'=>'form-control')))

@@ -11,29 +11,27 @@
     {% if is_granted('ROLE_ADMIN') %}
 
         <h2>Mes événements</h2>
-        <ul class="events-list">
+        <div class="events-list row">
             {% for event in my_events %}
-                <li>
-                    {{ include('event/event_details.html.twig', { 'event': event }) }}
-                </li>
+                {{ include('event/event_details.html.twig', { 'event': event }) }}
             {% endfor %}
-        </ul>
+        </div>
 
         <a href="{{ path('event_new') }}" class="btn btn-default">
             <i class="fa fa-fw fa-plus"></i>
             Créer un nouvel événement
         </a>
-
+        <hr>
     {% endif %}
 
-    <h2>Evénements</h2>
-    <ul class="events-list">
+    <p>Bonjour et bienvenue sur la plateforme d'inscription de RaidsAventure.fr</p>
+
+    <h2>&Eacute;vénements en cours</h2>
+    <div class="events-list  row">
         {% for event in events %}
-            <li>
-                {{ include('event/event_details.html.twig', { 'event': event }) }}
-            </li>
+            {{ include('event/event_details.html.twig', { 'event': event }) }}
         {% endfor %}
-    </ul>
+    </div>
 
 {% endblock %}
 

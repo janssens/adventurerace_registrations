@@ -51,6 +51,11 @@ class Race
     /**
      * @ORM\Column(type="integer")
      */
+    protected $max_attendee;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
     protected $number_of_athlete;
 
     /**
@@ -65,7 +70,7 @@ class Race
 
     /**
      * @ORM\OneToOne(targetEntity="Document", cascade={"persist"})
-     * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id",onDelete="CASCADE",nullable=true)
      */
     protected $illustration;
 
@@ -88,7 +93,7 @@ class Race
     /**
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="races", cascade={"persist", "merge"})
      * @ORM\JoinColumns({
-     *  @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     *  @ORM\JoinColumn(name="event_id", referencedColumnName="id",onDelete="CASCADE")
      * })
      */
     protected $event;
@@ -436,5 +441,53 @@ class Race
     public function getIllustration()
     {
         return $this->illustration;
+    }
+
+    /**
+     * Set paypalButtonUrl
+     *
+     * @param string $paypalButtonUrl
+     *
+     * @return Race
+     */
+    public function setPaypalButtonUrl($paypalButtonUrl)
+    {
+        $this->paypal_button_url = $paypalButtonUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get paypalButtonUrl
+     *
+     * @return string
+     */
+    public function getPaypalButtonUrl()
+    {
+        return $this->paypal_button_url;
+    }
+
+    /**
+     * Set maxAttendee
+     *
+     * @param integer $maxAttendee
+     *
+     * @return Race
+     */
+    public function setMaxAttendee($maxAttendee)
+    {
+        $this->max_attendee = $maxAttendee;
+
+        return $this;
+    }
+
+    /**
+     * Get maxAttendee
+     *
+     * @return integer
+     */
+    public function getMaxAttendee()
+    {
+        return $this->max_attendee;
     }
 }

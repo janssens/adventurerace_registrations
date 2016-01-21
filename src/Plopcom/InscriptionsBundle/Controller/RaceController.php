@@ -52,8 +52,12 @@ class RaceController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $illu = $race->getIllustration();
-            $illu->upload();
-            $race->setIllustration($illu);
+            if ($illu&&$illu->getFile()){
+                $illu->upload();
+                $race->setIllustration($illu);
+            }else{
+                $race->setIllustration(null);
+            }
 
             $event = $em->getRepository('PlopcomInscriptionsBundle:Event')->find($event_id);
             if ($event){
@@ -61,7 +65,7 @@ class RaceController extends Controller
                 $em->persist($race);
                 $em->flush();
 
-                return $this->redirectToRoute('race_show', array('id' => $race->getId()));
+                return $this->redirectToRoute('race_show', array('slug' => $race->getSlug()));
             }else{
                 $this->get('session')->getFlashBag()->add('error', "aucun événement d'id #". $event_id .' trouvé');
                 return $this->redirectToRoute('race_index');
