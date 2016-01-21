@@ -82,10 +82,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RaceController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RaceController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/RaceController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6643678">
+            <state vertical-scroll-proportion="-36.73077">
               <caret line="168" column="13" selection-start-line="168" selection-start-column="13" selection-end-line="168" selection-end-column="13" />
               <folding />
             </state>
@@ -112,11 +112,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="show.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Resources/views/inscription/show.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.076923">
-              <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.6057471">
+              <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -173,11 +173,11 @@
         <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/InscriptionController.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/inscription/new.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/Emails/registration.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/inscription/show.html.twig" />
         <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Race.php" />
         <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/RaceType.php" />
         <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Resources/public/js/inscriptions.js" />
         <option value="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/RaceController.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/inscription/show.html.twig" />
       </list>
     </option>
   </component>
@@ -1272,14 +1272,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/inscription/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.076923">
-          <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Race.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.807693">
@@ -1306,8 +1298,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/RaceController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6643678">
+        <state vertical-scroll-proportion="-36.73077">
           <caret line="168" column="13" selection-start-line="168" selection-start-column="13" selection-end-line="168" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/inscription/show.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6057471">
+          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
           <folding />
         </state>
       </provider>
