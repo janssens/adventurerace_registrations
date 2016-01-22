@@ -2,7 +2,7 @@
     <div class="panel-heading">{{ race.title }}{% if is_granted('ROLE_ADMIN') %}{% if (race.event.owner == app.user) %}<a href="{{ path('race_edit', { 'id': race.id }) }}"><i class="fa fa-pencil fa-fw"></i></a>{% endif %}{% endif %}</div>
     <div class="panel-body">
         <p class="date">{% if race.date %}{{ race.date|date('d M Y') }}{% endif %}</p>
-        <p class="description">{{ race.description }}</p>
+        <div class="description">{{ race.description|raw }}</div>
         <p class="slug">{{ race.slug }}</p>
         <p class="resume"><small>{{ race.resume }}</small></p>
         <a href="{{ path('race_show', { 'slug': race.slug }) }}" class="btn btn-default"><i class="fa fa-search fa-fw"></i>Détails</a>
