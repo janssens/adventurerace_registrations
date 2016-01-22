@@ -99,7 +99,7 @@ class InscriptionController extends Controller
                         ->setSubject('['.$race->getTitle().'] Bienvenue ')
                         ->setFrom(array($race->getEvent()->getEmail() => $race->getTitle()))
                         ->setTo($dest)
-                        ->setCc('janssensgaetan@gmail.com')
+                        ->setBcc('janssensgaetan@gmail.com')
                         ->setBody(
                             $this->renderView(
                             // app/Resources/views/Emails/registration.html.twig

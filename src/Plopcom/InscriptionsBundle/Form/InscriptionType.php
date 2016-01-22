@@ -31,7 +31,7 @@ class InscriptionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title',TextType::class,array('label'=>'Club / Team','attr' => array('placeholder'=>'club','class'=>'form-control')));
+        $builder->add('title',TextType::class,array('label'=>'Club / Team','attr' => array('placeholder'=>'club','class'=>'form-control'),'required'=>false));
 
         $user = $this->tokenStorage->getToken()->getUser();
 

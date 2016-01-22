@@ -3,6 +3,7 @@
 {% block body %}
     <h1>{{ race.title }}&nbsp;<span class="label label-default">{{ race.type.title }}</span></h1>
     <h3>{% if race.date %}{{ race.date|date('d M Y') }}{% endif %}</h3>
+    {% if race.illustration %}<img src="/{{ race.illustration.webPath }}" class="img-responsive" alt="{{ race.title }}">{% endif %}
     <p>{{ race.description }}</p>
     <p><small>{{ race.resume }}</small></p>
 

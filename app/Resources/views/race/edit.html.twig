@@ -30,7 +30,7 @@
     <table>
         <tr>
             <td>
-                <a href="{{ path('race_index') }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour</a>
+                <a href="{{ path('race_show',{'slug':race.slug}) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour</a>
             </td>
             <td>
                 {{ form_start(delete_form) }}
