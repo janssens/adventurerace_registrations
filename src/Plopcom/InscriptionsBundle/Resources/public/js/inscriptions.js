@@ -21,4 +21,8 @@ jQuery(function(){
         jQuery(this).parent().parent().find('>div').toggle();
     });
 
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
 });

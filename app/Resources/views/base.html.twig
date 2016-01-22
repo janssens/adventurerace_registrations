@@ -13,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cosmo/bootstrap.min.css" rel="stylesheet">
+    {#<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/darkly/bootstrap.min.css" rel="stylesheet">#}
     <!-- font-awesome CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -20,6 +21,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{ asset('bundles/plopcominscriptions/css/ekko-lightbox.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('bundles/plopcominscriptions/css/inscriptions.css') }}" />
     {% block stylesheets %}{% endblock %}
 
@@ -93,6 +95,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+<script src="{{ asset('bundles/plopcominscriptions/js/ekko-lightbox.min.js') }}"></script>
 <script src="{{ asset('bundles/plopcominscriptions/js/inscriptions.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>

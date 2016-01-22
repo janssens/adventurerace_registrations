@@ -52,7 +52,7 @@ class InscriptionType extends AbstractType
                         'Payé'=> Inscription::PAYEMENT_STATUS_PAYED,
                         'En attente retour'=> Inscription::PAYEMENT_STATUS_WAITING,
                     ), 'label' => "Status du payement",'attr' => array('class'=>'form-control')));
-                $form->add('admin_comment', TextType::class, array( 'label' => "Commentaire admin",'attr' => array('class'=>'form-control')));
+                $form->add('admin_comment', TextType::class, array( 'label' => "Commentaire admin",'attr' => array('class'=>'form-control'),'required'=> false));
             });
         }
 

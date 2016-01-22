@@ -7,7 +7,7 @@
 
         {% if file_url is not null %}
             <div>
-                <a href="{{ file_url }}"><i class="fa fa-fw fa-file-{{ file_url|ext|ext_type }}-o"></i>{{ file_url }}</a>
+                <a href="/{{ file_url }}" {% if file_url|ext|ext_type == 'image' %}data-toggle="lightbox"{% endif %}><i class="fa fa-fw fa-file-{{ file_url|ext|ext_type }}-o"></i>/{{ file_url }}</a>
                 &nbsp;<a href="#" class="toggle btn btn-default btn-sm">Changer</a>
             </div>
             <div id="file_field" style="display:none">

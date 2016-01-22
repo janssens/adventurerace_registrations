@@ -168,7 +168,7 @@ class InscriptionController extends Controller
             $em->persist($inscription);
             $em->flush();
 
-            return $this->redirectToRoute('inscription_edit', array('id' => $inscription->getId(), 'secret' => $inscription->getSalt()));
+            return $this->redirectToRoute('inscription_show', array('id' => $inscription->getId(), 'secret' => $inscription->getSalt()));
         }
 
         return $this->render('inscription/edit.html.twig', array(
