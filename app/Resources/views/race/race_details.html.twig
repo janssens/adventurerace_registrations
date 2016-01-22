@@ -1,11 +1,15 @@
-<div class="panel panel-default type-{{ race.type.code }} col-xs-6 col-md-4">
-    <div class="panel-heading">{{ race.title }}{% if is_granted('ROLE_ADMIN') %}{% if (race.event.owner == app.user) %}<a href="{{ path('race_edit', { 'id': race.id }) }}"><i class="fa fa-pencil fa-fw"></i></a>{% endif %}{% endif %}</div>
-    <div class="panel-body">
-        <p class="date">{% if race.date %}{{ race.date|date('d M Y') }}{% endif %}</p>
-        <div class="description">{{ race.description|raw }}</div>
-        <p class="slug">{{ race.slug }}</p>
-        <p class="resume"><small>{{ race.resume }}</small></p>
-        <a href="{{ path('race_show', { 'slug': race.slug }) }}" class="btn btn-default"><i class="fa fa-search fa-fw"></i>Détails</a>
-        <a href="{{ path('inscription_new', { 'slug': race.slug }) }}" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i>S'inscrire</a>
+<div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+        {% if race.illustration %}<img src="/{{ race.illustration.webPath }}" class="img-responsive" alt="{{ race.title }}">{% endif %}
+        <div class="caption">
+            <h3>{{ race.title }}&nbsp;<span class="label label-default">{{ race.type.title }}</span>{% if is_granted('ROLE_ADMIN') %}{% if (race.event.owner == app.user) %}<a href="{{ path('race_edit', { 'id': race.id }) }}"><i class="fa fa-pencil fa-fw"></i></a>{% endif %}{% endif %}</h3>
+            <h4>{% if race.date %}{{ race.date|date('d M Y') }}{% endif %}</h4>
+            <div class="description">{{ race.description|raw }}</div>
+            <p class="resume"><small>{{ race.resume }}</small></p>
+            <p>
+                <a href="{{ path('race_show', { 'slug': race.slug }) }}" class="btn btn-default"><i class="fa fa-search fa-fw"></i>Détails</a>
+                <a href="{{ path('inscription_new', { 'slug': race.slug }) }}" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i>S'inscrire</a>
+            </p>
+        </div>
     </div>
 </div>
