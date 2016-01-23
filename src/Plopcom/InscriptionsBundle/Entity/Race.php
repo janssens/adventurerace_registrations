@@ -58,6 +58,21 @@ class Race
     protected $max_attendee;
 
     /**
+     * @ORM\Column(type="float",nullable=true)
+     */
+    protected $entry_fees;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $open = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $public = false;
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $number_of_athlete;
@@ -517,5 +532,77 @@ class Race
     public function getPaypalHostedButtonId()
     {
         return $this->paypal_hosted_button_id;
+    }
+
+    /**
+     * Set entryFees
+     *
+     * @param float $entryFees
+     *
+     * @return Race
+     */
+    public function setEntryFees($entryFees)
+    {
+        $this->entry_fees = $entryFees;
+
+        return $this;
+    }
+
+    /**
+     * Get entryFees
+     *
+     * @return float
+     */
+    public function getEntryFees()
+    {
+        return $this->entry_fees;
+    }
+
+    /**
+     * Set open
+     *
+     * @param boolean $open
+     *
+     * @return Race
+     */
+    public function setOpen($open)
+    {
+        $this->open = $open;
+
+        return $this;
+    }
+
+    /**
+     * Get open
+     *
+     * @return boolean
+     */
+    public function getOpen()
+    {
+        return $this->open;
+    }
+
+    /**
+     * Set public
+     *
+     * @param boolean $public
+     *
+     * @return Race
+     */
+    public function setPublic($public)
+    {
+        $this->public = $public;
+
+        return $this;
+    }
+
+    /**
+     * Get public
+     *
+     * @return boolean
+     */
+    public function getPublic()
+    {
+        return $this->public;
     }
 }

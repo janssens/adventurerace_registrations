@@ -45,6 +45,11 @@ class Athlete
     protected $document;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $gender = 0;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $dob;
@@ -299,5 +304,29 @@ class Athlete
     public function getDocument()
     {
         return $this->document;
+    }
+
+    /**
+     * Set gender
+     *
+     * @param integer $gender
+     *
+     * @return Athlete
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
+     *
+     * @return integer
+     */
+    public function getGender()
+    {
+        return $this->gender;
     }
 }
