@@ -250,6 +250,17 @@ class RaceController extends Controller
      */
     public function showAction(Request $request,Race $race)
     {
+        if (!$race->getOpen()) //not open
+        {
+            if (!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+                if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+                    throw $this->createAccessDeniedException();
+                }else if($race->getEvent()->getOwner() != $this->getUser()){
+                    throw $this->createAccessDeniedException();
+                }
+            }
+        }
+
         $deleteForm = $this->createDeleteForm($race);
 
         if ($request->get("msg")){
@@ -283,6 +294,12 @@ class RaceController extends Controller
      */
     public function editAction(Request $request, Race $race)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+            if ($race->getEvent()->getOwner() != $this->getUser()) {
+                throw $this->createAccessDeniedException();
+            }
+        }
+
         $deleteForm = $this->createDeleteForm($race);
         $editForm = $this->createForm('Plopcom\InscriptionsBundle\Form\RaceType', $race);
         $editForm->handleRequest($request);
@@ -323,13 +340,15 @@ class RaceController extends Controller
         $form = $this->createDeleteForm($race);
         $form->handleRequest($request);
 
+        $event = $race->getEvent();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($race);
             $em->flush();
         }
 
-        return $this->redirectToRoute('race_index');
+        return $this->redirectToRoute('event_show',array('slug' => $event->getSlug()));
     }
 
     /**

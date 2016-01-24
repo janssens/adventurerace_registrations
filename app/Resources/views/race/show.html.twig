@@ -24,7 +24,7 @@
             {#<th>Mise à jour le</th>#}
             <th>Status</th>
             <th>Status Paiement</th>
-            {% if is_granted('ROLE_ADMIN') %}
+            {% if (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
                 <th>Actions</th>
             {% endif %}
         </tr>
@@ -43,7 +43,7 @@
                 <td>{{ inscription.status|human_status|raw }}</td>
                 <td>{{ inscription.payementStatus|human_payement_status|raw }}</td>
                 <td>
-                    {% if is_granted('ROLE_ADMIN') %}
+                    {% if (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
                     <a href="{{ path('inscription_show', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-default btn-sm"><i class="fa fa-search fa-fw"></i>Détails</a>
                     <a href="{{ path('inscription_edit', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil fa-fw"></i>Editer</a>
                     {% endif %}

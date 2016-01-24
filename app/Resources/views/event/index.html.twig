@@ -61,9 +61,10 @@
         {% endfor %}
         </tbody>
     </table>
-
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('event_new') }}" class="btn btn-default">
         <i class="fa fa-plus"></i>
         Créer un nouvel évènement
     </a>
+    {% endif %}
 {% endblock %}
