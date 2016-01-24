@@ -12,6 +12,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Athlete
 {
+
+    const FEMALE = 2;
+    const MALE = 1;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

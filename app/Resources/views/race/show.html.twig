@@ -17,12 +17,13 @@
             <th>Dossard</th>
             {% for i in 1..race.numberOfAthlete %}
                 <th>Athlete {{ loop.index }}</th>
+                <th>Catégorie</th>
             {% endfor %}
             <th>Team</th>
             <th>Inscrit le</th>
-            <th>Mise à jour le</th>
+            {#<th>Mise à jour le</th>#}
             <th>Status</th>
-            <th>Status Payement</th>
+            <th>Status Paiement</th>
             {% if is_granted('ROLE_ADMIN') %}
                 <th>Actions</th>
             {% endif %}
@@ -34,10 +35,11 @@
                 <td>{{ loop.index }}</td>
                 {% for athlete in inscription.athletes %}
                     <td>{{ athlete.firstname|lower|capitalize }} {{ athlete.lastname|upper }}</td>
+                    <td>{% if athlete.gender == constant('MALE', athlete) %}<i class="fa fa-fw fa-male"></i>H{% else %}<i class="fa fa-fw fa-female"></i>F{% endif %}</td>
                 {% endfor %}
                 <td>{{ inscription.title }}</td>
                 <td>{% if inscription.created %}{{ inscription.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if inscription.updated %}{{ inscription.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                {#<td>{% if inscription.updated %}{{ inscription.updated|date('Y-m-d H:i:s') }}{% endif %}</td>#}
                 <td>{{ inscription.status|human_status|raw }}</td>
                 <td>{{ inscription.payementStatus|human_payement_status|raw }}</td>
                 <td>

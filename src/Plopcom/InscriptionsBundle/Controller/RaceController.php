@@ -177,6 +177,12 @@ class RaceController extends Controller
                             $payment_status = $_POST['payment_status'];
                             if ($payment_status == 'Completed') { //payement complet
 
+                                $payment_amount = $_POST['mc_gross'];
+                                if ($payment_amount != $inscription->getRace()->getEntryFees()){ //wrong amount
+                                    error_log(date('[Y-m-d H:i e] '). "wrong amount ". PHP_EOL, 3, LOG_FILE);
+                                    return $this->redirectToRoute("default_index");
+                                }
+
                                 $inscription->setPayementStatus(Inscription::PAYEMENT_STATUS_PAYED);
                                 $em->persist($inscription);
                                 $em->flush();
@@ -207,10 +213,10 @@ class RaceController extends Controller
                                 $em->persist($inscription);
                                 $em->flush();
                             }
-                            //$payment_amount = $_POST['mc_gross'];
+
+
                             //$payment_currency = $_POST['mc_currency'];
                             //$txn_id = $_POST['txn_id'];
-                            //$receiver_email = $_POST['receiver_email'];
                             //$payer_email = $_POST['payer_email'];
 
                             if(DEBUG == true) {
@@ -228,8 +234,6 @@ class RaceController extends Controller
                                 error_log(date('[Y-m-d H:i e] '). "Invalid IPN: $req" . PHP_EOL, 3, LOG_FILE);
                             }
                         }
-
-                        //return $this->redirectToRoute("race_show",array('slug' => $race->getSlug()));
                         return $this->redirectToRoute("default_index");
                     }
                 }
