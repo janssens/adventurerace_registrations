@@ -645,7 +645,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1452938751286</updated>
-      <workItem from="1485418978756" duration="9518000" />
+      <workItem from="1485418978756" duration="9546000" />
     </task>
     <task id="LOCAL-00001" summary="hophop">
       <created>1453470036634</created>
@@ -668,11 +668,18 @@
       <option name="project" value="LOCAL" />
       <updated>1485430940848</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="mise à jour dépot distant et code manquant">
+      <created>1485431906421</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1485431906421</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9518000" />
+    <option name="totallyTimeSpent" value="9546000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1058" extended-state="6" />
