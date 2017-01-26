@@ -307,4 +307,14 @@ class Event
         }
         return $return;
     }
+
+    public function getFutureRaces()
+    {
+        $return = array();
+        foreach ($this->getRaces() as $race){
+            if ($race->getPublic() && !$race->isPast())
+                $return[$race->getId()] = $race;
+        }
+        return $return;
+    }
 }

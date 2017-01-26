@@ -2,7 +2,7 @@
     <div class="thumbnail">
         {% if event.races | length %}
         <div id="event_details_carousel_{{ event.id }}" class="carousel slide" data-ride="carousel">
-            {% if event.openRaces|length > 1 %}
+            {% if event.futureRaces|length > 1 %}
             <!-- Carousel indicators -->
             <ol class="carousel-indicators">
                 {% for race in event.openRaces %}
@@ -24,7 +24,7 @@
                     </div>
                 {% endfor %}
             </div>
-            {% if event.openRaces|length > 1 %}
+            {% if event.futureRaces|length > 1 %}
             <!-- Carousel controls -->
             <a class="carousel-control left" href="#event_details_carousel_{{ event.id }}" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left"></span>
