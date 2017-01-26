@@ -23,6 +23,13 @@
                         </a>
                     </div>
                 {% endfor %}
+                {% if event.futureRaces|length < 1 %}
+                    <div>
+                        <a href="{{ path('event_show', { 'slug': event.slug }) }}">
+                            <img src="https://placeholdit.imgix.net/~text?txtsize=33&bg=eee&txt=image-350%C3%97160&w=350&h=160" class="img-responsive" alt="{{ race.title }}">
+                        </a>
+                    </div>
+                {% endif %}
             </div>
             {% if event.futureRaces|length > 1 %}
             <!-- Carousel controls -->
