@@ -8,25 +8,26 @@
     <h1>{{ event.title }}</h1>
 
 <p>
-    {{ event.description }}
+    {{ event.description|raw }}
 </p>
 
     <h2>Liste des courses de cet événement</h2>
     <div class="races-list row">
         {% for race in event.races %}
-            {{ include('race/race_details.html.twig', { 'race': race }) }}
+            {% if not race.isPast %}
+                {{ include('race/race_details.html.twig', { 'race': race }) }}
+            {% endif %}
         {% endfor %}
     </div>
     <hr>
     <table>
         <tr>
             <td>
-                <a href="{{ path('event_index') }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à la liste</a>
+                <a href="{{ path('event_index') }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à la liste des événements</a>
             </td>
-            {% if is_granted("ROLE_ADMIN") %}
-                {% if event.owner == app.user %}
+            {% if (is_granted('ROLE_ADMIN') and event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
                 <td>
-                    <a href="{{ path('event_edit', { 'id': event.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i>Editer ce événement</a>
+                    <a href="{{ path('event_edit', { 'id': event.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i>Editer cet événement</a>
                 </td>
                 <td>
                     <a href="{{ path('race_new', { 'event_id': event.id }) }}" class="btn btn-default"><i class="fa fa-fw fa-plus"></i>Ajouter une course</a>
@@ -36,9 +37,19 @@
                     <button type="submit"  class="btn btn-danger"><i class="fa fa-fw fa-trash"></i>Supprimer l'événement</button>
                     {{ form_end(delete_form) }}
                 </td>
-                {% endif %}
             {% endif %}
         </tr>
     </table>
+
+    {% if (( is_granted('ROLE_ADMIN') and event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN')) %}
+    <h2>Courses passées</h2>
+    <div class="races-list row">
+        {% for race in event.races %}
+            {% if race.isPast %}
+                {{ include('race/race_details.html.twig', { 'race': race }) }}
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
 
 {% endblock %}

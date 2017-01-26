@@ -1,0 +1,15 @@
+<html>
+<body>
+    {% for athlete in inscription.athletes %}
+        Bonjour {{ athlete.fullname }},<br>
+    {% endfor %}
+    <br>
+    Votre inscription à la course "<b>{{ inscription.race.title }}</b>" a été passée en revue. <br>
+    Cette dernière n'est <b>pas valide</b>. <br>
+    L'administrateur a laissé le message suivant : <br><br>
+    <b style="background: #B96AB9;color: white;padding: 5px;display: block;">{{ inscription.adminComment }}</b><br>
+    Vous pouvez éditer votre inscription à cette adresse : <a href="{{ url("inscription_show",{'id' : inscription.id, 'secret' : inscription.salt }) }}">{{ url("inscription_show",{'id' : inscription.id, 'secret' : inscription.salt }) }}</a>
+    <br>
+    A très bientôt.
+</body>
+</html>

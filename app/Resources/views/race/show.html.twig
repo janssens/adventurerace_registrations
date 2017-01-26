@@ -1,25 +1,50 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {% if (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {% if (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
+    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+    <script src="{{ asset('bundles/plopcominscriptions/js/inscriptions_admin.js') }}"></script>
+    {% endif %}
+    <script src="{{ asset('bundles/plopcominscriptions/js/jquery.tablesorter.js') }}"></script>
+{% endblock %}
+
 {% block body %}
-    <h1>{{ race.title }}&nbsp;<span class="label label-default">{{ race.type.title }}</span></h1>
+    <h1>{{ race.title }}&nbsp;<a href="{{ path('type_show', { 'code': race.type.code }) }}"><span class="label label-default">{{ race.type.title }}</span></a></h1>
     <h3>{% if race.date %}{{ race.date|date('d M Y') }}{% endif %}</h3>
-    {% if race.illustration %}<img src="/{{ race.illustration.webPath }}" class="img-responsive" alt="{{ race.title }}">{% endif %}
+    {% if race.illustration %}<img src="{{ race.illustration.webPath | imagine_filter('my_cover_race') }}" class="img-responsive" alt="{{ race.title }}">{% endif %}
     <div class="desc">{{ race.description|raw }}</div>
     <p><small>{{ race.resume }}</small></p>
 
-    <a href="{{ path('inscription_new', { 'slug': race.slug }) }}" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i>Nouvelle inscription</a>
+    {% if race.open and not race.isPast %}
+        <a href="{{ path('inscription_new', { 'slug': race.slug }) }}" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i>Nouvelle inscription</a>
+    {% else %}
+        <div class="alert alert-danger" role="alert">Les inscriptions à la course sont fermées</div>
+    {% endif %}
 
     <h1>Liste des inscrits</h1>
 
-    <table class="table">
+{% if (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
+    <div class="response" style="display: none"></div>
+{% endif %}
+
+    <table class="table" id="subscribers" >
         <thead>
         <tr>
-            <th>Dossard</th>
-            {% for i in 1..race.numberOfAthlete %}
-                <th>Athlete {{ loop.index }}</th>
-                <th>Catégorie</th>
-            {% endfor %}
+            {% if (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
+                <th></th>
+            {% endif %}
+            <th>#</th>
             <th>Team</th>
+            {% for i in 1..race.numberOfAthlete %}
+                <th>Athlete {% if race.numberOfAthlete > 1 %}{{ loop.index }}{% endif %}</th>
+            {% endfor %}
+            <th>Catégorie</th>
             <th>Inscrit le</th>
             {#<th>Mise à jour le</th>#}
             <th>Status</th>
@@ -29,23 +54,28 @@
             {% endif %}
         </tr>
         </thead>
-        <tbody>
+        <tbody id="inscriptionstable" data-updateOrderUrl="{{ path('race_update_inscriptions_order', { 'id': race.id }) }}">
         {% for inscription in race.inscriptions %}
-            <tr>
-                <td>{{ loop.index }}</td>
+            <tr id="inscriptions_{{ inscription.id }}">
+                {% if (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
+                    <td class="grab"><i class="fa fa-sort"></i></td>
+                {% endif %}
+                <td class="order">{{ loop.index }}</td>
+                <td>{{ inscription.title }}</td>
                 {% for athlete in inscription.athletes %}
                     <td>{{ athlete.firstname|lower|capitalize }} {{ athlete.lastname|upper }}</td>
-                    <td>{% if athlete.gender == constant('MALE', athlete) %}<i class="fa fa-fw fa-male"></i>H{% else %}<i class="fa fa-fw fa-female"></i>F{% endif %}</td>
                 {% endfor %}
-                <td>{{ inscription.title }}</td>
-                <td>{% if inscription.created %}{{ inscription.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                {#<td>{% if inscription.updated %}{{ inscription.updated|date('Y-m-d H:i:s') }}{% endif %}</td>#}
+                <td>{% if race.numberOfAthlete > 1 %}{{ inscription.categorie }}{% else %}{{ inscription.categorieLetter }}{% endif %}</td>
+                <td>{% if inscription.created %}{{ inscription.created|date('d/m/Y H:i:s') }}{% endif %}</td>
                 <td>{{ inscription.status|human_status|raw }}</td>
                 <td>{{ inscription.payementStatus|human_payement_status|raw }}</td>
                 <td>
                     {% if (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
                     <a href="{{ path('inscription_show', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-default btn-sm"><i class="fa fa-search fa-fw"></i>Détails</a>
                     <a href="{{ path('inscription_edit', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil fa-fw"></i>Editer</a>
+                        {% if not (inscription.payementStatus|is_paid) %}
+                            <a href="{{ path('inscription_notify_unpaid', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-warning btn-sm"><i class="fa fa-envelope fa-fw"></i>Relancer paiement</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -58,18 +88,29 @@
             <td>
                 <a href="{{ path('event_show', { 'slug': race.event.slug }) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à l'événement</a>
             </td>
-            {% if is_granted('ROLE_ADMIN') %}
-                {% if race.event.owner == app.user %}
-                    <td>
-                        <a href="{{ path('race_edit', { 'id': race.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i>Editer cette course</a>
-                    </td>
-                    <td>
-                        {{ form_start(delete_form) }}
-                        <button type="submit"  class="btn btn-danger"><i class="fa fa-fw fa-trash"></i>Supprimer</button>
-                        {{ form_end(delete_form) }}
-                    </td>
-                {% endif %}
+            {% if (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
+                <td>
+                    <a href="{{ path('race_edit', { 'id': race.id }) }}" class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i>Editer cette course</a>
+                </td>
+                <td>
+                    <a href="{{ path('race_gmcap_export', { 'id': race.id }) }}" class="btn btn-default"><i class="fa fa-fw fa-download"></i>Export GmCAP</a>
+                </td>
+                <td>
+                    <a href="{{ path('race_csv_export', { 'id': race.id }) }}" class="btn btn-default"><i class="fa fa-fw fa-download"></i>Export CSV complet</a>
+                </td>
+                <td>
+                    <a href="{{ path('race_csv_export_public', { 'id': race.id }) }}" class="btn btn-default"><i class="fa fa-fw fa-download"></i>Export CSV public</a>
+                </td>
+                <td>
+                    <a href="{{ path('race_mails_export', { 'id': race.id }) }}" class="btn btn-default"><i class="fa fa-fw fa-envelope"></i>Export emails</a>
+                </td>
+                <td>
+                    {{ form_start(delete_form) }}
+                    <button type="submit"  class="btn btn-danger"><i class="fa fa-fw fa-trash"></i>Supprimer</button>
+                    {{ form_end(delete_form) }}
+                </td>
             {% endif %}
         </tr>
     </table>
+
 {% endblock %}

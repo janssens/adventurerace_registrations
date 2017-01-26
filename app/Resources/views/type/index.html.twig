@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Type list</h1>
+    <h1>Liste des type de course</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
+                <th>Titre</th>
                 <th>Code</th>
                 <th>Description</th>
                 <th>Actions</th>
@@ -16,28 +16,24 @@
         <tbody>
         {% for type in types %}
             <tr>
-                <td><a href="{{ path('type_show', { 'id': type.id }) }}">{{ type.id }}</a></td>
+                <td><a href="{{ path('type_show', { 'code': type.code }) }}">{{ type.id }}</a></td>
                 <td>{{ type.title }}</td>
                 <td>{{ type.code }}</td>
                 <td>{{ type.description }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('type_show', { 'id': type.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('type_edit', { 'id': type.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <div class="btn-group" role="group">
+                        <a href="{{ path('type_show', { 'code': type.code }) }}" class="btn btn-default"><i class="fa fa-search fa-fw"></i>voir</a>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <a href="{{ path('type_edit', { 'id': type.id }) }}" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i>editer</a>
+                        {% endif %}
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    <a href="{{ path('type_new') }}" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i>Créer un type</a>
+{% endif %}
 
-    <ul>
-        <li>
-            <a href="{{ path('type_new') }}">Create a new entry</a>
-        </li>
-    </ul>
 {% endblock %}

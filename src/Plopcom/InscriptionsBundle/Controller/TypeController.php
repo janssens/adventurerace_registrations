@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Plopcom\InscriptionsBundle\Entity\Type;
 use Plopcom\InscriptionsBundle\Form\TypeType;
+use DateTime;
 
 /**
  * Type controller.
@@ -39,6 +40,8 @@ class TypeController extends Controller
      *
      * @Route("/new", name="type_new")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     *
      */
     public function newAction(Request $request)
     {
@@ -51,7 +54,9 @@ class TypeController extends Controller
             $em->persist($type);
             $em->flush();
 
-            return $this->redirectToRoute('type_show', array('id' => $type->getId()));
+            $request->getSession()->getFlashBag()->add('success', 'Le type de course a été sauvegardé');
+
+            return $this->redirectToRoute('type_show', array('code' => $type->getCode()));
         }
 
         return $this->render('type/new.html.twig', array(
@@ -63,15 +68,36 @@ class TypeController extends Controller
     /**
      * Finds and displays a Type entity.
      *
-     * @Route("/{id}", name="type_show")
+     * @Route("/{code}", name="type_show")
      * @Method("GET")
      */
     public function showAction(Type $type)
     {
         $deleteForm = $this->createDeleteForm($type);
 
+        $races = $type->getRaces();
+
+        $now = new DateTime();
+        $private_races = array();
+        $public_races = array();
+        $past_public_races = array();
+        foreach ($races as $race) {
+            if ($race->getPublic()) {
+                if ($race->getDate() > $now){
+                    $public_races[] = $race;
+                }else{
+                    $past_public_races[] = $race;
+                }
+            } else {
+                $private_races[] = $race;
+            }
+        }
+
         return $this->render('type/show.html.twig', array(
             'type' => $type,
+            'private_races' => $private_races,
+            'public_races' => $public_races,
+            'past_public_races' => $past_public_races,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -81,6 +107,8 @@ class TypeController extends Controller
      *
      * @Route("/{id}/edit", name="type_edit")
      * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     *
      */
     public function editAction(Request $request, Type $type)
     {
@@ -93,7 +121,9 @@ class TypeController extends Controller
             $em->persist($type);
             $em->flush();
 
-            return $this->redirectToRoute('type_edit', array('id' => $type->getId()));
+            $request->getSession()->getFlashBag()->add('success', 'Le type de course a été sauvegardé');
+
+            return $this->redirectToRoute('type_index');
         }
 
         return $this->render('type/edit.html.twig', array(
@@ -108,6 +138,8 @@ class TypeController extends Controller
      *
      * @Route("/{id}", name="type_delete")
      * @Method("DELETE")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     *
      */
     public function deleteAction(Request $request, Type $type)
     {

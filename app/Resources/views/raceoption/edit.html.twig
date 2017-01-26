@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>RaceOption edit</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" value="Sauver" class="btn-primary btn"/>
+    {{ form_end(edit_form) }}
+
+        <a href="{{ path('raceoption_index') }}" class="btn-default btn"><i class="fa fa-fw fa-chevron-left"></i>Retour à la liste</a>
+        {{ form_start(delete_form) }}
+            <button type="submit" class="btn-danger btn"><i class="fa fa-fw fa-trash"></i>Supprimer</button>
+        {{ form_end(delete_form) }}
+{% endblock %}

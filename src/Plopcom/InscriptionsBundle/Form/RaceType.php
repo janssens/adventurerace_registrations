@@ -23,19 +23,20 @@ class RaceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title',TextType::class,array('label'=>'titre','attr' => array('placeholder'=>'Nom de votre course','class'=>'form-control')))
-            ->add('slug',TextType::class,array('label'=>'identifiant','attr' => array('placeholder'=>'nom-de-votre-course','class'=>'form-control',/*'disabled'=>'true'*/)))
+            ->add('title',TextType::class,array('label'=>'Titre','attr' => array('placeholder'=>'Nom de votre course','class'=>'form-control')))
+            ->add('slug',TextType::class,array('label'=>'Identifiant','attr' => array('placeholder'=>'nom-de-votre-course','class'=>'form-control',/*'disabled'=>'true'*/)))
             ->add('type',EntityType::class,array('class'=>'PlopcomInscriptionsBundle:Type','choice_label'=>'title','label'  => 'Type de manifestation','multiple' => false, 'expanded' => true))
-            ->add('illustration', DocumentType::class)
+            ->add('illustration', DocumentType::class,array('label'=>'illustration (1200x627)'))
             ->add('date', DateType::class,array('attr' => array('class'=>'form-control')))
             ->add('entry_fees', TextType::class,array('label'=>'Prix','attr' => array('class'=>'form-control')))
             ->add('public', CheckboxType::class,array('label'=>'Visible publiquement','attr' => array('class'=>'form-control'),'required' => false))
             ->add('open', CheckboxType::class,array('label'=>'Ouvert','attr' => array('class'=>'form-control'),'required' => false))
-            ->add('description',TextareaType::class,array('label'=>'description','attr' => array('class'=>'form-control')))
+            ->add('description',TextareaType::class,array('label'=>'Description','attr' => array('class'=>'form-control'),'required' => false))
             ->add('max_attendee',IntegerType::class,array('label'=>"Nombre d'insription maximum",'attr' => array('class'=>'form-control')))
             ->add('number_of_athlete',IntegerType::class,array('label'=>'Nombre de coureurs par inscription','attr' => array('class'=>'form-control')))
-            ->add('distance',IntegerType::class,array('label'=>'Distance à parcourir en metres','required'=>false,'attr' => array('class'=>'form-control')))
-            ->add('elevation',IntegerType::class,array('label'=>'Gain en dénivelé en metres','required'=>false,'attr' => array('class'=>'form-control')))
+            ->add('document_required',CheckboxType::class,array('label'=>'Certificat/Licence requis','attr' => array('class'=>'form-control'),'required' => false))
+            ->add('distance',IntegerType::class,array('label'=>'Distance à parcourir en metres (1km = 1000m)','required'=>true,'attr' => array('class'=>'form-control')))
+            ->add('elevation',IntegerType::class,array('label'=>'Gain en dénivelé en metres','required'=>true,'attr' => array('class'=>'form-control')))
             ->add('paypal_hosted_button_id',TextType::class,array('label'=>'Id du bouton paypal','required'=>false,'attr' => array('class'=>'form-control')))
         ;
     }

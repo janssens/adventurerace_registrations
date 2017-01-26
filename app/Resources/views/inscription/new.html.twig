@@ -9,6 +9,10 @@
     <h1> Nouvelle inscription <b>{{ race.title }}</b> </h1>
     {{ form_start(form) }}
         {{ form_row(form.title) }}
+        {% for option in form.options %}
+            {{ form_widget(option) }}
+        {% endfor %}
+        {{ form_widget(form.options) }}
         {% if is_granted("ROLE_ADMIN") %}
             <div style="display: none;">
                 {{ form_row(form.status) }}
@@ -18,31 +22,47 @@
         {% endif %}
         {% if race.numberOfAthlete > 1 %}
         <h3>athletes</h3>
+        <ul class="nav nav-tabs">
+            {% for i in 1..race.numberOfAthlete %}
+            <li role="presentation" {% if i == 1 %}class="active"{% endif %}><a href="#athlete{{ i }}" aria-controls="athlete{{ i }}" role="tab" data-toggle="tab">Athlete #{{ i }}</a></li>
+            {% endfor %}
+        </ul>
         {%  endif %}
-        <div class="athletes">
+        <div class="athletes tab-content">
             {% for athlete in form.athletes %}
-                <div class="athlete">
+                <div role="tabpanel" class="tab-pane fade {% if loop.index == 1 %}in active{% endif %} athlete" id="athlete{{ loop.index }}">
                 {% if race.numberOfAthlete > 1 %}
-                    <h4>Athlete #{{ loop.index }}</h4>
+                    <h2>Athlete #{{ loop.index }}</h2>
                 {%  endif %}
-                    {{ form_row(athlete.firstname) }}
-                    {{ form_row(athlete.lastname) }}
-                    {{ form_row(athlete.email) }}
-                    {{ form_row(athlete.gender) }}
-                    {{ form_row(athlete.dob) }}
+                    <div class="col-md-6">{{ form_row(athlete.firstname) }}</div>
+                    <div class="col-md-6">{{ form_row(athlete.lastname) }}</div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-4">{{ form_row(athlete.email) }}</div>
+                    <div class="col-md-4">{{ form_row(athlete.gender) }}</div>
+                    <div class="col-md-4">{{ form_row(athlete.dob) }}</div>
+                    <div class="clearfix"></div>
                     {{ form_row(athlete.address.line_1) }}
                     {{ form_row(athlete.address.line_2) }}
                     {#{{ form_row(athlete.address.line_3) }}#}
-                    {{ form_row(athlete.address.city) }}
                     {#{{ form_row(athlete.address.county_province) }}#}
-                    {{ form_row(athlete.address.zip_or_postcode) }}
-                    {{ form_row(athlete.address.country) }}
+                    <div class="col-md-4">{{ form_row(athlete.address.zip_or_postcode) }}</div>
+                    <div class="col-md-4">{{ form_row(athlete.address.city) }}</div>
+                    <div class="col-md-4">{{ form_row(athlete.address.country) }}</div>
+                    <div class="clearfix"></div>
                     {{ form_row(athlete.phone) }}
-                    {{ form_row(athlete.document) }}
+                    <div class="clearfix"></div>
+                    {% if race.documentRequired %}
+                        {{ form_row(athlete.document) }}
+                    {% endif %}
+                    {% for option in athlete.options %}
+                        {{ form_widget(option) }}
+                    {% endfor %}
+                    {{ form_widget(athlete.options) }}
                 </div>
             {% endfor %}
         </div>
-
+    <hr>
+        {{ form_row(form.signed) }}
         {{ form_row(form.save) }}
         {{ form_row(form.reset) }}
     {{ form_end(form) }}

@@ -4,6 +4,7 @@
     <h1>Inscription pour <b>{{ inscription.race.title }}</b></h1>
 
     <h2>{{ inscription.title }}</h2>
+    <h3>Catégorie : {{ inscription.categorie }}</h3>
     <br>
     {% if inscription.updated %} Dernière mise à jour le {{ inscription.updated|date('d M Y à H:i:s') }}{% endif %}
     <hr>
@@ -12,12 +13,27 @@
             {{ include('athlete/athlete_details.html.twig', { 'athlete': athlete }) }}
         {% endfor %}
     </div>
+    <div class="row">
+        {% for athlete in inscription.athletes %}
+            {{ include('athlete/athlete_options_details.html.twig', { 'athlete': athlete }) }}
+        {% endfor %}
+    </div>
+    {% if inscription.options | length %}
+        <h4>Options</h4>
+        {% for option in inscription.options %}
+            {% if option.raceOption.isDocument %}
+                <li>{{ option.raceOption.title }} : <a href="/{{ option.document.webPath }}" data-toggle="lightbox"><i class="fa fa-fw fa-file-image-o"></i>{{ option.document.webPath }}</a></li>
+            {% else %}
+                <li>{{ option.raceOption.title }} : <strong>{{ option.value is not empty ? option.value : 'N/A' }}</strong></li>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
     {% if inscription.adminComment %}
         <div class="alert alert-info" role="alert">{{ inscription.adminComment }}</div>
     {% endif %}
     <br>
     Status inscription : <b>{{ inscription.status|human_status|raw }}</b> <br>
-    Status payement : <b>{{ inscription.payementStatus|human_payement_status|raw }}</b>
+    Status paiment : <b>{{ inscription.payementStatus|human_payement_status|raw }}</b>
     <hr>
 
     {% if (inscription.payementStatus == 2 or inscription.payementStatus == 0) %}
@@ -27,19 +43,25 @@
                 <input type="hidden" name="cmd" value="_s-xclick">
                 <input type="hidden" name="hosted_button_id" value="{{ inscription.race.paypalHostedButtonId }}">
                 <input type="hidden" name="notify_url" value="{{ url('race_paypalipn',{'slug' : inscription.race.slug }) }}">
-                <input type="hidden" id="invoice" value="{{ inscription.id }}">
-                <input type="hidden" id="nom" value="{{ inscription.athletes.first.fullname }}">
+                <input type="hidden" id="invoice" name="invoice" value="{{ inscription.id }}">
+                {#<input type="hidden" id="nom" name="name" value="{{ inscription.athletes.first.fullname }}">#}
                 <button type="submit" class="btn btn-success">Payer et Valider</button>
             </form>
             <h3><i class="fa fa-fw fa-cc-paypal"></i>&nbsp;<i class="fa fa-fw fa-cc-mastercard"></i>&nbsp;<i class="fa fa-fw fa-cc-visa"></i>&nbsp;<i class="fa fa-fw fa-credit-card"></i></h3>
             <hr>
         {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('race_show',{'slug' : inscription.race.slug }) }}" class="btn btn-default"><i class="fa fa-chevron-left fa-fw"></i>Retour {{ inscription.race.title }}</a>
+        {% endif %}
     {% else %}
         <a href="{{ path('race_show',{'slug' : inscription.race.slug }) }}" class="btn btn-default"><i class="fa fa-chevron-left fa-fw"></i>Retour {{ inscription.race.title }}</a>
     {% endif %}
+    {#{% if (is_granted('ROLE_ADMIN') and inscription.adminComment) %}
+        <a href="{{ path('inscription_notify',{ 'id': inscription.id, 'secret' : inscription.salt }) }}" class="btn btn-default"><i class="fa fa-paper-plane fa-fw"></i>Notifier par email</a>
+    {% endif %}#}
+    <a href="{{ path('inscription_edit', { 'id': inscription.id, 'secret' : inscription.salt }) }}" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i>Editer cette inscription</a>
+    <br>
     {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('inscription_edit', { 'id': inscription.id, 'secret' : inscription.salt }) }}" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i>Editer cette inscription</a>
-        <br>
         {{ form_start(delete_form) }}
             <button type="submit" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Supprimer</button>
         {{ form_end(delete_form) }}

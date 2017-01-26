@@ -1,21 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Type edit</h1>
+    <h1>Edition type : <i>{{ type.title }}</i></h1>
 
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
+        {{ form_row(edit_form.title) }}
+        {{ form_row(edit_form.code) }}
+        {{ form_row(edit_form.description) }}
+        <button type="submit"  class="btn btn-primary">Sauver</button>
     {{ form_end(edit_form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('type_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <br>
+
+    <a href="{{ path('type_index') }}" class="btn btn-default"><i class="fa fa-chevron-left fa-fw"></i>Retour à la liste des types</a>
+    {{ form_start(delete_form) }}
+        <button type="submit" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Supprimer</button>
+    {{ form_end(delete_form) }}
+
 {% endblock %}

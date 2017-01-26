@@ -10,6 +10,7 @@ class AppExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFilter('human_status', array($this, 'humanStatus')),
             new \Twig_SimpleFilter('human_payement_status', array($this, 'humanPaymentStatus')),
+            new \Twig_SimpleFilter('is_paid', array($this, 'isPaid')),
             new \Twig_SimpleFilter('ext', array($this, 'ext')),
             new \Twig_SimpleFilter('ext_type', array($this, 'ext_type')),
         );
@@ -27,6 +28,9 @@ class AppExtension extends \Twig_Extension
                 break;
             case Inscription::STATUS_VALID:
                 $return = "<span class=\"label label-success\">validé</span>";
+                break;
+            case Inscription::STATUS_DNS:
+                $return = "<span class=\"label label-warning\">non partant</span>";
                 break;
             default:
                 $return = '<span class="label label-default">indéfini</span>';
@@ -50,8 +54,33 @@ class AppExtension extends \Twig_Extension
             case Inscription::PAYEMENT_STATUS_WAITING:
                 $return = "<span class=\"label label-success\">En attente retour</span>";
                 break;
+            case Inscription::PAYEMENT_STATUS_REFUND:
+                $return = '<span class="label label-default">remboursé</span>';
+                break;
             default:
                 $return = '<span class="label label-default">indéfini</span>';
+        }
+        return $return;
+    }
+
+    public function isPaid($integer)
+    {
+        $return = false;
+        switch ($integer){
+            case Inscription::PAYEMENT_STATUS_FAILED:
+                break;
+            case Inscription::PAYEMENT_STATUS_NOT_PAYED:
+                break;
+            case Inscription::PAYEMENT_STATUS_PAYED:
+                $return = true;
+                break;
+            case Inscription::PAYEMENT_STATUS_WAITING:
+                break;
+            case Inscription::PAYEMENT_STATUS_REFUND:
+                $return = true;
+                break;
+            default:
+                $return = false;
         }
         return $return;
     }

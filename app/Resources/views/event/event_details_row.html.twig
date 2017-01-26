@@ -1,0 +1,28 @@
+<tr>
+    <td>
+        {% if event.races | length %}
+                {% for race in event.races %}
+                            {% if race.illustration %}
+                                <img src="{{ (race.illustration.webPath) | imagine_filter('my_thumb_race_event') }}" class="img-responsive thumbnail" alt="{{ race.title }}">
+                            {% endif %}
+                {% endfor %}
+        {% endif %}
+    </td>
+    <td>
+        {{ event.title }}&nbsp;
+        {% if (is_granted('ROLE_ADMIN') and event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
+            <a href="{{ path('event_edit', { 'id': event.id }) }}"><i class="fa fa-pencil fa-fw"></i></a>
+        {% endif %}
+    </td>
+    <td>
+        {% for type in event.types %}
+            &nbsp;<a href="{{ path('type_show', { 'code': type.code }) }}"><span class="label label-default">{{ type.title }}</span></a>
+        {% endfor %}
+    </td>
+    <td class="description">
+        {{ event.description|striptags|raw }}
+    </td>
+    <td>
+        <a href="{{ path('event_show', { 'slug': event.slug }) }}" class="btn btn-sm btn-default"><i class="fa fa-search fa-fw"></i>Détails</a>
+    </td>
+</tr>

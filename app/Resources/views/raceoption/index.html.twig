@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Les Options supplémentaires pour les courses</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Requis ?</th>
+                <th>Titre</th>
+                <th>Choix</th>
+                <th>Course</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for raceOption in raceOptions %}
+            <tr>
+                <td><a href="{{ path('raceoption_show', { 'id': raceOption.id }) }}">{{ raceOption.id }}</a></td>
+                <td>{{ raceOption.typeAsText }}</td>
+                <td>{{ raceOption.required ? 'Oui':'Non' }}</td>
+                <td>{{ raceOption.title }}</td>
+                <td>{% if raceOption.choices %}{{ raceOption.choices|join(', ') }}{% endif %}</td>
+                <td>{% for race in raceOption.races %}
+                        {{ race.title }},
+                    {% endfor %}
+                </td>
+                <td>
+                    <a class="btn btn-default btn-sm" href="{{ path('raceoption_show', { 'id': raceOption.id }) }}">Détails</a>
+                    <a class="btn btn-default btn-sm" href="{{ path('raceoption_edit', { 'id': raceOption.id }) }}">Editer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('raceoption_new') }}" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i>Créer une nouvelle option</a>
+
+{% endblock %}

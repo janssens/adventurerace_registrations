@@ -17,6 +17,7 @@ $apcLoader = new Symfony\Component\ClassLoader\ApcClassLoader(sha1(__FILE__), $l
 $loader->unregister();
 $apcLoader->register(true);
 */
+umask(0002);
 
 $kernel = new AppKernel('prod', false);
 $kernel->loadClassCache();

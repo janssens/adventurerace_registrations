@@ -75,6 +75,11 @@ class Athlete
      */
     protected $address;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AthleteOption", mappedBy="athlete", cascade={"persist","remove"})
+     */
+    protected $options;
+
 
     /**
      * Get id
@@ -332,5 +337,46 @@ class Athlete
     public function getGender()
     {
         return $this->gender;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->options = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add option
+     *
+     * @param \Plopcom\InscriptionsBundle\Entity\AthleteOption $option
+     *
+     * @return Athlete
+     */
+    public function addOption(\Plopcom\InscriptionsBundle\Entity\AthleteOption $option)
+    {
+        $this->options[] = $option;
+
+        return $this;
+    }
+
+    /**
+     * Remove option
+     *
+     * @param \Plopcom\InscriptionsBundle\Entity\AthleteOption $option
+     */
+    public function removeOption(\Plopcom\InscriptionsBundle\Entity\AthleteOption $option)
+    {
+        $this->options->removeElement($option);
+    }
+
+    /**
+     * Get options
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 }

@@ -26,21 +26,25 @@ class EventController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $response = $this->forward('PlopcomInscriptionsBundle:Default:index', array());
 
-        $events = $em->getRepository('PlopcomInscriptionsBundle:Event')->findAll();
-        $my_events = array();
+        return $response;
 
-        $user = $this->getUser();
-        if ($user){
-            $my_events = $em->getRepository('PlopcomInscriptionsBundle:Event')->findByOwner($user);
-
-        }
-
-        return $this->render('event/index.html.twig', array(
-            'my_events' => $my_events,
-            'events' => $events
-        ));
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $events = $em->getRepository('PlopcomInscriptionsBundle:Event')->findAll();
+//        $my_events = array();
+//
+//        $user = $this->getUser();
+//        if ($user){
+//            $my_events = $em->getRepository('PlopcomInscriptionsBundle:Event')->findByOwner($user);
+//
+//        }
+//
+//        return $this->render('event/index.html.twig', array(
+//            'my_events' => $my_events,
+//            'events' => $events
+//        ));
     }
 
     /**
@@ -108,7 +112,7 @@ class EventController extends Controller
             $em->persist($event);
             $em->flush();
 
-            return $this->redirectToRoute('event_edit', array('id' => $event->getId()));
+            return $this->redirectToRoute('event_show', array('slug' => $event->getSlug()));
         }
 
         return $this->render('event/edit.html.twig', array(

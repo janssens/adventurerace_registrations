@@ -6,10 +6,12 @@ namespace Plopcom\InscriptionsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="event")
+ * @UniqueEntity("slug")
  */
 class Event
 {
@@ -50,8 +52,10 @@ class Event
     protected $paypal_account_email;
 
     /**
-     * @ORM\OneToOne(targetEntity="User", mappedBy="owner_id")
-     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="events", cascade={"persist", "merge"})
+     * @ORM\JoinColumns({
+     *  @ORM\JoinColumn(name="owner_id", referencedColumnName="id",onDelete="CASCADE")
+     * })
      */
     protected $owner;
 
@@ -278,5 +282,19 @@ class Event
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * get Tyoes
+     *
+     * @return array of Type
+     */
+    public function getTypes()
+    {
+        $return = array();
+        foreach ($this->getRaces() as $race){
+            $return[$race->getType()->getId()] = $race->getType();
+        }
+        return $return;
     }
 }

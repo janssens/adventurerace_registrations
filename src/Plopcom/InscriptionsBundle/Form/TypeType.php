@@ -5,6 +5,8 @@ namespace Plopcom\InscriptionsBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class TypeType extends AbstractType
 {
@@ -15,9 +17,9 @@ class TypeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('code')
-            ->add('description')
+            ->add('title',TextType::class,array('label'=>'Titre','attr' => array('placeholder'=>'Nom du type','class'=>'form-control')))
+            ->add('code',TextType::class,array('label'=>'Identifiant','attr' => array('placeholder'=>'nom-du-type','class'=>'form-control',)))
+            ->add('description',TextareaType::class,array('label'=>'Description','attr' => array('class'=>'form-control')))
         ;
     }
     

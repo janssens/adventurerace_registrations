@@ -1,0 +1,11 @@
+<html>
+<body>
+    {% for athlete in inscription.athletes %}
+        Bonjour {{ athlete.fullname }},<br>
+    {% endfor %}
+    Votre inscription à la course "<b>{{ inscription.race.title }}</b>" a été annulée et remboursée. <br>
+    Elle sera bientôt supprimée définitivement. <br>
+    Nous espérons vous revoir bientôt.
+    Bonne journée.
+</body>
+</html>

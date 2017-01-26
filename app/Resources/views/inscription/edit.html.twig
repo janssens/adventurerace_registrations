@@ -26,22 +26,76 @@
 
     {{ form_start(edit_form) }}
         {{ form_row(edit_form.title) }}
+        {% for option in edit_form.options %}
+            {{ form_widget(option) }}
+        {% endfor %}
+        {{ form_widget(edit_form.options) }}
     {% if is_granted("ROLE_ADMIN") %}
         <hr>
-        {{ form_row(edit_form.status) }}
-        {{ form_row(edit_form.payement_status) }}
+        <div class="col-md-6">{{ form_row(edit_form.status) }}</div>
+        <div class="col-md-6">{{ form_row(edit_form.payement_status) }}</div>
+        <div class="clearfix"></div>
         {{ form_row(edit_form.admin_comment) }}
         <hr>
     {% endif %}
+
+        {% if race.numberOfAthlete > 1 %}
+            <h3>athletes</h3>
+            <ul class="nav nav-tabs">
+                {% for i in 1..race.numberOfAthlete %}
+                    <li role="presentation" {% if i == 1 %}class="active"{% endif %}><a href="#athlete{{ i }}" aria-controls="athlete{{ i }}" role="tab" data-toggle="tab">Athlete #{{ i }}</a></li>
+                {% endfor %}
+            </ul>
+        {%  endif %}
+        <div class="athletes tab-content">
+            {% for athlete in edit_form.athletes %}
+                <div role="tabpanel" class="tab-pane fade {% if loop.index == 1 %}in active{% endif %} athlete" id="athlete{{ loop.index }}">
+                    {% if race.numberOfAthlete > 1 %}
+                        <h2>Athlete #{{ loop.index }}</h2>
+                    {%  endif %}
+                    <div class="col-md-6">{{ form_row(athlete.firstname) }}</div>
+                    <div class="col-md-6">{{ form_row(athlete.lastname) }}</div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-4">{{ form_row(athlete.email) }}</div>
+                    <div class="col-md-4">{{ form_row(athlete.gender) }}</div>
+                    <div class="col-md-4">{{ form_row(athlete.dob) }}</div>
+                    <div class="clearfix"></div>
+                    {{ form_row(athlete.address.line_1) }}
+                    {{ form_row(athlete.address.line_2) }}
+                    {#{{ form_row(athlete.address.line_3) }}#}
+                    {#{{ form_row(athlete.address.county_province) }}#}
+                    <div class="col-md-4">{{ form_row(athlete.address.zip_or_postcode) }}</div>
+                    <div class="col-md-4">{{ form_row(athlete.address.city) }}</div>
+                    <div class="col-md-4">{{ form_row(athlete.address.country) }}</div>
+                    <div class="clearfix"></div>
+                    {{ form_row(athlete.phone) }}
+                    <div class="clearfix"></div>
+                    {% if race.documentRequired %}
+                        {{ form_row(athlete.document) }}
+                        {#{% if is_granted('ROLE_ADMIN') %}#}
+                            {#<iframe class="col-xs-12 col-md-8" src="{{ athlete.document.webPath }}" frameborder="0" style="min-height: 800px;">#}
+                            {#</iframe>#}
+                        {#{% endif %}#}
+                    {% endif %}
+                    {% for option in athlete.options %}
+                        {{ form_widget(option) }}
+                    {% endfor %}
+                    {{ form_widget(athlete.options) }}
+                </div>
+            {% endfor %}
+        </div>
+        <hr>
+        {{ form_row(edit_form.signed) }}
         {{ form_widget(edit_form) }}
     {{ form_end(edit_form) }}
 
     <hr>
             <a href="{{ path('race_show',{"slug":inscription.race.slug}) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à la course</a>
+            <a href="{{ path('inscription_show', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à l'inscription</a>
             {% if is_granted("ROLE_ADMIN") %}
-                {% if inscription.race.event.owner == app.user %}
+                {% if (inscription.race.event.owner == app.user) or is_granted("ROLE_SUPER_ADMIN") %}
                     {{ form_start(delete_form) }}
-                        <input type="submit" value="Supprimer" class="btn btn-danger">
+                        <button type="submit" class="btn btn-danger"><i class="fa fa-fw fa-trash"></i>Supprimer</button>
                     {{ form_end(delete_form) }}
                 {% endif %}
             {% endif %}

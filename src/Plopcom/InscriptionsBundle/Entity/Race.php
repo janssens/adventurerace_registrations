@@ -6,10 +6,13 @@ namespace Plopcom\InscriptionsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use DateTime;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="race")
+ * @UniqueEntity("slug")
  */
 class Race
 {
@@ -73,6 +76,11 @@ class Race
     protected $public = false;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $document_required = true;
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $number_of_athlete;
@@ -99,15 +107,21 @@ class Race
     protected $paypal_hosted_button_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Type")
+     * @ORM\ManyToOne(targetEntity="Type",inversedBy="races")
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      */
     protected $type;
 
     /**
      * @ORM\OneToMany(targetEntity="Inscription", mappedBy="race", cascade={"persist", "remove", "merge"})
+     * @ORM\OrderBy({"position" = "ASC", "id" = "ASC"})
      */
     protected $inscriptions;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="RaceOption", mappedBy="races", cascade={"persist", "remove", "merge"})
+     */
+    protected $options;
 
     /**
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="races", cascade={"persist", "merge"})
@@ -604,5 +618,74 @@ class Race
     public function getPublic()
     {
         return $this->public;
+    }
+
+    /**
+     * is past
+     *
+     * @return boolean
+     */
+    public function isPast()
+    {
+        $now = new DateTime();
+        return ($now > $this->getDate());
+    }
+
+    /**
+     * Set documentRequired
+     *
+     * @param boolean $documentRequired
+     *
+     * @return Race
+     */
+    public function setDocumentRequired($documentRequired)
+    {
+        $this->document_required = $documentRequired;
+
+        return $this;
+    }
+
+    /**
+     * Get documentRequired
+     *
+     * @return boolean
+     */
+    public function getDocumentRequired()
+    {
+        return $this->document_required;
+    }
+
+    /**
+     * Add option
+     *
+     * @param \Plopcom\InscriptionsBundle\Entity\RaceOption $option
+     *
+     * @return Race
+     */
+    public function addOption(\Plopcom\InscriptionsBundle\Entity\RaceOption $option)
+    {
+        $this->options[] = $option;
+
+        return $this;
+    }
+
+    /**
+     * Remove option
+     *
+     * @param \Plopcom\InscriptionsBundle\Entity\RaceOption $option
+     */
+    public function removeOption(\Plopcom\InscriptionsBundle\Entity\RaceOption $option)
+    {
+        $this->options->removeElement($option);
+    }
+
+    /**
+     * Get options
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 }

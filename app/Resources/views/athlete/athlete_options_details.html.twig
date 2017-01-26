@@ -1,0 +1,21 @@
+{%  if athlete.options | length %}
+<div class="panel panel-default col-xs-6 col-md-4">
+    <div class="panel-heading">Options</div>
+    <div class="panel-body">
+        <ul>
+            {% for option in athlete.options %}
+                {% if option.raceOption.isDocument %}
+                    <li>{{ option.raceOption.title }} :
+                    {% if option.document %}
+                     <a href="/{{ option.document.webPath }}" data-toggle="lightbox"><i class="fa fa-fw fa-file-image-o"></i>{{ option.document.webPath }}</a></li>
+                    {% else %}
+                        <strong> N/A </strong>
+                    {% endif %}
+                {% else %}
+                    <li>{{ option.raceOption.title }} : <strong>{{ option.value is not empty ? option.value : 'N/A' }}</strong></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}

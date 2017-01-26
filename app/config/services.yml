@@ -21,3 +21,18 @@ services:
             class: Plopcom\InscriptionsBundle\Form\Extension\FileTypeExtension
             tags:
                 - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }
+    app.form.type.athlete_option:
+            class: Plopcom\InscriptionsBundle\Form\AthleteOptionType
+            arguments: ["@doctrine.orm.entity_manager"]
+            tags:
+                - { name: form.type }
+    app.form.type.inscription_option:
+            class: Plopcom\InscriptionsBundle\Form\InscriptionOptionType
+            arguments: ["@doctrine.orm.entity_manager"]
+            tags:
+                - { name: form.type }
+    app.form.type.document_as_string:
+            class: Plopcom\InscriptionsBundle\Form\DocumentAsStringType
+            arguments: ["@doctrine.orm.entity_manager"]
+            tags:
+                - { name: form.type }

@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\ChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -31,11 +32,20 @@ class InscriptionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title',TextType::class,array('label'=>'Club / Team','attr' => array('placeholder'=>'club','class'=>'form-control'),'required'=>false));
-
         $user = $this->tokenStorage->getToken()->getUser();
 
-        if ($user && is_object($user) && $user->hasRole('ROLE_ADMIN')) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($user) {
+            $form = $event->getForm();
+            $data = $event->getData();
+
+            if ($data->getRace()->getNumberOfAthlete() > 1)
+                $form->add('title',TextType::class,array('label'=>'Nom de l\'équipe','attr' => array('placeholder'=>'équipe','class'=>'form-control'),'required'=>true));
+            else
+                $form->add('title',TextType::class,array('label'=>'Club / Team','attr' => array('placeholder'=>'club','class'=>'form-control'),'required'=>false));
+
+        });
+
+        if ($user && is_object($user) && ($user->hasRole('ROLE_ADMIN')||$user->hasRole('ROLE_SUPER_ADMIN'))) {
             $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($user) {
                 $form = $event->getForm();
 
@@ -44,6 +54,7 @@ class InscriptionType extends AbstractType
                             'Valide' => Inscription::STATUS_VALID,
                             'Non vérifié'=> Inscription::STATUS_UNCHECKED,
                             'Non valide'=> Inscription::STATUS_UNVALID,
+                            'Non partant'=> Inscription::STATUS_DNS,
                     ), 'label' => "Status de l'inscription",'attr' => array('class'=>'form-control')));
                 $form->add('payement_status', ChoiceType::class, array(
                     'choices' => array(
@@ -51,6 +62,7 @@ class InscriptionType extends AbstractType
                         'Non payé'=> Inscription::PAYEMENT_STATUS_NOT_PAYED,
                         'Payé'=> Inscription::PAYEMENT_STATUS_PAYED,
                         'En attente retour'=> Inscription::PAYEMENT_STATUS_WAITING,
+                        'Remboursé'=> Inscription::PAYEMENT_STATUS_REFUND,
                     ), 'label' => "Status du payement",'attr' => array('class'=>'form-control')));
                 $form->add('admin_comment', TextType::class, array( 'label' => "Commentaire admin",'attr' => array('class'=>'form-control'),'required'=> false));
             });
@@ -58,6 +70,16 @@ class InscriptionType extends AbstractType
 
         $builder->add('athletes', CollectionType::class, array(
             'entry_type' => AthleteType::class
+        ));
+
+        $builder->add('options', CollectionType::class, array(
+            'entry_type' => InscriptionOptionType::class
+        ));
+
+        $builder->add('signed', CheckboxType::class, array(
+            'label'    => "En cochant cette case vous acceptez le règlement de l'épreuve dans son intégralité",
+            'required' => true,
+            'attr' => array('class'=>'form-control')
         ));
 
         $builder->add('save',SubmitType::class,array('label'=>'Enregistrer', 'attr'=>array('class'=>'btn btn-primary')))

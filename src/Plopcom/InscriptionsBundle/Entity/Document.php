@@ -159,7 +159,7 @@ class Document
             $extension = 'bin';
         }
         do{
-            $newName = rand(1, 99999).'.'.$extension;
+            $newName = time().'_'.rand(1, 99).'.'.$extension;
         } while(file_exists($this->getUploadRootDir().$newName));
 
         $this->setName($newName);
@@ -173,5 +173,14 @@ class Document
         $this->file = null;
 
         return $this->getName();
+    }
+
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string)$this->getId();
     }
 }

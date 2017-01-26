@@ -1,0 +1,13 @@
+<html>
+<body>
+{% for athlete in inscription.athletes %}
+    Bonjour {{ athlete.fullname }},<br>
+{% endfor %}
+<br>
+Sauf erreur de notre part, votre inscription à la course "<b>{{ inscription.race.title }}</b>" n'a pas encore été réglée. <br>
+Merci de prendre soin de valider votre participation à l'événement.<br>
+Pour se faire, vous pouvez modifier votre inscription et effectuer votre paiement via cette adresse : <a href="{{ url("inscription_show",{'id' : inscription.id, 'secret' : inscription.salt }) }}">{{ url("inscription_show",{'id' : inscription.id, 'secret' : inscription.salt }) }}</a>
+<br>
+A très bientôt.
+</body>
+</html>

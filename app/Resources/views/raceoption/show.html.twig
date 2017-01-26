@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>RaceOption</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ raceOption.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ raceOption.typeAsText }}</td>
+            </tr>
+            <tr>
+                <th>Choices</th>
+                <td>{% if raceOption.choices %}{{ raceOption.choices|join(', ') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Placeholder</th>
+                <td>{{ raceOption.placeholder }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ raceOption.title }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('raceoption_index') }}" class="btn-default btn"><i class="fa fa-fw fa-chevron-left"></i>Retour à la liste</a>
+    <a href="{{ path('raceoption_edit', { 'id': raceOption.id }) }}" class="btn-default btn"><i class="fa fa-fw fa-pencil"></i>Editer</a>
+    {{ form_start(delete_form) }}
+        <button type="submit" value="Delete" class="btn-danger btn"><i class="fa fa-fw fa-trash"></i>Supprimer</button>
+    {{ form_end(delete_form) }}
+{% endblock %}

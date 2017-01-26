@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Type creation</h1>
+    <h1>Nouveau type</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <button type="submit" class="btn btn-primary">Créer</button>
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('type_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    <br>
+
+    <a href="{{ path('type_index') }}" class="btn btn-default"><i class="fa fa-chevron-left fa-fw"></i>Retour</a>
+
 {% endblock %}

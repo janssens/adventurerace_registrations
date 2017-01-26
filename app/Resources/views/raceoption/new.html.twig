@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>RaceOption creation</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.target) }}
+        {{ form_row(form.choices) }}
+        {{ form_row(form.placeholder) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.required) }}
+        {{ form_row(form.races) }}
+    <button type="submit" class="btn btn-primary">Créer</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('raceoption_index') }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour</a>
+{% endblock %}

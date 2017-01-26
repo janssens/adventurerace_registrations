@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -37,10 +39,19 @@ class AthleteType extends AbstractType
 
         $builder->add('address', AddressType::class,array('label'=>' '));
 
-        $builder
-            ->add('document',DocumentType::class,array('label'=>'Licence / certificat medical'))
-            ->add('phone',TextType::class,array('label'=>'Téléphone','attr' => array('placeholder' => '0102030405','class'=>'form-control')))
-        ;
+        $builder->add('options', CollectionType::class, array(
+            'entry_type' => AthleteOptionType::class
+        ));
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $form = $event->getForm();
+            $data = $event->getData();
+
+            if ($data->getInscription()->getRace()->getDocumentRequired())
+                $form->add('document',DocumentType::class,array('label'=>'Licence / certificat medical'));
+        });
+
+        $builder->add('phone',TextType::class,array('label'=>'Téléphone','attr' => array('placeholder' => '0102030405','class'=>'form-control')));
     }
     
     /**

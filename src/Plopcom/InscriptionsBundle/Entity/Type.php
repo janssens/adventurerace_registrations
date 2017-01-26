@@ -38,7 +38,7 @@ class Type
     protected $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Race", inversedBy="type")
+     * @ORM\OneToMany(targetEntity="Race", mappedBy="type")
      */
     protected $races;
 
@@ -126,6 +126,14 @@ class Type
     }
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->races = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Set races
      *
      * @param \Plopcom\InscriptionsBundle\Entity\Race $races
@@ -147,5 +155,29 @@ class Type
     public function getRaces()
     {
         return $this->races;
+    }
+
+    /**
+     * Add race
+     *
+     * @param \Plopcom\InscriptionsBundle\Entity\Race $race
+     *
+     * @return Type
+     */
+    public function addRace(\Plopcom\InscriptionsBundle\Entity\Race $race)
+    {
+        $this->races[] = $race;
+
+        return $this;
+    }
+
+    /**
+     * Remove race
+     *
+     * @param \Plopcom\InscriptionsBundle\Entity\Race $race
+     */
+    public function removeRace(\Plopcom\InscriptionsBundle\Entity\Race $race)
+    {
+        $this->races->removeElement($race);
     }
 }
