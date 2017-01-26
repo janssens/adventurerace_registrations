@@ -2,15 +2,17 @@
     <div class="thumbnail">
         {% if event.races | length %}
         <div id="event_details_carousel_{{ event.id }}" class="carousel slide" data-ride="carousel">
+            {% if event.openRaces|length > 1 %}
             <!-- Carousel indicators -->
             <ol class="carousel-indicators">
-                {% for race in event.races %}
+                {% for race in event.openRaces %}
                     <li data-target="#event_details_carousel_{{ event.id }}" data-slide-to="{{ loop.index }}" class="{% if loop.index == 1 %}active{% endif %}"></li>
                 {% endfor %}
             </ol>
+            {% endif %}
             <!-- Wrapper for carousel items -->
             <div class="carousel-inner">
-                {% for race in event.races %}
+                {% for race in event.openRaces %}
                     <div class="item{% if loop.index == 1 %} active{% endif %}">
                         <a href="{{ path('event_show', { 'slug': event.slug }) }}">
                             {% if race.illustration %}
@@ -22,6 +24,7 @@
                     </div>
                 {% endfor %}
             </div>
+            {% if event.openRaces|length > 1 %}
             <!-- Carousel controls -->
             <a class="carousel-control left" href="#event_details_carousel_{{ event.id }}" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left"></span>
@@ -29,6 +32,7 @@
             <a class="carousel-control right" href="#event_details_carousel_{{ event.id }}" data-slide="next">
                 <span class="glyphicon glyphicon-chevron-right"></span>
             </a>
+            {% endif %}
         </div>
         {% else %}
             <img src="http://placehold.it/1200x627" class="img-responsive" alt="no image">

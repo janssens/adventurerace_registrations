@@ -297,4 +297,14 @@ class Event
         }
         return $return;
     }
+
+    public function getOpenRaces()
+    {
+        $return = array();
+        foreach ($this->getRaces() as $race){
+            if ($race->getOpen() && $race->getPublic() && !$race->isPast())
+                $return[$race->getId()] = $race;
+        }
+        return $return;
+    }
 }
