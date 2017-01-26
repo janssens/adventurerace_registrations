@@ -9,5 +9,6 @@
 /.idea/
 /dploy.yaml
 /composer.lock
+/.rev*
 src/AppBundle/Resources/
 /web/media/
