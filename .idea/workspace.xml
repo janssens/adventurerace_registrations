@@ -1,120 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8b5ea52d-5f43-48df-9ea0-0775a54e8ea3" name="Default" comment="oups">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/Emails/notification.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/Emails/notifyunpaid.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/Emails/refound.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/athlete/athlete_options_details.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/event/event_details_row.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/home.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/raceoption/edit.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/raceoption/index.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/raceoption/new.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Resources/views/raceoption/show.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/RaceOptionController.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/AthleteOption.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/AthleteOptionDocument.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/AthleteOptionString.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/InscriptionOption.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/RaceOption.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/EventListener/InscriptionOnFlush.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/AthleteOptionType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/DataTransformer/DocumentToNumberTransformer.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/DocumentAsStringType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/InscriptionOptionType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/RaceOptionType.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Repository/AthleteOptionRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Repository/InscriptionOptionRepository.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Repository/RaceOptionRepository.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/inscriptions.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/magicento.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
+    <list default="true" id="8b5ea52d-5f43-48df-9ea0-0775a54e8ea3" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/ChangePassword/changePassword.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/ChangePassword/changePassword_content.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Group/edit.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Group/edit_content.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Group/list.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Group/list_content.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Group/new.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Group/new_content.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Group/show.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Group/show_content.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Profile/edit.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Profile/edit_content.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Profile/show.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Profile/show_content.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Registration/checkEmail.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Registration/confirmed.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Registration/email.txt.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Registration/register.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Registration/register_content.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Resetting/checkEmail.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Resetting/email.txt.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Resetting/passwordAlreadyRequested.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Resetting/request.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Resetting/request_content.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Resetting/reset.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Resetting/reset_content.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/Security/login.html.twig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/composer.lock" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/SymfonyRequirements.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/logs/.gitkeep" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/var/sessions/.gitkeep" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/AppKernel.php" afterPath="$PROJECT_DIR$/app/AppKernel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/layout.html.twig" afterPath="$PROJECT_DIR$/app/Resources/FOSUserBundle/views/layout.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/athlete/athlete_details.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/athlete/athlete_details.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/default/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/default/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/event/edit.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/event/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/event/event_details.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/event/event_details.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/event/new.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/event/new.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/event/show.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/event/show.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/inscription/edit.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/inscription/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/inscription/new.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/inscription/new.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/inscription/show.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/inscription/show.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/race/edit.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/race/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/race/new.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/race/new.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/race/race_details.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/race/race_details.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/race/show.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/race/show.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/type/edit.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/type/edit.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/type/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/type/index.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/type/new.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/type/new.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/type/show.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/type/show.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/services.yml" afterPath="$PROJECT_DIR$/app/config/services.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/console" afterPath="$PROJECT_DIR$/bin/console" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/symfony_requirements" afterPath="$PROJECT_DIR$/bin/symfony_requirements" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/EventController.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/EventController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/InscriptionController.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/InscriptionController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/RaceController.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/RaceController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/TypeController.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Controller/TypeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Athlete.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Athlete.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Document.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Document.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Event.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Event.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Inscription.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Inscription.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Race.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Race.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Type.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/Type.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Entity/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/AddressType.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/AddressType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/AthleteType.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/AthleteType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/EventType.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/EventType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/InscriptionType.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/InscriptionType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/RaceType.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/RaceType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/TypeType.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Form/TypeType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Twig/AppExtension.php" afterPath="$PROJECT_DIR$/src/Plopcom/InscriptionsBundle/Twig/AppExtension.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/app.php" afterPath="$PROJECT_DIR$/web/app.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/app_dev.php" afterPath="$PROJECT_DIR$/web/app_dev.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/config.php" afterPath="$PROJECT_DIR$/web/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/Emails/notification.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/Emails/notification.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/Emails/notifyunpaid.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/Emails/notifyunpaid.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/Emails/refound.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/Emails/refound.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/athlete/athlete_options_details.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/athlete/athlete_options_details.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/event/event_details_row.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/event/event_details_row.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/home.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/home.html.twig" />
     </list>
     <ignored path="inscriptions.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -751,7 +645,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1452938751286</updated>
-      <workItem from="1485418978756" duration="8520000" />
+      <workItem from="1485418978756" duration="9518000" />
     </task>
     <task id="LOCAL-00001" summary="hophop">
       <created>1453470036634</created>
@@ -767,11 +661,18 @@
       <option name="project" value="LOCAL" />
       <updated>1453470116285</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="mise à jour dépot distant et code manquant">
+      <created>1485430940848</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1485430940848</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8520000" />
+    <option name="totallyTimeSpent" value="9518000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1058" extended-state="6" />
@@ -803,6 +704,24 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
       <collection />
@@ -817,7 +736,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="hophop" />
     <MESSAGE value="oups" />
-    <option name="LAST_COMMIT_MESSAGE" value="oups" />
+    <MESSAGE value="mise à jour dépot distant et code manquant" />
+    <option name="LAST_COMMIT_MESSAGE" value="mise à jour dépot distant et code manquant" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -920,6 +840,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="72" column="32" lean-forward="false" selection-start-line="72" selection-start-column="27" selection-end-line="72" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -949,6 +870,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="9" column="79" lean-forward="false" selection-start-line="9" selection-start-column="79" selection-end-line="9" selection-end-column="79" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -971,6 +893,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="24" column="63" lean-forward="false" selection-start-line="24" selection-start-column="63" selection-end-line="24" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -978,6 +901,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="32" column="57" lean-forward="false" selection-start-line="32" selection-start-column="57" selection-end-line="32" selection-end-column="57" />
+          <folding />
         </state>
       </provider>
     </entry>
