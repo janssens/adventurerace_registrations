@@ -46,10 +46,17 @@ class RaceOptionController extends Controller
     {
         $raceOption = new RaceOption();
         $raceOption->setChoices(array());
+
         $form = $this->createForm('Plopcom\InscriptionsBundle\Form\RaceOptionType', $raceOption);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $doc = $raceOption->getDocument();
+            if ($doc&&$doc->getFile()){
+                $doc->upload();
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($raceOption);
             $em->flush();
@@ -93,6 +100,12 @@ class RaceOptionController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $doc = $raceOption->getDocument();
+            if ($doc&&$doc->getFile()){
+                $doc->upload();
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($raceOption);
             $em->flush();

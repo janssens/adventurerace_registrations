@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Plopcom\InscriptionsBundle\Form\DataTransformer\DocumentToNumberTransformer;
 use Plopcom\InscriptionsBundle\Form\DocumentAsStringType;
 use Plopcom\InscriptionsBundle\Form\DocumentType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -32,6 +33,8 @@ class RaceOption
     const TYPE_TEXTAREA = 7;
     const TYPE_EMAIL = 8;
     const TYPE_DOCUMENT = 9;
+
+    const TYPE_CHECKBOX_READ = 10;
 
         /**
      * @var int
@@ -69,6 +72,13 @@ class RaceOption
      * @ORM\Column(name="placeholder", type="string", length=255, nullable=true)
      */
     private $placeholder;
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="Document", cascade={"persist"})
+     * @ORM\JoinColumn(name="document_id", referencedColumnName="id")
+     */
+    protected $document;
 
     /**
      * @var string
@@ -156,6 +166,9 @@ class RaceOption
                 break;
             case RaceOption::TYPE_DOCUMENT:
                 $return = 'TYPE_DOCUMENT';
+                break;
+            case RaceOption::TYPE_CHECKBOX_READ:
+                $return = 'TYPE_CHECKBOX_READ';
                 break;
             default:
                 $return = 'N/A';
@@ -346,7 +359,8 @@ class RaceOption
                 $return = ChoiceType::class;
                 break;
             case RaceOption::TYPE_CHECKBOX:
-                $return = ChoiceType::class;
+            case RaceOption::TYPE_CHECKBOX_READ:
+                $return = CheckboxType::class;
                 break;
             case RaceOption::TYPE_INT:
                 $return = IntegerType::class;
@@ -418,5 +432,29 @@ class RaceOption
     public function getRaces()
     {
         return $this->races;
+    }
+
+    /**
+     * Set document
+     *
+     * @param \Plopcom\InscriptionsBundle\Entity\Document $document
+     *
+     * @return RaceOption
+     */
+    public function setDocument(\Plopcom\InscriptionsBundle\Entity\Document $document = null)
+    {
+        $this->document = $document;
+
+        return $this;
+    }
+
+    /**
+     * Get document
+     *
+     * @return \Plopcom\InscriptionsBundle\Entity\Document
+     */
+    public function getDocument()
+    {
+        return $this->document;
     }
 }

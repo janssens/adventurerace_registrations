@@ -6,6 +6,7 @@ use Plopcom\InscriptionsBundle\Entity\RaceOption;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Plopcom\InscriptionsBundle\Form\DocumentType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,6 +21,7 @@ class RaceOptionType extends AbstractType
         $types = array();
         $types[] = array('id'=>RaceOption::TYPE_RADIO,'name'=>'radio','hint'=>'Boutons radio');
         $types[] = array('id'=>RaceOption::TYPE_CHECKBOX,'name'=>'checkbox','hint'=>'Une case à cocher');
+        $types[] = array('id'=>RaceOption::TYPE_CHECKBOX_READ,'name'=>'click and check','hint'=>'Une case à cocher après avoir visité un document');
         $types[] = array('id'=>RaceOption::TYPE_SELECT,'name'=>'select','hint'=>'Menu déroulant');
         $types[] = array('id'=>RaceOption::TYPE_MULTISELECT,'name'=>'multiselect','hint'=>'Menu déroulant choix multiple');
         $types[] = array('id'=>RaceOption::TYPE_INT,'name'=>'integer','hint'=>'Entier');
@@ -52,11 +54,14 @@ class RaceOptionType extends AbstractType
                 'multiple' => false))
             ->add('choices', TextType::class, ['required' => false,'attr' => array('class'=>'form-control'),])
             ->add('placeholder', TextType::class, array('attr' => array('class'=>'form-control'),'required'=>false))
+            ->add('document', DocumentType::class,array('label'=>'Document joint','required'=>false))
             ->add('title', TextType::class, array('attr' => array('class'=>'form-control'),))
             ->add('required')
             ->add('races', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
                 'class' => 'Plopcom\InscriptionsBundle\Entity\Race',
-                'choice_label' => 'title',
+                'choice_label' => function ($value, $key, $index) {
+                    return $value->getEvent()->getTitle()." > ".$value->getDate()->format('Y-m-d')." > ".$value->getTitle();
+                },
                 'multiple' => true,
             ])
         ;

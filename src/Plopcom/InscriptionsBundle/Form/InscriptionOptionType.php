@@ -56,6 +56,12 @@ class InscriptionOptionType extends AbstractType
                 $attr['attr']['class'] = '';
             }
 
+            if (($raceOption->getType()==RaceOption::TYPE_CHECKBOX_READ)){
+                $attr['label'] = $raceOption->getTitle().' [[/'.$raceOption->getDocument()->getWebPath().']]';
+                $attr['attr']['class'] = 'form-control radio_read';
+                $attr['required'] = true;
+            }
+
             if (($raceOption->getType()==RaceOption::TYPE_DOCUMENT))
             {
                 $attr['attr']['class'] = '';

@@ -45,7 +45,8 @@ class AthleteOptionType extends AbstractType
 
             if (($raceOption->getType()==RaceOption::TYPE_SELECT)
                 ||($raceOption->getType()==RaceOption::TYPE_MULTISELECT)
-                ||($raceOption->getType()==RaceOption::TYPE_RADIO))
+                ||($raceOption->getType()==RaceOption::TYPE_RADIO)
+            )
             {
                 $choices = array();
                 foreach ($raceOption->getChoices() as $choice){
@@ -57,6 +58,12 @@ class AthleteOptionType extends AbstractType
             if (($raceOption->getType()==RaceOption::TYPE_RADIO)){
                 $attr['expanded'] = true;
                 $attr['attr']['class'] = '';
+            }
+
+            if (($raceOption->getType()==RaceOption::TYPE_CHECKBOX_READ)){
+                $attr['label'] = $raceOption->getTitle().' [[/'.$raceOption->getDocument()->getWebPath().']]';
+                $attr['attr']['class'] = 'form-control radio_read';
+                $attr['required'] = true;
             }
 
             if (($raceOption->getType()==RaceOption::TYPE_DOCUMENT))
