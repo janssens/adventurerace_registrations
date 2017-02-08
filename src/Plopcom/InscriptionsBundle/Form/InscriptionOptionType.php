@@ -62,6 +62,14 @@ class InscriptionOptionType extends AbstractType
                 $attr['required'] = true;
             }
 
+            if (($raceOption->getType()==RaceOption::TYPE_CHECKBOX_READ)
+                ||($raceOption->getType()==RaceOption::TYPE_CHECKBOX)
+            ) {
+                $data = $event->getData();
+                $data->setValue($data->getValue() == true);
+                $event->setData($data);
+            }
+
             if (($raceOption->getType()==RaceOption::TYPE_DOCUMENT))
             {
                 $attr['attr']['class'] = '';

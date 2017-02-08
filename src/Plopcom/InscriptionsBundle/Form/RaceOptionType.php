@@ -54,7 +54,7 @@ class RaceOptionType extends AbstractType
                 'multiple' => false))
             ->add('choices', TextType::class, ['required' => false,'attr' => array('class'=>'form-control'),])
             ->add('placeholder', TextType::class, array('attr' => array('class'=>'form-control'),'required'=>false))
-            ->add('additional_fees', TextType::class,array('label'=>'Cout supplémentaire','attr' => array('class'=>'form-control')))
+            ->add('additional_fees', TextType::class,array('label'=>'Cout supplémentaire','attr' => array('class'=>'form-control'),'required'=>false))
             ->add('document', DocumentType::class,array('label'=>'Document joint','required'=>false))
             ->add('title', TextType::class, array('attr' => array('class'=>'form-control'),))
             ->add('required')
