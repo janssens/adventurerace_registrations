@@ -54,7 +54,8 @@ jQuery(function(){
                         jQuery('.ekko-lightbox-container').html(jQuery('<iframe src="'+link+'"></iframe>').css({"width":"100%","min-height":"500px"}));
                     }
                 };
-                jQuery("<a>").attr('href',link).text("(lire)").appendTo($label).on('click',function () {
+                jQuery("<a>").attr('href',link).text("(lire)").appendTo($label);
+                $label.on('click',"a",function () {
                     e.preventDefault();
                     jQuery(this).ekkoLightbox(conf);
                 });
