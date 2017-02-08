@@ -7,7 +7,7 @@
 
         {% if file_url is not null %}
             <div>
-                <a href="/{{ file_url }}" {% if file_url|ext|ext_type == 'image' %}data-toggle="lightbox"{% endif %}><i class="fa fa-fw fa-file-{{ file_url|ext|ext_type }}-o"></i>/{{ file_url }}</a>
+                <a href="/{{ file_url }}" data-toggle="lightbox" {% if file_url|ext|ext_type == 'image' %}data-type="image"{% else %}data-type="url"{% endif %}><i class="fa fa-fw fa-file-{{ file_url|ext|ext_type }}-o"></i>/{{ file_url }}</a>
                 &nbsp;<a href="#" class="toggle btn btn-default btn-sm">Changer</a>
             </div>
             <div id="file_field" style="display:none">
@@ -72,10 +72,6 @@
                     <div class="clearfix"></div>
                     {% if race.documentRequired %}
                         {{ form_row(athlete.document) }}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <iframe class="col-xs-12 col-md-8" src="{{ athlete.document.webPath }}" frameborder="0" style="min-height: 800px;">
-                            </iframe>
-                        {% endif %}
                     {% endif %}
                     {% for option in athlete.options %}
                         {{ form_widget(option) }}

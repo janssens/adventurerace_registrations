@@ -21,7 +21,7 @@ jQuery(function(){
         jQuery(this).parent().parent().find('>div').toggle();
     });
 
-    jQuery(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+    jQuery(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {//
         event.preventDefault();
         $(this).ekkoLightbox();
     });
@@ -50,9 +50,9 @@ jQuery(function(){
                 event.preventDefault();
                 jQuery("<a>").attr('href',link).attr('data-toggle',"lightbox").text("(lire)").appendTo($label).on('click',function () {
                     e.preventDefault();
-                    jQuery(this).ekkoLightbox();
+                    jQuery(this).ekkoLightbox({'data-type':'url'});
                 })
-                    .ekkoLightbox();
+                    .ekkoLightbox({'data-type':'url'});
             });
         });
     }
