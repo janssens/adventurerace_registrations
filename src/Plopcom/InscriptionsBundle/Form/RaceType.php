@@ -37,7 +37,6 @@ class RaceType extends AbstractType
             ->add('document_required',CheckboxType::class,array('label'=>'Certificat/Licence requis','attr' => array('class'=>'form-control'),'required' => false))
             ->add('distance',IntegerType::class,array('label'=>'Distance à parcourir en metres (1km = 1000m)','required'=>true,'attr' => array('class'=>'form-control')))
             ->add('elevation',IntegerType::class,array('label'=>'Gain en dénivelé en metres','required'=>true,'attr' => array('class'=>'form-control')))
-            ->add('paypal_hosted_button_id',TextType::class,array('label'=>'Id du bouton paypal','required'=>false,'attr' => array('class'=>'form-control')))
         ;
     }
     

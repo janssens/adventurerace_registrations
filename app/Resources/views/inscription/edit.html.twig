@@ -40,10 +40,10 @@
     {% endif %}
 
         {% if race.numberOfAthlete > 1 %}
-            <h3>athletes</h3>
+            <h3>Athlètes</h3>
             <ul class="nav nav-tabs">
                 {% for i in 1..race.numberOfAthlete %}
-                    <li role="presentation" {% if i == 1 %}class="active"{% endif %}><a href="#athlete{{ i }}" aria-controls="athlete{{ i }}" role="tab" data-toggle="tab">Athlete #{{ i }}</a></li>
+                    <li role="presentation" {% if i == 1 %}class="active"{% endif %}><a href="#athlete{{ i }}" aria-controls="athlete{{ i }}" role="tab" data-toggle="tab">Athlète #{{ i }}</a></li>
                 {% endfor %}
             </ul>
         {%  endif %}
@@ -51,7 +51,7 @@
             {% for athlete in edit_form.athletes %}
                 <div role="tabpanel" class="tab-pane fade {% if loop.index == 1 %}in active{% endif %} athlete" id="athlete{{ loop.index }}">
                     {% if race.numberOfAthlete > 1 %}
-                        <h2>Athlete #{{ loop.index }}</h2>
+                        <h2>Athlète #{{ loop.index }}</h2>
                     {%  endif %}
                     <div class="col-md-6">{{ form_row(athlete.firstname) }}</div>
                     <div class="col-md-6">{{ form_row(athlete.lastname) }}</div>
@@ -62,7 +62,7 @@
                     <div class="clearfix"></div>
                     {{ form_row(athlete.address.line_1) }}
                     {{ form_row(athlete.address.line_2) }}
-                    {#{{ form_row(athlete.address.line_3) }}#}
+                    {#{{ form_row(athlete.address.line3) }}#}
                     {#{{ form_row(athlete.address.county_province) }}#}
                     <div class="col-md-4">{{ form_row(athlete.address.zip_or_postcode) }}</div>
                     <div class="col-md-4">{{ form_row(athlete.address.city) }}</div>
@@ -72,10 +72,10 @@
                     <div class="clearfix"></div>
                     {% if race.documentRequired %}
                         {{ form_row(athlete.document) }}
-                        {#{% if is_granted('ROLE_ADMIN') %}#}
-                            {#<iframe class="col-xs-12 col-md-8" src="{{ athlete.document.webPath }}" frameborder="0" style="min-height: 800px;">#}
-                            {#</iframe>#}
-                        {#{% endif %}#}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <iframe class="col-xs-12 col-md-8" src="{{ athlete.document.webPath }}" frameborder="0" style="min-height: 800px;">
+                            </iframe>
+                        {% endif %}
                     {% endif %}
                     {% for option in athlete.options %}
                         {{ form_widget(option) }}

@@ -21,10 +21,10 @@
             </div>
         {% endif %}
         {% if race.numberOfAthlete > 1 %}
-        <h3>athletes</h3>
+        <h3>Athlètes</h3>
         <ul class="nav nav-tabs">
             {% for i in 1..race.numberOfAthlete %}
-            <li role="presentation" {% if i == 1 %}class="active"{% endif %}><a href="#athlete{{ i }}" aria-controls="athlete{{ i }}" role="tab" data-toggle="tab">Athlete #{{ i }}</a></li>
+            <li role="presentation" {% if i == 1 %}class="active"{% endif %}><a href="#athlete{{ i }}" aria-controls="athlete{{ i }}" role="tab" data-toggle="tab">Athlète #{{ i }}</a></li>
             {% endfor %}
         </ul>
         {%  endif %}
@@ -32,7 +32,7 @@
             {% for athlete in form.athletes %}
                 <div role="tabpanel" class="tab-pane fade {% if loop.index == 1 %}in active{% endif %} athlete" id="athlete{{ loop.index }}">
                 {% if race.numberOfAthlete > 1 %}
-                    <h2>Athlete #{{ loop.index }}</h2>
+                    <h2>{% if loop.index == 1 %} Vous {% else %} Coéquipier #{{ loop.index }} {% endif %}</h2>
                 {%  endif %}
                     <div class="col-md-6">{{ form_row(athlete.firstname) }}</div>
                     <div class="col-md-6">{{ form_row(athlete.lastname) }}</div>

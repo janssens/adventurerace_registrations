@@ -73,7 +73,11 @@ class RaceOption
      */
     private $placeholder;
 
-
+    /**
+     * @ORM\Column(type="float",nullable=true)
+     */
+    protected $additional_fees;
+    
     /**
      * @ORM\OneToOne(targetEntity="Document", cascade={"persist"})
      * @ORM\JoinColumn(name="document_id", referencedColumnName="id")
@@ -456,5 +460,29 @@ class RaceOption
     public function getDocument()
     {
         return $this->document;
+    }
+
+    /**
+     * Set additionalFees
+     *
+     * @param float $additionalFees
+     *
+     * @return RaceOption
+     */
+    public function setAdditionalFees($additionalFees)
+    {
+        $this->additional_fees = $additionalFees;
+
+        return $this;
+    }
+
+    /**
+     * Get additionalFees
+     *
+     * @return float
+     */
+    public function getAdditionalFees()
+    {
+        return $this->additional_fees;
     }
 }

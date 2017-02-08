@@ -131,11 +131,13 @@ class InscriptionController extends Controller
                         }
                     }
 
-                    foreach ($inscription->getOptions() as $option_inscription){
-                        if ($option_inscription instanceof InscriptionOptionDocument){
-                            $doc = $option_inscription->getDocument();
-                            if ($doc&&$doc->getFile()){
-                                $doc->upload();
+                    if ($inscription->getOptions() != null){
+                        foreach ($inscription->getOptions() as $option_inscription){
+                            if ($option_inscription instanceof InscriptionOptionDocument){
+                                $doc = $option_inscription->getDocument();
+                                if ($doc&&$doc->getFile()){
+                                    $doc->upload();
+                                }
                             }
                         }
                     }

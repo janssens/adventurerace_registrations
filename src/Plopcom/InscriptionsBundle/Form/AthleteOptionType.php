@@ -60,10 +60,17 @@ class AthleteOptionType extends AbstractType
                 $attr['attr']['class'] = '';
             }
 
-            if (($raceOption->getType()==RaceOption::TYPE_CHECKBOX_READ)){
-                $attr['label'] = $raceOption->getTitle().' [[/'.$raceOption->getDocument()->getWebPath().']]';
+            if (($raceOption->getType()==RaceOption::TYPE_CHECKBOX_READ)) {
+                $attr['label'] = $raceOption->getTitle() . ' [[/' . $raceOption->getDocument()->getWebPath() . ']]';
                 $attr['attr']['class'] = 'form-control radio_read';
                 $attr['required'] = true;
+            }
+            if (($raceOption->getType()==RaceOption::TYPE_CHECKBOX_READ)
+            ||($raceOption->getType()==RaceOption::TYPE_CHECKBOX)
+            ) {
+                $data = $event->getData();
+                $data->setValue($data->getValue() == true);
+                $event->setData($data);
             }
 
             if (($raceOption->getType()==RaceOption::TYPE_DOCUMENT))

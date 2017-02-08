@@ -520,4 +520,28 @@ class Inscription
     {
         return $this->options;
     }
+
+    /**
+     * Get total
+     *
+     * @return float
+     */
+    public function getTotal()
+    {
+        $extra = 0;
+
+        foreach ($this->getAthletes() as $athlete){
+            foreach ($athlete->getOptions() as $option){
+                if (! $option->getRaceOption()->isDocument() && $option->getRaceOption()->getAdditionalFees() && $option->getValue())
+                    $extra += $option->getRaceOption()->getAdditionalFees();
+            }
+        }
+
+        foreach ($this->getOptions() as $option){
+            if (! $option->getRaceOption()->isDocument() && $option->getRaceOption()->getAdditionalFees() && $option->getValue())
+                $extra += $option->getRaceOption()->getAdditionalFees();
+        }
+
+        return $this->getRace()->getEntryFees() + $extra;
+    }
 }

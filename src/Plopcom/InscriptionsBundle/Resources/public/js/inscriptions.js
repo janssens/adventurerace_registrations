@@ -21,40 +21,8 @@ jQuery(function(){
         jQuery(this).parent().parent().find('>div').toggle();
     });
 
-    jQuery(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
         event.preventDefault();
         $(this).ekkoLightbox();
     });
-
-    if (jQuery('.radio_read').length){
-        jQuery('.radio_read').each(function () {
-            var $label = jQuery(this).siblings("label").first();
-            var str = $label.text();
-            const regex = /\[\[(.*)\]\]/g;
-            let m;
-            var link = '';
-            while ((m = regex.exec(str)) !== null) {
-                // This is necessary to avoid infinite loops with zero-width matches
-                if (m.index === regex.lastIndex) {
-                    regex.lastIndex++;
-                }
-                // The result can be accessed through the `m`-variable.
-                m.forEach((match, groupIndex) => {
-                    console.log(`Found match, group ${groupIndex}: ${match}`);
-                    link = match;
-                });
-            }
-            var newLabel = str.substr(0,(str.length-link.length-4))
-            $label.html(newLabel);
-            jQuery(this).one("click",function (event) {
-                event.preventDefault();
-                jQuery("<a>").attr('href',link).attr('data-toggle',"lightbox").text("(lire)").appendTo($label).on('click',function () {
-                    e.preventDefault();
-                    jQuery(this).ekkoLightbox();
-                })
-                .ekkoLightbox();
-            });
-        });
-    }
-
 });

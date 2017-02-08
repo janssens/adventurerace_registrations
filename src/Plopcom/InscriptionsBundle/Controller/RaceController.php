@@ -180,7 +180,7 @@ class RaceController extends Controller
                             if ($payment_status == 'Completed') { //payement complet
 
                                 $payment_amount = $_POST['mc_gross'];
-                                if ($payment_amount != $inscription->getRace()->getEntryFees()) { //wrong amount
+                                if ($payment_amount != $inscription->getTotal()) { //wrong amount
                                     error_log(date('[Y-m-d H:i e] ') . "wrong amount " . PHP_EOL, 3, LOG_FILE);
                                     return $this->redirectToRoute("default_index");
                                 }
