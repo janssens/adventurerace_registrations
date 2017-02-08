@@ -48,18 +48,26 @@ jQuery(function(){
             $label.html(newLabel);
             jQuery(this).one("click",function (event) {
                 event.preventDefault();
-                var conf = {
-                    remote:'/bundles/plopcominscriptions/640px.jpg',
-                    onShown:function () {
-                        jQuery('.ekko-lightbox-container').html(jQuery('<iframe src="'+link+'"></iframe>').css({"width":"100%","min-height":"500px"}));
-                    }
-                };
+                // var conf = {
+                //     remote:'/bundles/plopcominscriptions/640px.jpg',
+                //     onShown:function () {
+                //         jQuery('.ekko-lightbox-container').html(jQuery('<iframe src="'+link+'"></iframe>').css({"width":"100%","min-height":"500px"}));
+                //     }
+                // };
                 jQuery("<a>").attr('href',link).text("(lire)").appendTo($label);
-                $label.on('click',"a",function () {
-                    e.preventDefault();
-                    jQuery(this).ekkoLightbox(conf);
-                });
-                jQuery(this).ekkoLightbox(conf);
+                // $label.on('click',"a",function () {
+                //     e.preventDefault();
+                //     jQuery(this).ekkoLightbox(conf);
+                // });
+                // jQuery(this).ekkoLightbox(conf);
+                var win = window.open(link, '_blank');
+                if (win) {
+                    //Browser has allowed it to be opened
+                    win.focus();
+                } else {
+                    //Browser has blocked it
+                    alert('Merci de lire le document avant de continuer');
+                }
             });
         });
     }
