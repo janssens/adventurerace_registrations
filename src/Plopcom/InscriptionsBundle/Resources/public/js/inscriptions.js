@@ -50,9 +50,9 @@ jQuery(function(){
                 event.preventDefault();
                 jQuery("<a>").attr('href',link).attr('data-toggle',"lightbox").text("(lire)").appendTo($label).on('click',function () {
                     e.preventDefault();
-                    jQuery(this).ekkoLightbox({'data-type':'url'});
+                    jQuery(this).ekkoLightbox({type:'url'});
                 })
-                    .ekkoLightbox({'data-type':'url'});
+                    .ekkoLightbox({type:'url'});
             });
         });
     }
