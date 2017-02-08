@@ -43,7 +43,7 @@
             <h3>Athlètes</h3>
             <ul class="nav nav-tabs">
                 {% for i in 1..race.numberOfAthlete %}
-                    <li role="presentation" {% if i == 1 %}class="active"{% endif %}><a href="#athlete{{ i }}" aria-controls="athlete{{ i }}" role="tab" data-toggle="tab">Athlète #{{ i }}</a></li>
+                    <li role="presentation" {% if i == 1 %}class="active"{% endif %}><a href="#athlete{{ i }}" aria-controls="athlete{{ i }}" role="tab" data-toggle="tab"><i class="fa fa-user"></i>&nbsp;Athlète #{{ i }}</a></li>
                 {% endfor %}
             </ul>
         {%  endif %}

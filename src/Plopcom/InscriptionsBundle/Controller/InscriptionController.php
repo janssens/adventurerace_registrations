@@ -73,6 +73,7 @@ class InscriptionController extends Controller
                 for($i=0; $i<$nb_of_athletes; $i++){
                     $athlete = new Athlete();
                     $address = new Address();
+                    $athlete->setDob(new \DateTime("20 years ago"));
                     $address->setCountry('FR');
                     $athlete->setAddress($address);
                     $athlete->setInscription($inscription);

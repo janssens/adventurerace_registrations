@@ -23,7 +23,7 @@ jQuery(function(){
 
     jQuery(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {//
         event.preventDefault();
-        $(this).ekkoLightbox();
+        $(this).clone().removeAttr("title").ekkoLightbox({alwaysShowClose:false});
     });
 
 
@@ -48,11 +48,17 @@ jQuery(function(){
             $label.html(newLabel);
             jQuery(this).one("click",function (event) {
                 event.preventDefault();
-                jQuery("<a>").attr('href',link).attr('data-toggle',"lightbox").text("(lire)").appendTo($label).on('click',function () {
+                var conf = {
+                    remote:'/bundles/plopcominscriptions/640px.jpg',
+                    onShown:function () {
+                        jQuery('.ekko-lightbox-container').html(jQuery('<iframe src="'+link+'"></iframe>').css({"width":"100%","min-height":"500px"}));
+                    }
+                };
+                jQuery("<a>").attr('href',link).text("(lire)").appendTo($label).on('click',function () {
                     e.preventDefault();
-                    jQuery(this).ekkoLightbox({type:'url'});
-                })
-                    .ekkoLightbox({type:'url'});
+                    jQuery(this).ekkoLightbox(conf);
+                });
+                jQuery(this).ekkoLightbox(conf);
             });
         });
     }
