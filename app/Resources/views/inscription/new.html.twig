@@ -9,10 +9,6 @@
     <h1> Nouvelle inscription <b>{{ race.title }}</b> </h1>
     {{ form_start(form) }}
         {{ form_row(form.title) }}
-        {% for option in form.options %}
-            {{ form_widget(option) }}
-        {% endfor %}
-        {{ form_widget(form.options) }}
         {% if is_granted("ROLE_ADMIN") %}
             <div style="display: none;">
                 {{ form_row(form.status) }}
