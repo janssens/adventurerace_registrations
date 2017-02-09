@@ -97,6 +97,12 @@ class Race
 
     /**
      * @ORM\OneToOne(targetEntity="Document", cascade={"persist"})
+     * @ORM\JoinColumn(name="rules_id", referencedColumnName="id",onDelete="CASCADE",nullable=true)
+     */
+    protected $rules;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Document", cascade={"persist"})
      * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id",onDelete="CASCADE",nullable=true)
      */
     protected $illustration;
@@ -658,5 +664,29 @@ class Race
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * Set rules
+     *
+     * @param \Plopcom\InscriptionsBundle\Entity\Document $rules
+     *
+     * @return Race
+     */
+    public function setRules(\Plopcom\InscriptionsBundle\Entity\Document $rules = null)
+    {
+        $this->rules = $rules;
+
+        return $this;
+    }
+
+    /**
+     * Get rules
+     *
+     * @return \Plopcom\InscriptionsBundle\Entity\Document
+     */
+    public function getRules()
+    {
+        return $this->rules;
     }
 }

@@ -1,6 +1,6 @@
 imports:
     - { resource: parameters.yml }
-    - { resource: security.yml }
+    - { resource: security.yml, schemes: [https] }
     - { resource: services.yml }
     - { resource: "@PlopcomInscriptionsBundle/Resources/config/services.yml" }
 

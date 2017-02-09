@@ -172,6 +172,28 @@ class Inscription
         return $this->status;
     }
 
+    public function getHumanStatus()
+    {
+        $return = '';
+        switch ($this->getStatus()){
+            case Inscription::STATUS_UNCHECKED:
+                $return = "non vérifié";
+                break;
+            case Inscription::STATUS_UNVALID:
+                $return = "non valide (".$this->getAdminComment().")";
+                break;
+            case Inscription::STATUS_VALID:
+                $return = "validé";
+                break;
+            case Inscription::STATUS_DNS:
+                $return = "non partant";
+                break;
+            default:
+                $return = 'indéfini';
+        }
+        return $return;
+    }
+
     /**
      * Set payementStatus
      *
@@ -194,6 +216,31 @@ class Inscription
     public function getPayementStatus()
     {
         return $this->payement_status;
+    }
+
+    public function getHumanPaymentStatus()
+    {
+        $return = '';
+        switch ($this->getPayementStatus()){
+            case Inscription::PAYEMENT_STATUS_FAILED:
+                $return = "payement échoué";
+                break;
+            case Inscription::PAYEMENT_STATUS_NOT_PAYED:
+                $return = "non payé";
+                break;
+            case Inscription::PAYEMENT_STATUS_PAYED:
+                $return = "payé";
+                break;
+            case Inscription::PAYEMENT_STATUS_WAITING:
+                $return = "En attente retour";
+                break;
+            case Inscription::PAYEMENT_STATUS_REFUND:
+                $return = 'remboursé';
+                break;
+            default:
+                $return = 'indéfini';
+        }
+        return $return;
     }
 
     /**

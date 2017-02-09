@@ -61,6 +61,14 @@ class RaceController extends Controller
                 $race->setIllustration(null);
             }
 
+            $rules = $race->getRules();
+            if ($rules&&$rules->getFile()){
+                $rules->upload();
+                $race->setRules($rules);
+            }else if(!$rules){
+                $race->setRules(null);
+            }
+
             $event = $em->getRepository('PlopcomInscriptionsBundle:Event')->find($event_id);
             if ($event){
                 $race->setEvent($event);
@@ -361,6 +369,14 @@ class RaceController extends Controller
                 $race->setIllustration(null);
             }
 
+            $rules = $race->getRules();
+            if ($rules&&$rules->getFile()){
+                $rules->upload();
+                $race->setRules($rules);
+            }else if(!$rules){
+                $race->setRules(null);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($race);
             $em->flush();
@@ -477,7 +493,7 @@ class RaceController extends Controller
             }
             $return .= $race->getDate()->format('d/m/y')."\t";//Date Compet. (jj/mm/yy)
             $return .= $race->getTitle()."\t"; //Course
-            $return .= $race->getDistance()."\t"; //Distance
+            $return .= ($race->getDistance()/1000)."\t"; //Distance
             $return .= "00:00:00.00\t"; //Temps
             $return .= "0\t"; //0
             $return .= "00:00:00\t"; //Temps Arrondi\t";
@@ -526,6 +542,8 @@ class RaceController extends Controller
         $return .= "Dossard\t;\t";
         $return .= "Equipe/team\t;\t";
         $return .= "Catégorie\t;\t";
+        $return .= "Paiement\t;\t";
+        $return .= "Status\t;\t";
         foreach ($race->getOptions() as $option){
             if (!$option->isForAthlete()&&$option->getType()!=RaceOption::TYPE_DOCUMENT){
                 $return .= $option->getTitle()."\t;\t";
@@ -559,6 +577,8 @@ class RaceController extends Controller
             $return .= ($i+1)."\t;\t";//$inscription->getPosition()."\t;\t"; //TODO: change once order is custom
             $return .= $inscription->getTitle()."\t;\t"; //Club
             $return .= $inscription->getCategorieLetterEnglish()."\t;\t"; // Sexe
+            $return .= $inscription->getHumanStatus()."\t;\t"; // Paiement
+            $return .= $inscription->getHumanPaymentStatus()."\t;\t"; // Status
             foreach ($inscription->getOptions() as $option){
                 if (in_array($option->getRaceOption()->getId(),$race_option_ids)) {
                     if ($option->getRaceOption()->getType() != RaceOption::TYPE_DOCUMENT) {

@@ -37,12 +37,31 @@ class InscriptionType extends AbstractType
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($user) {
             $form = $event->getForm();
             $data = $event->getData();
+            $race = $data->getRace();
 
             if ($data->getRace()->getNumberOfAthlete() > 1)
                 $form->add('title',TextType::class,array('label'=>'Nom de l\'équipe','attr' => array('placeholder'=>'équipe','class'=>'form-control'),'required'=>true));
             else
                 $form->add('title',TextType::class,array('label'=>'Club / Team','attr' => array('placeholder'=>'club','class'=>'form-control'),'required'=>false));
 
+            $form->add('athletes', CollectionType::class, array(
+                'entry_type' => AthleteType::class
+            ));
+            $form->add('options', CollectionType::class, array(
+                'entry_type' => InscriptionOptionType::class
+            ));
+
+            $attr = array();
+            if ($race->getRules())
+                $attr['label'] = "En cochant cette case vous acceptez le règlement de l'épreuve dans son intégralité".' [[/'.$race->getRules()->getWebPath().']]';
+            else
+                $attr['label'] = "En cochant cette case vous acceptez le règlement de l'épreuve dans son intégralité";
+            $attr['attr']['class'] = 'form-control radio_read';
+            $attr['required'] = true;
+
+            $form->add('signed',CheckboxType::class,$attr);
+            $form->add('save',SubmitType::class,array('label'=>'Enregistrer', 'attr'=>array('class'=>'btn btn-primary')))
+                ->add('reset',ResetType::class,array('label'=>'Vider', 'attr'=>array('class'=>'btn btn-warning')));
         });
 
         if ($user && is_object($user) && ($user->hasRole('ROLE_ADMIN')||$user->hasRole('ROLE_SUPER_ADMIN'))) {
@@ -67,23 +86,6 @@ class InscriptionType extends AbstractType
                 $form->add('admin_comment', TextType::class, array( 'label' => "Commentaire admin",'attr' => array('class'=>'form-control'),'required'=> false));
             });
         }
-
-        $builder->add('athletes', CollectionType::class, array(
-            'entry_type' => AthleteType::class
-        ));
-
-        $builder->add('options', CollectionType::class, array(
-            'entry_type' => InscriptionOptionType::class
-        ));
-
-        $builder->add('signed', CheckboxType::class, array(
-            'label'    => "En cochant cette case vous acceptez le règlement de l'épreuve dans son intégralité",
-            'required' => true,
-            'attr' => array('class'=>'form-control')
-        ));
-
-        $builder->add('save',SubmitType::class,array('label'=>'Enregistrer', 'attr'=>array('class'=>'btn btn-primary')))
-            ->add('reset',ResetType::class,array('label'=>'Vider', 'attr'=>array('class'=>'btn btn-warning')));
     }
     
     /**

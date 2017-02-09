@@ -114,7 +114,8 @@ div[data-role="editor-toolbar"] .color:hover{
 }
 #panorama {
     height: 200px;
-    background: url(../home-2.jpg) #000000;
+    background-image: url(../home-trees.jpg);
+    background-color: #000000;
     background-size: cover;
     background-position: center;
 }
