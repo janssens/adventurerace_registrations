@@ -21,11 +21,65 @@ jQuery(function(){
         jQuery(this).parent().parent().find('>div').toggle();
     });
 
+    jQuery("form[name='inscription']").on("click",'[type="submit"]',function(event){
+        var that = jQuery("form[name='inscription']")[0];
+        if(!that.checkValidity())
+        {
+            //event.preventDefault();
+            jQuery(that).find('[required="required"]').each(function()
+            {
+                if(!this.validity.valid)
+                {
+                    jQuery("a[href='#"+jQuery(this).parents('.tab-pane:first').attr("id")+"']").tab('show')
+                    // break
+                    return false;
+                }
+            });
+        }
+    });
+
     jQuery(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {//
         event.preventDefault();
         $(this).clone().removeAttr("title").ekkoLightbox({alwaysShowClose:false});
     });
 
+    jQuery("div[id*='_wysiwyg']").each(function () {
+        var realid = jQuery(this).wysiwyg({
+            hotKeys: {},
+            selectionColor : '#3498db',
+        }).data("realid");
+        var $target = jQuery("#"+realid);
+        $target.hide();
+        jQuery(this).html(jQuery('#race_description').val());
+        jQuery(this).on('mouseup keyup mouseout',function () {
+            $target.val(jQuery(this).html());
+        });
+        $target.parents('form').on("submit",function (event) {
+            if ($target.val() == ''){
+                event.preventDefault();
+                alert("La description est obligatoire");
+            }
+        });
+    });
+
+    if (jQuery("#subscribers").is('*')) {
+        jQuery("#subscribers").tablesorter({
+            dateFormat: 'pt',
+            cssAsc: 'sort-asc',
+            cssDesc: 'sort-desc',
+        });
+    }
+
+    jQuery('div[data-role="editor-toolbar"] .color').on('mouseover',function () {
+        var $that = jQuery(this);
+        var $container = $that.parent();
+        $container.find("input[type='text']").trigger("focus").val($that.attr("data-text"));
+    });
+    jQuery('div[data-role="editor-toolbar"] .color').on('click',function () {
+        var $that = jQuery(this);
+        var $container = $that.parent().parent();
+        $container.find("input[type='text']").val($that.attr("data-text")).trigger("change");
+    });
 
     if (jQuery('.radio_read').length){
         jQuery('.radio_read').each(function () {

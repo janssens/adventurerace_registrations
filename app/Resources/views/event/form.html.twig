@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.slug) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.paypal_account_email) }}
+<br>
+{{ include('default/wysiwyg.html.twig', { 'field': form.description,'id': 'event_description' }) }}
+
+<button type="submit"  class="btn btn-primary">Sauver</button>
+{{ form_end(form) }}

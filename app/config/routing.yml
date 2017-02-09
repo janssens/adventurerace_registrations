@@ -1,45 +1,57 @@
 plopcom_inscriptions_event:
     resource: "@PlopcomInscriptionsBundle/Controller/EventController.php"
     type:     annotation
+    schemes:  [https]
 
 plopcom_inscriptions_address:
     resource: "@PlopcomInscriptionsBundle/Controller/AddressController.php"
     type:     annotation
+    schemes:  [https]
 
 plopcom_inscriptions_athlete:
     resource: "@PlopcomInscriptionsBundle/Controller/AthleteController.php"
     type:     annotation
+    schemes:  [https]
 
 plopcom_inscriptions_inscription:
     resource: "@PlopcomInscriptionsBundle/Controller/InscriptionController.php"
     type:     annotation
+    schemes:  [https]
 
 plopcom_inscriptions_type:
     resource: "@PlopcomInscriptionsBundle/Controller/TypeController.php"
     type:     annotation
+    schemes:  [https]
 
 plopcom_inscriptions_user:
     resource: "@PlopcomInscriptionsBundle/Controller/UserController.php"
     type:     annotation
+    schemes:  [https]
 
 plopcom_inscriptions_race:
     resource: "@PlopcomInscriptionsBundle/Controller/RaceController.php"
     type:     annotation
+    schemes:  [https]
 
 plopcom_inscriptions_raceoption:
     resource: "@PlopcomInscriptionsBundle/Controller/RaceOptionController.php"
     type:     annotation
+    schemes:  [https]
 
 plopcom_inscriptions:
     resource: "@PlopcomInscriptionsBundle/Controller/DefaultController.php"
     type:   annotation
+    schemes:  [https]
 
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+    schemes:  [https]
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    schemes:  [https]
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
+    schemes:  [https]
