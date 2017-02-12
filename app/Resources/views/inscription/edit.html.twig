@@ -27,7 +27,7 @@
     <hr>
     <a href="{{ path('race_show',{"slug":inscription.race.slug}) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à la course</a>
     <a href="{{ path('inscription_show', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à l'inscription</a>
-    {% if is_granted("ROLE_ADMIN") %}
+    {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN") %}
         {% if (inscription.race.event.owner == app.user) or is_granted("ROLE_SUPER_ADMIN") %}
             <a href="{{ path('inscription_delete', { 'id': inscription.id }) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à l'inscription</a>
         {% endif %}

@@ -28,7 +28,7 @@ class InscriptionController extends Controller
     /**
      * Lists all Inscription entities.
      *
-     * @Route("/", name="inscription_index")
+     * @Route("", name="inscription_index")
      * @Method("GET")
      */
     public function indexAction()
