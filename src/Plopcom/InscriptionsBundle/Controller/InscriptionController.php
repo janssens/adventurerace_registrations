@@ -361,7 +361,7 @@ class InscriptionController extends Controller
      *
      * @Route("/{id}", name="inscription_delete")
      * @Method("DELETE")
-     * @Security("has_role('ROLE_ADMIN','ROLE_SUPER_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, Inscription $inscription)
     {
