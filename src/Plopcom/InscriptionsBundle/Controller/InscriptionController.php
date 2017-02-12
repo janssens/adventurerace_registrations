@@ -33,13 +33,7 @@ class InscriptionController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $inscriptions = $em->getRepository('PlopcomInscriptionsBundle:Inscription')->findAll();
-
-        return $this->render('inscription/index.html.twig', array(
-            'inscriptions' => $inscriptions,
-        ));
+        return $this->redirectToRoute('/');
     }
 
     /**
@@ -367,7 +361,7 @@ class InscriptionController extends Controller
      *
      * @Route("/{id}", name="inscription_delete")
      * @Method("DELETE")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_ADMIN','ROLE_SUPER_ADMIN')")
      */
     public function deleteAction(Request $request, Inscription $inscription)
     {
