@@ -29,9 +29,7 @@
     <a href="{{ path('inscription_show', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à l'inscription</a>
     {% if is_granted("ROLE_ADMIN") %}
         {% if (inscription.race.event.owner == app.user) or is_granted("ROLE_SUPER_ADMIN") %}
-            {{ form_start(delete_form) }}
-                <button type="submit" class="btn btn-danger"><i class="fa fa-fw fa-trash"></i>Supprimer</button>
-            {{ form_end(delete_form) }}
+            <a href="{{ path('inscription_delete', { 'id': inscription.id }) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à l'inscription</a>
         {% endif %}
     {% endif %}
 {% endblock %}
