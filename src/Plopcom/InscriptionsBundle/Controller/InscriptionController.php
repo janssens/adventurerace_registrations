@@ -359,8 +359,8 @@ class InscriptionController extends Controller
     /**
      * Deletes a Inscription entity.
      *
-     * @Route("/{id}", name="inscription_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="inscription_delete")
+     * @Method("POST")
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request, Inscription $inscription)
