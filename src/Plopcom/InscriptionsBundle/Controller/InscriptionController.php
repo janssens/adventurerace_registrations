@@ -200,11 +200,8 @@ class InscriptionController extends Controller
             throw $this->createNotFoundException('Respectez la vie privée des inscrits.');
         }
 
-        $deleteForm = $this->createDeleteForm($inscription);
-
         return $this->render('inscription/show.html.twig', array(
             'inscription' => $inscription,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -259,7 +256,6 @@ class InscriptionController extends Controller
             throw $this->createNotFoundException('Respectez la vie privée des inscrits.');
         }
 
-        $deleteForm = $this->createDeleteForm($inscription);
         $editForm = $this->createForm('Plopcom\InscriptionsBundle\Form\InscriptionType', $inscription);
         $editForm->handleRequest($request);
 
@@ -275,7 +271,6 @@ class InscriptionController extends Controller
                         'inscription' => $inscription,
                         'edit_form' => $editForm->createView(),
                         'race' => $inscription->getRace(),
-                        'delete_form' => $deleteForm->createView(),
                     ));
                 }
                 foreach ($athlete->getOptions() as $option){
@@ -312,7 +307,6 @@ class InscriptionController extends Controller
             'inscription' => $inscription,
             'edit_form' => $editForm->createView(),
             'race' => $inscription->getRace(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -371,33 +365,13 @@ class InscriptionController extends Controller
             }
         }
 
-        $form = $this->createDeleteForm($inscription);
-        $form->handleRequest($request);
-
         $race = $inscription->getRace();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($inscription);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($inscription);
+        $em->flush();
 
         return $this->redirectToRoute('race_show',array('slug'=>$race->getSlug()));
     }
 
-    /**
-     * Creates a form to delete a Inscription entity.
-     *
-     * @param Inscription $inscription The Inscription entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Inscription $inscription)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('inscription_delete', array('id' => $inscription->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
 }
