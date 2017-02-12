@@ -175,8 +175,11 @@ class InscriptionController extends Controller
                     $this->get('mailer')->send($message);
 
                     return $this->redirectToRoute('inscription_show', array('id' => $inscription->getId(),'secret' => $inscription->getSalt()));
+                }elseif (!$form->isValid()){
+                    foreach ($form->getErrors() as $id => $error){
+                        $request->getSession()->getFlashBag()->add('error', $error->getMessage());
+                    }
                 }
-
 
 
                 return $this->render('inscription/new.html.twig', array(
