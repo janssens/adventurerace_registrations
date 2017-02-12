@@ -353,11 +353,11 @@ class InscriptionController extends Controller
     /**
      * Deletes a Inscription entity.
      *
-     * @Route("/{id}/delete", name="inscription_delete")
-     * @Method("POST")
+     * @Route("/delete/{id}/{secret}", name="inscription_delete")
+     * @Method("GET")
      * @Security("is_granted('ROLE_ADMIN')")
      */
-    public function deleteAction(Request $request, Inscription $inscription)
+    public function deleteAction(Request $request, Inscription $inscription,$secret)
     {
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
             if ($inscription->getRace()->getEvent()->getOwner() != $this->getUser()) {
