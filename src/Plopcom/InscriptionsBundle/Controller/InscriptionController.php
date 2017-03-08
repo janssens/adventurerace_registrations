@@ -376,4 +376,20 @@ class InscriptionController extends Controller
         return $this->redirectToRoute('race_show',array('slug'=>$race->getSlug()));
     }
 
+    /**
+     * Creates a form to delete a Inscription entity.
+     *
+     * @param Inscription $inscription
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Inscription $inscription)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('inscription_delete', array('id' => $inscription->getId(),'secret' => $inscription->getSalt())))
+            ->setMethod('GET')
+            ->getForm()
+            ;
+    }
+
 }
