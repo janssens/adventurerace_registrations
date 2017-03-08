@@ -199,9 +199,11 @@ class InscriptionController extends Controller
         if($secret != $inscription->getSalt()) {
             throw $this->createNotFoundException('Respectez la vie privée des inscrits.');
         }
+        $deleteForm = $this->createDeleteForm($inscription);
 
         return $this->render('inscription/show.html.twig', array(
             'inscription' => $inscription,
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
