@@ -26,7 +26,7 @@ class RaceType extends AbstractType
             ->add('title',TextType::class,array('label'=>'Titre','attr' => array('placeholder'=>'Nom de votre course','class'=>'form-control')))
             ->add('slug',TextType::class,array('label'=>'Identifiant','attr' => array('placeholder'=>'nom-de-votre-course','class'=>'form-control',/*'disabled'=>'true'*/)))
             ->add('type',EntityType::class,array('class'=>'PlopcomInscriptionsBundle:Type','choice_label'=>'title','label'  => 'Type de manifestation','multiple' => false, 'expanded' => true))
-            ->add('illustration', DocumentType::class,array('label'=>'illustration (1200x627)'))
+            ->add('illustration', DocumentType::class,array('label'=>'illustration (1400x640)'))
             ->add('rules', DocumentType::class,array('label'=>'réglement'))
             ->add('date', DateType::class,array('attr' => array('class'=>'form-control')))
             ->add('entry_fees', TextType::class,array('label'=>'Prix','attr' => array('class'=>'form-control')))
