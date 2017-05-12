@@ -88,7 +88,7 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Plopcom\InscriptionsBundle\Entity\
+    user_class: Plopcom\InscriptionsBundle\Entity\User
     from_email:
         address:        contact@raidsaventure.fr
         sender_name:    inscriptions.RaidsAventure.fr
