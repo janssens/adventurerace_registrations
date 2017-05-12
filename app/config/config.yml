@@ -88,7 +88,8 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Plopcom\InscriptionsBundle\Entity\User
+    user_class: Plopcom\InscriptionsBundle\Entity\
+    from_email: contact@raidsaventure.fr
 
 liip_imagine:
     resolvers:
