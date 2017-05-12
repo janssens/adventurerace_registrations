@@ -67,7 +67,14 @@
                 {% endfor %}
                 <td>{% if race.numberOfAthlete > 1 %}{{ inscription.categorie }}{% else %}{{ inscription.categorieLetter }}{% endif %}</td>
                 <td>{% if inscription.created %}{{ inscription.created|date('d/m/Y H:i:s') }}{% endif %}</td>
-                <td>{{ inscription.status|human_status|raw }}</td>
+                <td>{% if inscription.adminComment %}
+                    <div data-toggle="tooltip" data-placement="top" title="{{ inscription.adminComment }}">
+                    {% endif %}
+                        {{ inscription.status|human_status|raw }}
+                    {% if inscription.adminComment %}
+                    </div>
+                    {% endif %}
+                </td>
                 <td>{{ inscription.payementStatus|human_payement_status|raw }}</td>
                 <td>
                     {% if (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
