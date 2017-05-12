@@ -8,6 +8,9 @@ function convertToSlug(Text)
 }
 
 jQuery(function(){
+
+    jQuery('[data-toggle="tooltip"]').tooltip()
+
     jQuery("form[name='race']").on("keyup","#race_title",function(){
        jQuery("#race_slug").val(convertToSlug(jQuery(this).val()));
     }).find("#race_title").trigger("keyup");
