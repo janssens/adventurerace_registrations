@@ -89,7 +89,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Plopcom\InscriptionsBundle\Entity\
-    from_email: contact@raidsaventure.fr
+    from_email:
+        address:        contact@raidsaventure.fr
+        sender_name:    inscriptions.RaidsAventure.fr
 
 liip_imagine:
     resolvers:
