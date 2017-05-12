@@ -2,6 +2,7 @@
 
 namespace Plopcom\InscriptionsBundle\Controller;
 
+use Plopcom\InscriptionsBundle\Entity\Configuration;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -57,6 +58,11 @@ class DefaultController extends Controller
         }
 
         return $this->render('default/index.html.twig', array(
+            'conf' => $this
+                ->getDoctrine()
+                ->getManager()
+                ->getRepository('PlopcomInscriptionsBundle:Configuration')
+                ->getInstance(),
             'events' => $events,
             'my_events' => $my_events,
             'events_with_public_races' => $events_with_public_races,
@@ -64,4 +70,38 @@ class DefaultController extends Controller
         ));
     }
 
+    /**
+     * Edit app.
+     *
+     * @Route("/admin", name="app_config")
+     * @Method({"GET", "POST"})
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     */
+    public function configAction(Request $request)
+    {
+        $conf = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('PlopcomInscriptionsBundle:Configuration')
+            ->getInstance();
+
+        $editForm = $this->createForm('Plopcom\InscriptionsBundle\Form\ConfigurationType', $conf);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($conf);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'conf saved');
+
+            return $this->redirectToRoute('app_config');
+        }
+
+        return $this->render('default/conf.html.twig', array(
+            'conf' => $conf,
+            'edit_form' => $editForm->createView(),
+        ));
+    }
 }

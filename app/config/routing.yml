@@ -43,11 +43,6 @@ plopcom_inscriptions:
     type:   annotation
     schemes:  [https]
 
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
-    schemes:  [https]
-
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
     schemes:  [https]

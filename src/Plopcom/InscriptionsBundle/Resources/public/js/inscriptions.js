@@ -50,7 +50,7 @@ jQuery(function(){
         }).data("realid");
         var $target = jQuery("#"+realid);
         $target.hide();
-        jQuery(this).html(jQuery('#race_description').val());
+        jQuery(this).html($target.val());
         jQuery(this).on('mouseup keyup mouseout',function () {
             $target.val(jQuery(this).html());
         });

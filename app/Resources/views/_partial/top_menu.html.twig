@@ -1,0 +1,41 @@
+<div class="navbar-wrapper">
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ path('default_index') }}">RaidsAventure.fr Inscriptions</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ path('default_index') }}"><i class="fa fa-home"></i></a></li>
+                        <li><a href="{{ path('event_index') }}"><i class="fa fa-calendar fa-fw"></i>Evénements</a></li>
+                        <li><a href="{{ path('type_index') }}"><i class="fa fa-tag fa-fw"></i>Types</a></li>
+                        {% if is_granted("ROLE_SUPER_ADMIN") %}
+                            <li><a href="{{ path('raceoption_index') }}"><i class="fa fa-gears fa-fw"></i>Options supplémentaires</a></li>
+                            <li><a href="{{ path('app_config') }}"><i class="fa fa-gear fa-fw"></i>App Conf</a></li>
+                        {% endif %}
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('fos_user_profile_edit') }}">Profil</a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-in fa-fw"></i>Déconnexion</a></li>
+                            </ul>
+                            {% else %}
+                            <a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+                        {% endif %}
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+    </div>
+</div>

@@ -1,20 +1,10 @@
 {% extends 'home.html.twig' %}
 
 {% block body %}
-    <h1>inscriptions.raidsaventure.fr</h1>
+    <h1>{{ conf.pageTitle }}</h1>
 
-    <h3>Bonjour et bienvenue sur la plate-forme d'inscription de <a href="http://raidsaventure.fr" target="_blank">RaidsAventure.fr</a></h3>
-
-    <p>
-        <b>inscriptions.raidsaventure.fr</b> est un outil <b>gratuit</b> destiné aux organisateurs de raid multisport et de trail
-        pour la gestion de leurs inscriptions en ligne. <br>
-        Le télé-paiement est possible en Carte Bleue avec la solution Paypal. <br>
-        Pour en savoir plus sur la solution, contactez-nous. <br>
-        <i>Gaëtan Janssens <script type="text/javascript"><!--
-                var ylnguhy = ['.','s','l','m','t','o','m','l','=','f','@','o','a','l','<','"','n','a','c','n','c','>','h','<','o','t','o','e','s','a','"','=','r','p','/','p','i','o','a','r','.','c','a','f','>','f','c','p','t','t',' ','m','l','"',' ','m','l','p','"','c','o','c','e','i',':','r','o','t','@','a','c','a'];var rarhgpn = [31,40,59,64,22,60,44,12,7,66,23,14,10,47,68,34,18,54,36,52,28,49,3,0,63,13,51,5,39,70,48,41,33,58,69,24,46,29,38,67,65,21,20,6,71,32,55,61,56,53,35,30,25,42,2,9,37,27,8,50,26,62,43,11,15,4,17,19,57,45,16,1];var zeskzfx= new Array();for(var i=0;i<rarhgpn.length;i++){zeskzfx[rarhgpn[i]] = ylnguhy[i]; }for(var i=0;i<zeskzfx.length;i++){document.write(zeskzfx[i]);}
-                // --></script>
-            <noscript>contact [@] plopcom [point] fr</noscript></i>
-    </p>
+    {{ conf.content|raw }}
+    {{ conf.contactName }} <a href="mailto:{{ conf.contactEmail|email_encode|raw  }}">{{ conf.contactEmail|email_encode|raw }}</a>
 
     {% if is_granted('ROLE_SUPER_ADMIN') %}
         <h2>[SUPER_ADMIN]</h2>

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    App config
+{% endblock %}
+
+{% form_theme edit_form _self %}
+
+{% block body %}
+    <h1>Editer conf</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_row(edit_form.page_title) }}
+        {{ form_row(edit_form.headerImageFile) }}
+        {{ form_row(edit_form.contact_name) }}
+        {{ form_row(edit_form.contact_email) }}
+        {{ form_row(edit_form.meta_title) }}
+        {{ form_row(edit_form.meta_keywords) }}
+        {{ form_row(edit_form.meta_description) }}
+        {{ form_row(edit_form.message) }}
+        {{ include('default/wysiwyg.html.twig', { 'field': edit_form.content,'id': 'configuration_content' }) }}
+
+
+    <br>
+        <button type="submit" class="btn btn-primary" >Sauver</button>
+    <br>
+    {{ form_end(edit_form) }}
+
+    <table>
+        <tr>
+            <td>
+                <a href="{{ path('default_index') }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour</a>
+            </td>
+        </tr>
+    </table>
+{% endblock %}

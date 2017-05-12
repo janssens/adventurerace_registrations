@@ -13,6 +13,7 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFilter('is_paid', array($this, 'isPaid')),
             new \Twig_SimpleFilter('ext', array($this, 'ext')),
             new \Twig_SimpleFilter('ext_type', array($this, 'ext_type')),
+            new \Twig_SimpleFilter('email_encode',array($this, 'encodeText')),
         );
     }
 
@@ -105,6 +106,34 @@ class AppExtension extends \Twig_Extension
                 $return = '';
         }
         return $return;
+    }
+
+    public function encodeText($text)
+    {
+        $encoded_text = '';
+
+        for ($i = 0; $i < strlen($text); $i++)
+        {
+            $char = $text{$i};
+            $r = rand(0, 100);
+
+            # roughly 10% raw, 45% hex, 45% dec
+            # '@' *must* be encoded. I insist.
+            if ($r > 90 && $char != '@')
+            {
+                $encoded_text .= $char;
+            }
+            else if ($r < 45)
+            {
+                $encoded_text .= '&#x' . dechex(ord($char)) . ';';
+            }
+            else
+            {
+                $encoded_text .= '&#' . ord($char) . ';';
+            }
+        }
+
+        return $encoded_text;
     }
 
     public function getName()
