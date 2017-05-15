@@ -33,7 +33,8 @@ class InscriptionOnFlush
                         }
                         $message = \Swift_Message::newInstance()
                             ->setSubject('['.$entity->getRace()->getTitle().'] Notification ')
-                            ->setFrom(array($entity->getRace()->getEvent()->getEmail() => $entity->getRace()->getTitle()))
+                            ->setFrom(array('contact@raisaventure.fr' => $entity->getRace()->getTitle()))
+                            ->setReplyTo(array($entity->getRace()->getEvent()->getEmail() => $entity->getRace()->getTitle()))
                             ->setTo($to)
                             ->setBcc($entity->getRace()->getEvent()->getEmail())
                             ->setBody(
