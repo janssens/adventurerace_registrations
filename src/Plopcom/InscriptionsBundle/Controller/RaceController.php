@@ -193,29 +193,34 @@ class RaceController extends Controller
                                     return $this->redirectToRoute("default_index");
                                 }
 
-                                $inscription->setPayementStatus(Inscription::PAYEMENT_STATUS_PAYED);
-                                $em->persist($inscription);
-                                $em->flush();
+                                if ($inscription->getPayementStatus() != Inscription::PAYEMENT_STATUS_PAYED){
+                                    $inscription->setPayementStatus(Inscription::PAYEMENT_STATUS_PAYED);
+                                    $em->persist($inscription);
+                                    $em->flush();
 
-                                //email payement ok
-                                $dest = array();
-                                foreach ($inscription->getAthletes() as $athlete) {
-                                    $dest[$athlete->getEmail()] = $athlete->getFullName();
+                                    //email payement ok
+                                    $dest = array();
+                                    foreach ($inscription->getAthletes() as $athlete) {
+                                        $dest[$athlete->getEmail()] = $athlete->getFullName();
+                                    }
+                                    $message = \Swift_Message::newInstance()
+                                        ->setSubject('[' . $race->getTitle() . '] Paiement reçu')
+                                        ->setFrom(array($race->getEvent()->getEmail() => $race->getTitle()))
+                                        ->setTo($dest)
+                                        ->setBcc($race->getEvent()->getEmail())
+                                        ->setBody(
+                                            $this->renderView(
+                                            // app/Resources/views/Emails/payement.html.twig
+                                                'Emails/payement.html.twig',
+                                                array('inscription' => $inscription)
+                                            ),
+                                            'text/html'
+                                        );
+                                    $this->get('mailer')->send($message);
+                                }else{
+
                                 }
-                                $message = \Swift_Message::newInstance()
-                                    ->setSubject('[' . $race->getTitle() . '] Paiement reçu')
-                                    ->setFrom(array($race->getEvent()->getEmail() => $race->getTitle()))
-                                    ->setTo($dest)
-                                    ->setBcc($race->getEvent()->getEmail())
-                                    ->setBody(
-                                        $this->renderView(
-                                        // app/Resources/views/Emails/payement.html.twig
-                                            'Emails/payement.html.twig',
-                                            array('inscription' => $inscription)
-                                        ),
-                                        'text/html'
-                                    );
-                                $this->get('mailer')->send($message);
+
                             }elseif ($payment_status == 'Refunded'){
                                 $inscription->setPayementStatus(Inscription::PAYEMENT_STATUS_REFUND);
                                 $inscription->setStatus(Inscription::STATUS_DNS);
