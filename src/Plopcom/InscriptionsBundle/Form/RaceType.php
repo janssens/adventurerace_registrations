@@ -32,7 +32,7 @@ class RaceType extends AbstractType
             ->add('entry_fees', TextType::class,array('label'=>'Prix','attr' => array('class'=>'form-control')))
             ->add('public', CheckboxType::class,array('label'=>'Visible publiquement','attr' => array('class'=>'form-control'),'required' => false))
             ->add('open', CheckboxType::class,array('label'=>'Ouvert','attr' => array('class'=>'form-control'),'required' => false))
-            ->add('description',TextareaType::class,array('label'=>'Description','attr' => array('class'=>'form-control'),'required' => false))
+            ->add('description',TextareaType::class,array('label'=>'Description','attr' => array('class'=>'form-control'),'required' => true))
             ->add('max_attendee',IntegerType::class,array('label'=>"Nombre d'insription maximum",'attr' => array('class'=>'form-control')))
             ->add('number_of_athlete',IntegerType::class,array('label'=>'Nombre de coureurs par inscription','attr' => array('class'=>'form-control')))
             ->add('document_required',CheckboxType::class,array('label'=>'Certificat/Licence requis','attr' => array('class'=>'form-control'),'required' => false))
