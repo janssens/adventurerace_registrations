@@ -153,9 +153,11 @@ class InscriptionController extends Controller
                     foreach($inscription->getAthletes() as $athlete){
                         $dest[$athlete->getEmail()]=$athlete->getFullName();
                     }
+                    $conf = $em->getRepository('PlopcomInscriptionsBundle:Configuration')->getInstance();
                     $message = \Swift_Message::newInstance()
                         ->setSubject('['.$race->getTitle().'] Bienvenue ')
-                        ->setFrom(array($race->getEvent()->getEmail() => $race->getTitle()))
+                        ->setFrom(array($conf->getContactEmail() => $race->getTitle()))
+                        ->setReplyTo(array($race->getEvent()->getEmail() => $race->getTitle()))
                         ->setTo($dest)
                         ->setBcc($race->getEvent()->getEmail())
                         ->setBody(
@@ -226,9 +228,11 @@ class InscriptionController extends Controller
         foreach($inscription->getAthletes() as $athlete){
             $to[$athlete->getEmail()]=$athlete->getFullName();
         }
+        $conf = $this->getDoctrine()->getManager()->getRepository('PlopcomInscriptionsBundle:Configuration')->getInstance();
         $message = \Swift_Message::newInstance()
             ->setSubject('['.$inscription->getRace()->getTitle().'] Notification ')
-            ->setFrom(array($inscription->getRace()->getEvent()->getEmail() => $inscription->getRace()->getTitle()))
+            ->setFrom(array($conf->getContactEmail() => $inscription->getRace()->getTitle()))
+            ->setReplyTo(array($inscription->getRace()->getEvent()->getEmail() => $inscription->getRace()->getTitle()))
             ->setTo($to)
             ->setBcc($inscription->getRace()->getEvent()->getEmail())
             ->setBody(
@@ -332,9 +336,11 @@ class InscriptionController extends Controller
         foreach($inscription->getAthletes() as $athlete){
             $to[$athlete->getEmail()]=$athlete->getFullName();
         }
+        $conf = $this->getDoctrine()->getManager()->getRepository('PlopcomInscriptionsBundle:Configuration')->getInstance();
         $message = \Swift_Message::newInstance()
             ->setSubject('['.$inscription->getRace()->getTitle().'] Paiement en attente ')
-            ->setFrom(array($inscription->getRace()->getEvent()->getEmail() => $inscription->getRace()->getTitle()))
+            ->setFrom(array($conf->getContactEmail() => $inscription->getRace()->getTitle()))
+            ->setReplyTo(array($inscription->getRace()->getEvent()->getEmail() => $inscription->getRace()->getTitle()))
             ->setTo($to)
             ->setBcc($inscription->getRace()->getEvent()->getEmail())
             ->setBody(
