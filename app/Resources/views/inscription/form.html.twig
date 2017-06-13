@@ -65,8 +65,10 @@
 
 {{ form_row(form.save) }}
 {{ form_row(form.reset) }}
-{% if is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN") %}
-    {% if (inscription.race.event.owner == app.user) or is_granted("ROLE_SUPER_ADMIN") %}
-        <a href="{{ path('inscription_delete', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Supprimer</a>
+{% if inscription.id %}
+    {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN") %}
+        {% if (inscription.race.event.owner == app.user) or is_granted("ROLE_SUPER_ADMIN") %}
+            <a href="{{ path('inscription_delete', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Supprimer</a>
+        {% endif %}
     {% endif %}
 {% endif %}
