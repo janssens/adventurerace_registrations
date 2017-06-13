@@ -50,6 +50,8 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
             - 'PlopcomInscriptionsBundle:Form:fields.html.twig'
+    globals:
+            paypal_url: 'https://www.paypal.com/cgi-bin/webscr'
 
 # Doctrine Configuration
 doctrine:

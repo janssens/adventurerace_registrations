@@ -38,7 +38,7 @@
 
     {% if (inscription.payementStatus == 2 or inscription.payementStatus == 0) %}
         <p><b>Total : </b> {{ inscription.total }} €</p>
-        <form action="{{ constant('PAYPAL_URL',inscription.race) }}" method="post" target="_top">
+        <form action="{{ paypal_url }}" method="post" target="_top">
             <input type="hidden" name="cmd" value="_xclick">
             {#<input type="hidden" name="hosted_button_id" value="{{ inscription.race.paypalHostedButtonId }}">#}
             <input type="hidden" name="notify_url" value="{{ url('race_paypalipn',{'slug' : inscription.race.slug }) }}">

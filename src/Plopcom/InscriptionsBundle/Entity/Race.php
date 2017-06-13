@@ -17,9 +17,6 @@ use DateTime;
 class Race
 {
 
-    const PAYPAL_URL = 'https://www.paypal.com/cgi-bin/webscr';
-    //const PAYPAL_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

@@ -131,7 +131,7 @@ class RaceController extends Controller
                             }
                             // Post IPN data back to PayPal to validate the IPN data is genuine
                             // Without this step anyone can fake IPN data
-                            $paypal_url = RACE::PAYPAL_URL;
+                            $paypal_url = $this->getParameter('twig.globals.paypal_url');
 
                             $ch = curl_init($paypal_url);
                             if ($ch == FALSE) {
