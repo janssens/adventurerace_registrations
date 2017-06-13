@@ -4,6 +4,9 @@
             {{ form_widget(option) }}
         {% endfor %}
         {{ form_widget(form.options) }}
+    {% if not inscription.id %}
+        <div style="display: none">
+    {% endif %}
     {% if inscription.id and is_granted("ROLE_ADMIN") %}
         <hr>
         <div class="col-md-6">{{ form_row(form.status) }}</div>
@@ -12,7 +15,9 @@
         {{ form_row(form.admin_comment) }}
         <hr>
     {% endif %}
-
+    {% if not inscription.id %}
+        </div>
+    {% endif %}
         {% if race.numberOfAthlete > 1 %}
             <h3>Athlètes</h3>
             <ul class="nav nav-tabs">
