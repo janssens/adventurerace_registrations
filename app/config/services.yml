@@ -7,6 +7,11 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    plopcominscriptions.tblprefix_subscriber:
+        class: Plopcom\InscriptionsBundle\Subscriber\TablePrefixSubscriber
+        arguments: [%plopcominscriptions.db.table_prefix%]
+        tags:
+            - { name: doctrine.event_subscriber }
     app.twig_extension:
         class: Plopcom\InscriptionsBundle\Twig\AppExtension
         public: false
