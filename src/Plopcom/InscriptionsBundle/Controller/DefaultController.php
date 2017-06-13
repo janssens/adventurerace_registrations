@@ -71,6 +71,131 @@ class DefaultController extends Controller
     }
 
     /**
+     * IPN from paypal.
+     *
+     * @Route("/paypalipn", name="paypalipn")
+     * @Method("POST")
+     *
+     */
+    public function paypalipnAction(Request $request)
+    {
+        if ($request->isMethod('POST')) { //only post
+
+            $ipn = new PaypalIPN();
+            // Use the sandbox endpoint during testing.
+            if ($this->getParameter('plopcominscriptions.paypal.use_sandbox'))
+                $ipn->useSandbox();
+            $verified = $ipn->verifyIPN();
+            if ($verified) {
+                /*
+                 * Process IPN
+                 * A list of variables is available here:
+                 * https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNandPDTVariables/
+                 */
+                $em = $this->getDoctrine()->getManager();
+                $receiver_email = $request->get('receiver_email');
+                $race_id = $request->get('item_number');
+                if ($race_id){ //race id
+                    $race = $em->getRepository('PlopcomInscriptionsBundle:Race')->find($race_id);
+                    if ($race){ //race found
+                        if ($receiver_email && ($receiver_email == $race->getEvent()->getPaypalAccountEmail())) { // good receiver
+                            $invoice_id = $request->get('invoice');
+                            if ($invoice_id) { //invoice id
+                                $inscription = $em->getRepository('PlopcomInscriptionsBundle:Inscription')->find($invoice_id);
+                                if ($inscription) { //inscription found
+
+                                    // check whether the payment_status is Completed
+                                    // check that txn_id has not been previously processed
+                                    // check that receiver_email is your PayPal email
+                                    // check that payment_amount/payment_currency are correct
+                                    // process payment and mark item as paid.
+                                    // assign posted variables to local variables
+                                    //$item_name = $_POST['item_name'];
+                                    //$item_number = $_POST['item_number'];
+                                    $payment_status = $_POST['payment_status'];
+                                    if ($payment_status == 'Completed') { //payement complet
+
+                                        $payment_amount = $_POST['mc_gross'];
+                                        if ($payment_amount != $inscription->getTotal()) { //wrong amount
+                                            error_log(date('[Y-m-d H:i e] ') . "wrong amount " . PHP_EOL, 3, LOG_FILE);
+                                            return $this->redirectToRoute("default_index");
+                                        }
+
+                                        if ($inscription->getPayementStatus() != Inscription::PAYEMENT_STATUS_PAYED){
+                                            $inscription->setPayementStatus(Inscription::PAYEMENT_STATUS_PAYED);
+                                            $em->persist($inscription);
+                                            $em->flush();
+
+                                            //email payement ok
+                                            $dest = array();
+                                            foreach ($inscription->getAthletes() as $athlete) {
+                                                $dest[$athlete->getEmail()] = $athlete->getFullName();
+                                            }
+                                            $message = \Swift_Message::newInstance()
+                                                ->setSubject('[' . $race->getTitle() . '] Paiement reçu')
+                                                ->setFrom(array($race->getEvent()->getEmail() => $race->getTitle()))
+                                                ->setTo($dest)
+                                                ->setBcc($race->getEvent()->getEmail())
+                                                ->setBody(
+                                                    $this->renderView(
+                                                    // app/Resources/views/Emails/payement.html.twig
+                                                        'Emails/payement.html.twig',
+                                                        array('inscription' => $inscription)
+                                                    ),
+                                                    'text/html'
+                                                );
+                                            $this->get('mailer')->send($message);
+                                        }else{
+
+                                        }
+
+                                    }elseif ($payment_status == 'Refunded'){
+                                        $inscription->setPayementStatus(Inscription::PAYEMENT_STATUS_REFUND);
+                                        $inscription->setStatus(Inscription::STATUS_DNS);
+                                        $em->persist($inscription);
+                                        $em->flush();
+
+                                        //email payement ok
+                                        $dest = array();
+                                        foreach ($inscription->getAthletes() as $athlete) {
+                                            $dest[$athlete->getEmail()] = $athlete->getFullName();
+                                        }
+                                        $message = \Swift_Message::newInstance()
+                                            ->setSubject('[' . $race->getTitle() . '] Remboursement')
+                                            ->setFrom(array($race->getEvent()->getEmail() => $race->getTitle()))
+                                            ->setTo($dest)
+                                            ->setBcc($race->getEvent()->getEmail())
+                                            ->setBody(
+                                                $this->renderView(
+                                                // app/Resources/views/Emails/payement.html.twig
+                                                    'Emails/refund.html.twig',
+                                                    array('inscription' => $inscription)
+                                                ),
+                                                'text/html'
+                                            );
+                                        $this->get('mailer')->send($message);
+                                    } else {
+                                        $inscription->setPayementStatus(Inscription::PAYEMENT_STATUS_FAILED);
+                                        $inscription->setAdminComment($payment_status);
+                                        $em->persist($inscription);
+                                        $em->flush();
+                                    }
+
+                                    return $this->redirectToRoute("default_index");
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            // Reply with an empty 200 response to indicate to paypal the IPN was received correctly.
+            return new Response('',200);
+        }
+        return $this->redirectToRoute("default_index");
+    }
+
+    /**
      * Edit app.
      *
      * @Route("/admin", name="app_config")
