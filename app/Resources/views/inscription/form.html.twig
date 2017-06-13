@@ -4,7 +4,7 @@
             {{ form_widget(option) }}
         {% endfor %}
         {{ form_widget(form.options) }}
-    {% if is_granted("ROLE_ADMIN") %}
+    {% if inscription.id and is_granted("ROLE_ADMIN") %}
         <hr>
         <div class="col-md-6">{{ form_row(form.status) }}</div>
         <div class="col-md-6">{{ form_row(form.payement_status) }}</div>
