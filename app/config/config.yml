@@ -51,7 +51,7 @@ twig:
     form_themes:
             - 'PlopcomInscriptionsBundle:Form:fields.html.twig'
     globals:
-            paypal_url: 'https://www.paypal.com/cgi-bin/webscr'
+            paypal_url: '%plopcominscriptions.paypal.url%'
 
 # Doctrine Configuration
 doctrine:

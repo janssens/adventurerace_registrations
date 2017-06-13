@@ -33,7 +33,3 @@ monolog:
 
 swiftmailer:
     delivery_address: janssensgaetan@gmail.com
-
-twig:
-    globals:
-        paypal_url: 'https://www.sandbox.paypal.com/cgi-bin/webscr'
