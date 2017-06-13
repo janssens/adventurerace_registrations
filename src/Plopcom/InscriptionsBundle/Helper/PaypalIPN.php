@@ -2,6 +2,8 @@
 
 namespace Plopcom\InscriptionsBundle\Helper;
 
+use Exception;
+
 class PaypalIPN
 {
 
