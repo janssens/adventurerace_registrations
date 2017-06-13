@@ -119,7 +119,7 @@ class RaceController extends Controller
                         $em = $this->getDoctrine()->getManager();
                         $inscription = $em->getRepository('PlopcomInscriptionsBundle:Inscription')->find($invoice_id);
                         if ($inscription) { //inscription found
-
+                                define("LOG_FILE", "/var/log/ipn.log");
                                 // check whether the payment_status is Completed
                                 // check that txn_id has not been previously processed
                                 // check that receiver_email is your PayPal email
@@ -134,7 +134,7 @@ class RaceController extends Controller
                                     $payment_amount = $_POST['mc_gross'];
                                     if ($payment_amount != $inscription->getTotal()) { //wrong amount
                                         error_log(date('[Y-m-d H:i e] ') . "wrong amount " . PHP_EOL, 3, LOG_FILE);
-                                        return $this->redirectToRoute("default_index");
+                                        return new Response('',200);
                                     }
 
                                     if ($inscription->getPayementStatus() != Inscription::PAYEMENT_STATUS_PAYED){
@@ -197,7 +197,8 @@ class RaceController extends Controller
                                     $em->flush();
                                 }
 
-                            return $this->redirectToRoute("default_index");
+                            // Reply with an empty 200 response to indicate to paypal the IPN was received correctly.
+                            return new Response('',200);
                         }
                     }
                 }
