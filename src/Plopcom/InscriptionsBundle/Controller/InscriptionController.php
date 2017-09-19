@@ -137,8 +137,10 @@ class InscriptionController extends Controller
                         }
                     }
 
-                    $inscription->setStatus(Inscription::STATUS_UNCHECKED);
-                    $inscription->setPayementStatus(Inscription::PAYEMENT_STATUS_NOT_PAYED);
+                    if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
+                        $inscription->setStatus(Inscription::STATUS_UNCHECKED);
+                        $inscription->setPayementStatus(Inscription::PAYEMENT_STATUS_NOT_PAYED);
+                    }
 
                     //last inscription?
                     if (count($race->getInscriptions())+1==$race->getMaxAttendee()){
