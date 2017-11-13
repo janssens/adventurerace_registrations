@@ -450,10 +450,11 @@ class RaceController extends Controller
             $return .= $athlete->getEmail();//EMail
             $return .= "\n";
         }
-        var_dump($return);
-        $return = iconv("UTF-8", "windows-1252", $return);
-        var_dump($return);
-        die();
+
+        $r = iconv("UTF-8", "windows-1252", $return);
+        if (!$r){
+            $r = $return;
+        }
 
         return new Response($return, 200, array(
             'Content-Encoding: Windows-1252',
