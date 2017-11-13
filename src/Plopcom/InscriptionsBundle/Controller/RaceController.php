@@ -450,6 +450,7 @@ class RaceController extends Controller
             $return .= $athlete->getEmail();//EMail
             $return .= "\n";
         }
+        die($return);
         $return = iconv("UTF-8", "windows-1252", $return);
 
         return new Response($return, 200, array(
@@ -492,6 +493,7 @@ class RaceController extends Controller
             $return .= "Ville [".$i."]\t;\t";
             $return .= "Pays [".$i."]\t;\t";
             $return .= "Telephone [".$i."]\t;\t";
+            $return .= "Anniversaire [".$i."]\t;\t";
             $return .= "Année [".$i."]\t;\t";
             $return .= "Email [".$i."]\t;\t";
             foreach ($race->getOptions() as $option){
@@ -529,7 +531,8 @@ class RaceController extends Controller
                 $return .= $athlete->getAddress()->getCity()."\t;\t"; //Ville
                 $return .= $athlete->getAddress()->getCountry()."\t;\t"; //Pays
                 $return .= $athlete->getPhone()."\t;\t"; //Tel
-                $return .= $athlete->getDob()->format('Y')."\t;\t"; //Naissance
+                $return .= $athlete->getDob()->format('d/m/Y')."\t;\t"; //Anniversaire
+                $return .= $athlete->getDob()->format('Y')."\t;\t"; //Année Naissance
                 $return .= $athlete->getEmail()."\t;\t";//EMail
                 foreach ($athlete->getOptions() as $option){
                     if (in_array($option->getRaceOption()->getId(),$race_option_ids)) {
