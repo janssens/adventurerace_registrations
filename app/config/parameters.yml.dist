@@ -20,3 +20,4 @@ parameters:
 
     plopcominscriptions.paypal.url: ~
     plopcominscriptions.db.table_prefix: inscriptions_
+    plopcominscriptions.paypal.use_sandbox: false
