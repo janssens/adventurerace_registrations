@@ -66,7 +66,7 @@ class RaceController extends Controller
             if ($rules&&$rules->getFile()){
                 $rules->upload();
                 $race->setRules($rules);
-            }else if(!$rules){
+            }else{
                 $race->setRules(null);
             }
 
@@ -298,7 +298,7 @@ class RaceController extends Controller
             if ($illu&&$illu->getFile()){
                 $illu->upload();
                 $race->setIllustration($illu);
-            }else if(!$illu){
+            }else{
                 $race->setIllustration(null);
             }
 
@@ -306,7 +306,7 @@ class RaceController extends Controller
             if ($rules&&$rules->getFile()){
                 $rules->upload();
                 $race->setRules($rules);
-            }else if(!$rules){
+            }else{
                 $race->setRules(null);
             }
 

@@ -34,7 +34,6 @@ class AthleteType extends AbstractType
                 'multiple' => false,
                 //'choices_as_values' => true,
             ))
-            ->add('dob', BirthdayType::class,array('label'=>'Date de naissance','attr' => array('class'=>'form-control')))
         ;
 
         $builder->add('address', AddressType::class,array('label'=>' '));
@@ -46,6 +45,15 @@ class AthleteType extends AbstractType
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $form = $event->getForm();
             $data = $event->getData();
+            if ($max = $data->getInscription()->getRace()->getMaximalYear()){
+                $years = array();
+                for ($i=intval(date('Y')-120);$i<=$max;$i++){
+                    $years[] = $i;
+                }
+                $form->add('dob', BirthdayType::class,array('label'=>'Date de naissance (né en '.$max.' et avant)','years'=>array_reverse($years),'attr' => array('class'=>'form-control')));
+            }else{
+                $form->add('dob', BirthdayType::class,array('label'=>'Date de naissance','years'=>array_reverse($years),'attr' => array('class'=>'form-control')));
+            }
 
             if ($data->getInscription()->getRace()->getDocumentRequired())
                 $form->add('document',DocumentType::class,array('label'=>'Licence / certificat medical'));

@@ -17,3 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    plopcominscriptions.paypal.url: ~
+    plopcominscriptions.db.table_prefix: inscriptions_

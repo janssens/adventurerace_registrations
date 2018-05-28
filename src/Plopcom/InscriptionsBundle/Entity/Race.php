@@ -58,6 +58,11 @@ class Race
     protected $max_attendee;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $maximal_year;
+
+    /**
      * @ORM\Column(type="float",nullable=true)
      */
     protected $entry_fees;
@@ -685,5 +690,29 @@ class Race
     public function getRules()
     {
         return $this->rules;
+    }
+
+    /**
+     * Set maximalYear.
+     *
+     * @param int $maximalYear
+     *
+     * @return Race
+     */
+    public function setMaximalYear($maximalYear)
+    {
+        $this->maximal_year = $maximalYear;
+
+        return $this;
+    }
+
+    /**
+     * Get maximalYear.
+     *
+     * @return int
+     */
+    public function getMaximalYear()
+    {
+        return $this->maximal_year;
     }
 }
