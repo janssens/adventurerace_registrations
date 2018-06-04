@@ -52,7 +52,7 @@ class AthleteType extends AbstractType
                 }
                 $form->add('dob', BirthdayType::class,array('label'=>'Date de naissance (né en '.$max.' et avant)','years'=>array_reverse($years),'attr' => array('class'=>'form-control')));
             }else{
-                $form->add('dob', BirthdayType::class,array('label'=>'Date de naissance','years'=>array_reverse($years),'attr' => array('class'=>'form-control')));
+                $form->add('dob', BirthdayType::class,array('label'=>'Date de naissance','attr' => array('class'=>'form-control')));
             }
 
             if ($data->getInscription()->getRace()->getDocumentRequired())
