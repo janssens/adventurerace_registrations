@@ -2,9 +2,9 @@ app/config/parameters.yml
 phpunit.xml*
 var/
 vendor/
-web/bundles/
-web/uploads/
 web/media/
+web/uploads/
+web/bundles/
 .idea/
 dploy.yaml
 composer.lock
