@@ -6,6 +6,22 @@ function convertToSlug(Text)
         .replace(/ +/g,'-')
         ;
 }
+function checkEmpty($tab) {
+    var empty = true;
+    $tab.one('keyup',function(){checkEmpty($tab)});
+    $tab.find("input[type='text']").each(function() {
+        if($(this).val()) {
+            empty = false;
+        }
+    });
+    if (empty){
+        //console.log('tab '+$tab.attr('id'));
+        //console.log('is empty');
+        $tab.find("[required='required']").removeAttr('required').addClass('optional_required');
+    }else{
+        $tab.find(".optional_required").attr('required','required').removeClass('optional_required');
+    }
+}
 
 jQuery(function(){
 
@@ -33,9 +49,12 @@ jQuery(function(){
             {
                 if(!this.validity.valid)
                 {
-                    jQuery("a[href='#"+jQuery(this).parents('.tab-pane:first').attr("id")+"']").tab('show')
-                    // break
-                    return false;
+                    var $link = jQuery("a[href='#"+jQuery(this).parents('.tab-pane:first').attr("id")+"'].required");
+                    if ($link.length){
+                        $link.tab('show');
+                        // break
+                        return false;
+                    }
                 }
             });
         }

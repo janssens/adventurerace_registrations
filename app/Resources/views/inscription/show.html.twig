@@ -19,14 +19,24 @@
         {% endfor %}
     </div>
     {% if inscription.options | length %}
-        <h4>Options</h4>
-        {% for option in inscription.options %}
-            {% if option.raceOption.isDocument %}
-                <li>{{ option.raceOption.title }} : <a href="/{{ option.document.webPath }}" data-toggle="lightbox"><i class="fa fa-fw fa-file-image-o"></i>{{ option.document.webPath }}</a></li>
-            {% else %}
-                <li>{{ option.raceOption.title }} : <strong>{{ option.value is not empty ? option.value : 'N/A' }}</strong></li>
-            {% endif %}
-        {% endfor %}
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Options inscription</h4>
+                <ul>
+                    {% for option in inscription.options %}
+                        {% if option.raceOption.isDocument %}
+                            <li>{{ option.raceOption.title }} : <a href="/{{ option.document.webPath }}" data-toggle="lightbox"><i class="fa fa-fw fa-file-image-o"></i>{{ option.document.webPath }}</a></li>
+                        {% else %}
+                            {% if option.raceOption.isCheckbox %}
+                                <li>{{ option.raceOption.title }} : <strong>{{ option.value is not empty ? 'OUI' : 'NON' }}</strong></li>
+                            {% else %}
+                                <li>{{ option.raceOption.title }} : <strong>{{ option.value is not empty ? option.value : 'N/A' }}</strong></li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     {% endif %}
     {% if inscription.adminComment %}
         <div class="alert alert-info" role="alert">{{ inscription.adminComment }}</div>

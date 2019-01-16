@@ -332,10 +332,10 @@ class Inscription
         }
         $cat = '';
         switch ($sum){
-            case $this->getRace()->getNumberOfAthlete()*Athlete::FEMALE :
+            case $this->getAthletes()->count()*Athlete::FEMALE :
                 $cat = "Féminine";
                 break;
-            case $this->getRace()->getNumberOfAthlete()*Athlete::MALE :
+            case $this->getAthletes()->count()*Athlete::MALE :
                 $cat = "Masculine";
                 break;
             default :
@@ -353,14 +353,14 @@ class Inscription
         }
         $cat = '';
         switch ($sum){
-            case $this->getRace()->getNumberOfAthlete()*Athlete::FEMALE :
+            case $this->getAthletes()->count()*Athlete::FEMALE :
                 $cat = "<i class=\"fa fa-fw fa-female\"></i>";
-                if ($this->getRace()->getNumberOfAthlete()>1)
+                if ($this->getAthletes()->count()>1)
                     $cat .= "<i class=\"fa fa-fw fa-female\"></i>";
                 break;
-            case $this->getRace()->getNumberOfAthlete()*Athlete::MALE :
+            case $this->getAthletes()->count()*Athlete::MALE :
                 $cat = "<i class=\"fa fa-fw fa-male\"></i>";
-                if ($this->getRace()->getNumberOfAthlete()>1)
+                if ($this->getAthletes()->count()>1)
                     $cat .= "<i class=\"fa fa-fw fa-male\"></i>";
                 break;
             default :
@@ -378,10 +378,10 @@ class Inscription
         }
         $cat = '';
         switch ($sum){
-            case $this->getRace()->getNumberOfAthlete()*Athlete::FEMALE :
+            case $this->getAthletes()->count()*Athlete::FEMALE :
                 $cat = "F";
                 break;
-            case $this->getRace()->getNumberOfAthlete()*Athlete::MALE :
+            case $this->getAthletes()->count()*Athlete::MALE :
                 $cat = "H";
                 break;
             default :
@@ -399,10 +399,10 @@ class Inscription
         }
         $cat = '';
         switch ($sum){
-            case $this->getRace()->getNumberOfAthlete()*Athlete::FEMALE :
+            case $this->getAthletes()->count()*Athlete::FEMALE :
                 $cat = "F";
                 break;
-            case $this->getRace()->getNumberOfAthlete()*Athlete::MALE :
+            case $this->getAthletes()->count()*Athlete::MALE :
                 $cat = "M";
                 break;
             default :
@@ -576,19 +576,51 @@ class Inscription
     public function getTotal()
     {
         $extra = 0;
+        $max = -1;
 
         foreach ($this->getAthletes() as $athlete){
             foreach ($athlete->getOptions() as $option){
-                if (! $option->getRaceOption()->isDocument() && $option->getRaceOption()->getAdditionalFees() && $option->getValue())
-                    $extra += $option->getRaceOption()->getAdditionalFees();
+                if (! $option->getRaceOption()->isDocument() && $option->getValue()){ //option chosen
+                    if ($option->getRaceOption()->getAdditionalFees()){ //add extra price
+                        $extra += $option->getRaceOption()->getAdditionalFees();
+                    }
+                    if ($option->getRaceOption()->getUpperLimitFees()){ //set max
+                        if ($max > 0){
+                            $max = min($max,$option->getRaceOption()->getUpperLimitFees());
+                        }else{
+                            $max = $option->getRaceOption()->getUpperLimitFees();
+                        }
+                    }
+                }
             }
         }
 
         foreach ($this->getOptions() as $option){
-            if (! $option->getRaceOption()->isDocument() && $option->getRaceOption()->getAdditionalFees() && $option->getValue())
-                $extra += $option->getRaceOption()->getAdditionalFees();
+            if (! $option->getRaceOption()->isDocument() && $option->getValue()){ //option chosen
+                if ($option->getRaceOption()->getAdditionalFees()){ //add extra price
+                    $extra += $option->getRaceOption()->getAdditionalFees();
+                }
+                if ($option->getRaceOption()->getUpperLimitFees()){ //set max
+                    if ($max > 0){
+                        $max = min($max,$option->getRaceOption()->getUpperLimitFees());
+                    }else{
+                        $max = $option->getRaceOption()->getUpperLimitFees();
+                    }
+                }
+            }
         }
 
-        return $this->getRace()->getEntryFees() + $extra;
+        if ($this->getRace()->getEntryFeesGlobal()){
+            $multi = 1;
+        }else{
+            $multi = $this->getAthletes()->count();
+        }
+
+        $total = $this->getRace()->getEntryFees()*$multi + $extra;
+
+        if ($max > 0 and $total > $max)
+            return $max;
+
+        return $total;
     }
 }

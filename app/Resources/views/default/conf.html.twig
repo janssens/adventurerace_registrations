@@ -18,7 +18,7 @@
         {{ form_row(edit_form.meta_keywords) }}
         {{ form_row(edit_form.meta_description) }}
         {{ form_row(edit_form.message) }}
-        {{ include('default/wysiwyg.html.twig', { 'field': edit_form.content,'id': 'configuration_content' }) }}
+        {{ include('_partial/wysiwyg.html.twig', { 'field': edit_form.content,'id': 'configuration_content' }) }}
 
 
     <br>

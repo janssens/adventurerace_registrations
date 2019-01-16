@@ -1,13 +1,13 @@
 {% if (race.public or (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN')) %}
 <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-        {% if race.illustration %}
         <a href="{{ path('race_show', { 'slug': race.slug }) }}" class="btn btn-default">
+        {% if race.illustration %}
             <img src="{{ (race.illustration.webPath) | imagine_filter('my_thumb_race_event') }}" class="img-responsive" alt="{{ race.title }}">
-        </a>
         {% else %}
             <img src="https://placeholdit.imgix.net/~text?txtsize=33&bg=eee&txt=image-350%C3%97160&w=350&h=160" class="img-responsive" alt="{{ race.title }}">
         {% endif %}
+        </a>
         <div class="caption">
             <h3>{{ race.title }}&nbsp;<a href="{{ path('type_show', { 'code': race.type.code }) }}"><span class="label label-default">{{ race.type.title }}</span></a>
                 {% if (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}

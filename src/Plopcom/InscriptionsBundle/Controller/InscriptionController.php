@@ -61,6 +61,9 @@ class InscriptionController extends Controller
             }
 
             $nb_of_athletes = $race->getNumberOfAthlete();
+            if ($race->getMaxNumberOfAthlete() > $race->getNumberOfAthlete()){
+                $nb_of_athletes = $race->getMaxNumberOfAthlete();
+            }
             if ($nb_of_athletes>0){
                 $inscription = new Inscription();
 
@@ -72,8 +75,8 @@ class InscriptionController extends Controller
                     $athlete->setAddress($address);
                     $athlete->setInscription($inscription);
                     $inscription->addAthlete($athlete);
-                    $inscription->setRace($race);
                 }
+                $inscription->setRace($race);
                 
                 foreach ($race->getOptions() as $option){
                     if ($option->isForAthlete()){
@@ -102,25 +105,30 @@ class InscriptionController extends Controller
                 $form->handleRequest($request);
 
                 if ($form->isSubmitted() && $form->isValid()) {
-                    
+                    $athleteCounter = 0;
                     foreach($inscription->getAthletes() as $athlete){
-                        $doc = $athlete->getDocument();
-                        if ($doc&&$doc->getFile()){
-                            $doc->upload();
-                            $athlete->setInscription($inscription);
-                        }else if($race->getDocumentRequired()) {
-                            $request->getSession()->getFlashBag()->add('error', 'Le justificatif est obligatoire pour '.$athlete->getFullName());
-                            return $this->render('inscription/new.html.twig', array(
-                                'inscription' => $inscription,
-                                'race' => $race,
-                                'form' => $form->createView(),
-                            ));
-                        }
-                        foreach ($athlete->getOptions() as $option_athlete){
-                            if ($option_athlete instanceof AthleteOptionDocument){
-                                $doc = $option_athlete->getDocument();
-                                if ($doc&&$doc->getFile()){
-                                    $doc->upload();
+                        if (!$athlete->getEmail()){
+                            $inscription->removeAthlete($athlete);
+                        }else{
+                            $athleteCounter++;
+                            $doc = $athlete->getDocument();
+                            if ($doc&&$doc->getFile()){
+                                $doc->upload();
+                                $athlete->setInscription($inscription);
+                            }else if($race->getDocumentRequired()) {
+                                $request->getSession()->getFlashBag()->add('error', 'Le justificatif est obligatoire pour '.$athlete->getFullName());
+                                return $this->render('inscription/new.html.twig', array(
+                                    'inscription' => $inscription,
+                                    'race' => $race,
+                                    'form' => $form->createView(),
+                                ));
+                            }
+                            foreach ($athlete->getOptions() as $option_athlete){
+                                if ($option_athlete instanceof AthleteOptionDocument){
+                                    $doc = $option_athlete->getDocument();
+                                    if ($doc&&$doc->getFile()){
+                                        $doc->upload();
+                                    }
                                 }
                             }
                         }
@@ -264,28 +272,60 @@ class InscriptionController extends Controller
             throw $this->createNotFoundException('Respectez la vie privée des inscrits.');
         }
 
+        if ($inscription->getAthletes()->count() < $inscription->getRace()->getMaxNumberOfAthlete() and $inscription->getPayementStatus() != Inscription::PAYEMENT_STATUS_PAYED){
+            $addedAthletes = array();
+            for($i=$inscription->getAthletes()->count(); $i<$inscription->getRace()->getMaxNumberOfAthlete(); $i++){
+                $athlete = new Athlete();
+                $address = new Address();
+                $athlete->setDob(new \DateTime("20 years ago"));
+                $address->setCountry('FR');
+                $athlete->setAddress($address);
+                $athlete->setInscription($inscription);
+                $inscription->addAthlete($athlete);
+                $addedAthletes[] = $athlete;
+            }
+            foreach ($inscription->getRace()->getOptions() as $option){
+                if ($option->isForAthlete()){
+                    foreach ($addedAthletes as $athlete)
+                    {
+                        if ($option->getType() == RaceOption::TYPE_DOCUMENT)
+                            $athlete_option = new AthleteOptionDocument();
+                        else
+                            $athlete_option = new AthleteOptionString();
+                        $athlete_option->setRaceOption($option);
+                        $athlete_option->setAthlete($athlete);
+                        $athlete->addOption($athlete_option);
+                    }
+                }
+            }
+        }
+
         $editForm = $this->createForm('Plopcom\InscriptionsBundle\Form\InscriptionType', $inscription);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
             foreach($inscription->getAthletes() as $athlete){
-                $doc = $athlete->getDocument();
-                if ($doc&&$doc->getFile()){
-                    $doc->upload();
-                }else if(!$doc &&  $inscription->getRace()->getDocumentRequired()){
-                    $request->getSession()->getFlashBag()->add('error', 'Le justificatif est obligatoire pour '.$athlete->getFullName());
-                    return $this->render('inscription/edit.html.twig', array(
-                        'inscription' => $inscription,
-                        'edit_form' => $editForm->createView(),
-                        'race' => $inscription->getRace(),
-                    ));
-                }
-                foreach ($athlete->getOptions() as $option){
-                    if ($option instanceof AthleteOptionDocument){
-                        $doc = $option->getDocument();
-                        if ($doc&&$doc->getFile()){
-                            $doc->upload();
+                if (!$athlete->getEmail()){
+                    $inscription->removeAthlete($athlete);
+                }else{
+                    $doc = $athlete->getDocument();
+                    if ($doc&&$doc->getFile()){
+                        $doc->upload();
+                    }else if(!$doc &&  $inscription->getRace()->getDocumentRequired()){
+                        $request->getSession()->getFlashBag()->add('error', 'Le justificatif est obligatoire pour '.$athlete->getFullName());
+                        return $this->render('inscription/edit.html.twig', array(
+                            'inscription' => $inscription,
+                            'edit_form' => $editForm->createView(),
+                            'race' => $inscription->getRace(),
+                        ));
+                    }
+                    foreach ($athlete->getOptions() as $option){
+                        if ($option instanceof AthleteOptionDocument){
+                            $doc = $option->getDocument();
+                            if ($doc&&$doc->getFile()){
+                                $doc->upload();
+                            }
                         }
                     }
                 }
@@ -307,6 +347,8 @@ class InscriptionController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($inscription);
             $em->flush();
+
+
 
             return $this->redirectToRoute('inscription_show', array('id' => $inscription->getId(), 'secret' => $inscription->getSalt()));
         }

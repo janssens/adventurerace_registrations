@@ -488,7 +488,7 @@ class RaceController extends Controller
             }
         }
 
-        for ($i = 0; $i < $race->getNumberOfAthlete(); $i++) {
+        for ($i = 0; $i < $race->getMaxNumberOfAthlete(); $i++) {
             $return .= "Nom [".$i."]\t;\t";
             $return .= "Prénom [".$i."]\t;\t";
             $return .= "Adresse [".$i."]\t;\t";
@@ -545,6 +545,28 @@ class RaceController extends Controller
                     }
                 }
             }
+            if ($inscription->getAthletes()->count() < $race->getMaxNumberOfAthlete()){
+                for ($i = $inscription->getAthletes()->count();$i<$race->getMaxNumberOfAthlete(); $i++){
+                    $return .= '' . "\t;\t"; //NOM
+                    $return .= '' . "\t;\t"; //Prenom
+                    $return .= ''; //Adresse1
+                    $return .= '' ."\t;\t"; //Adresse2
+                    $return .= '' ."\t;\t"; //Code
+                    $return .= '' ."\t;\t"; //Ville
+                    $return .= '' ."\t;\t"; //Pays
+                    $return .= '' ."\t;\t"; //Tel
+                    $return .= '' ."\t;\t"; //Anniversaire
+                    $return .= '' ."\t;\t"; //Année Naissance
+                    $return .= '' ."\t;\t";//EMail
+                    foreach ($inscription->getAthletes()->first()->getOptions() as $option){
+                        if (in_array($option->getRaceOption()->getId(),$race_option_ids)) {
+                            if ($option->getRaceOption()->getType() != RaceOption::TYPE_DOCUMENT) {
+                                $return .= ' ' . "\t;\t";
+                            }
+                        }
+                    }
+                }
+            }
             $return = rtrim($return,"\t;\t");
 
             $return .= "\n";
@@ -561,7 +583,7 @@ class RaceController extends Controller
     }
 
     /**
-     * export race starting list as GmCAP format.
+     * export race starting list .
      *
      * @Route("/{id}/CSVexportPublic", name="race_csv_export_public")
      * @Method({"GET"})
@@ -576,7 +598,7 @@ class RaceController extends Controller
         $return .= "Equipe/team\t;\t";
         $return .= "Catégorie\t;\t";
 
-        for ($i = 0; $i < $race->getNumberOfAthlete(); $i++) {
+        for ($i = 0; $i < $race->getMaxNumberOfAthlete(); $i++) {
             $return .= "Nom [".$i."]\t;\t";
             $return .= "Prénom [".$i."]\t;\t";
             $return .= "Pays [".$i."]\t;\t";
@@ -597,6 +619,14 @@ class RaceController extends Controller
                 $return .= $athlete->getFirstName() . "\t;\t"; //Prenom
                 $return .= $athlete->getAddress()->getCountry()."\t;\t"; //Pays
                 $return .= $athlete->getDob()->format('Y')."\t;\t"; //Naissance
+            }
+            if ($inscription->getAthletes()->count() < $race->getMaxNumberOfAthlete()){
+                for ($i = $inscription->getAthletes()->count();$i<$race->getMaxNumberOfAthlete(); $i++){
+                    $return .= '' . "\t;\t"; //NOM
+                    $return .= '' . "\t;\t"; //Prenom
+                    $return .= '' ."\t;\t"; //Pays
+                    $return .= '' ."\t;\t"; //Naissance
+                }
             }
             $return = rtrim($return,"\t;\t");
             $return .= "\n";

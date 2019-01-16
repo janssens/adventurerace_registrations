@@ -77,6 +77,11 @@ class RaceOption
      * @ORM\Column(type="float",nullable=true)
      */
     protected $additional_fees;
+
+    /**
+     * @ORM\Column(type="float",nullable=true)
+     */
+    protected $upper_limit_fees;
     
     /**
      * @ORM\OneToOne(targetEntity="Document", cascade={"persist"})
@@ -396,6 +401,16 @@ class RaceOption
     public function isDocument(){
         return $this->getType()==RaceOption::TYPE_DOCUMENT;
     }
+
+    /**
+     * IsCheckbox
+     * return true if Type == TYPE_CHECKBOX
+     * @return boolean
+     */
+    public function isCheckbox(){
+        return $this->getType()==RaceOption::TYPE_CHECKBOX OR $this->getType()==RaceOption::TYPE_CHECKBOX_READ;
+    }
+
     /**
      * Constructor
      */
@@ -485,4 +500,29 @@ class RaceOption
     {
         return $this->additional_fees;
     }
+
+    /**
+     * Set upperLimitFees
+     *
+     * @param float $upper_limit_fees
+     *
+     * @return RaceOption
+     */
+    public function setUpperLimitFees($upper_limit_fees)
+    {
+        $this->upper_limit_fees = $upper_limit_fees;
+
+        return $this;
+    }
+
+    /**
+     * Get upperLimitFees
+     *
+     * @return float
+     */
+    public function getUpperLimitFees()
+    {
+        return $this->upper_limit_fees;
+    }
+
 }

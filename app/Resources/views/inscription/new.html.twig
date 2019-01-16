@@ -9,3 +9,13 @@
     <h1> Nouvelle inscription <b>{{ race.title }}</b> </h1>
     {{ include('inscription/form.html.twig', { 'form': form }) }}
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        jQuery(function ($) {
+            $(".athlete.optional").each(function () {
+                checkEmpty($(this));
+            });
+        });
+    </script>
+{% endblock %}

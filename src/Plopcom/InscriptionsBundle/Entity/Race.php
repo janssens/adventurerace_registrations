@@ -58,14 +58,24 @@ class Race
     protected $max_attendee;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      */
     protected $maximal_year;
+
+    /**
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    protected $minimal_year;
 
     /**
      * @ORM\Column(type="float",nullable=true)
      */
     protected $entry_fees;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $entry_fees_global = true;
 
     /**
      * @ORM\Column(type="boolean")
@@ -88,6 +98,11 @@ class Race
     protected $number_of_athlete;
 
     /**
+     * @ORM\Column(type="integer",nullable=true)
+     */
+    protected $max_number_of_athlete;
+
+    /**
      * @ORM\Column(type="integer")
      */
     protected $distance;
@@ -96,6 +111,11 @@ class Race
      * @ORM\Column(type="integer")
      */
     protected $elevation;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $time_duration;
 
     /**
      * @ORM\OneToOne(targetEntity="Document", cascade={"persist"})
@@ -144,7 +164,17 @@ class Race
     }
 
     public function resume(){
-        return ($this->getDistance()/1000)."km & ".$this->getElevation()."m d+";
+        $r = '';
+        if ($this->getDistance() > 0){
+            $r = ($this->getDistance()/1000)."km".$r;
+        }
+        if ($this->getElevation() > 0){
+            $r = ($r) ? $r.' & ' : ''.$this->getElevation()."m d+";
+        }
+        if ($this->getTimeDuration() > 0){
+            $r = ($r) ? $r.' & ' : ''.gmdate("H\hi", ($this->getTimeDuration() * 60));
+        }
+        return $r;
     }
 
     /**
@@ -278,6 +308,30 @@ class Race
     }
 
     /**
+     * Set maxNumberOfAthlete
+     *
+     * @param integer $maxNumberOfAthlete
+     *
+     * @return Race
+     */
+    public function setMaxNumberOfAthlete($maxNumberOfAthlete)
+    {
+        $this->max_number_of_athlete = $maxNumberOfAthlete;
+
+        return $this;
+    }
+
+    /**
+     * Get maxNumberOfAthlete
+     *
+     * @return integer
+     */
+    public function getMaxNumberOfAthlete()
+    {
+        return $this->max_number_of_athlete;
+    }
+
+    /**
      * Set distance
      *
      * @param integer $distance
@@ -323,6 +377,30 @@ class Race
     public function getElevation()
     {
         return $this->elevation;
+    }
+
+    /**
+     * Set time_duration
+     *
+     * @param integer $duration
+     *
+     * @return Race
+     */
+    public function setTimeDuration($duration)
+    {
+        $this->time_duration = $duration;
+
+        return $this;
+    }
+
+    /**
+     * Get time_duration
+     *
+     * @return integer
+     */
+    public function getTimeDuration()
+    {
+        return $this->time_duration;
     }
 
     /**
@@ -552,6 +630,29 @@ class Race
     }
 
     /**
+     * Set entry_fees_global
+     *
+     * @param boolean $entry_fees_global
+     *
+     * @return Race
+     */
+    public function setEntryFeesGlobal($entry_fees_global)
+    {
+        $this->entry_fees_global = $entry_fees_global;
+
+        return $this;
+    }
+
+    /**
+     * Get entry_fees_global
+     *
+     * @return boolean
+     */
+    public function getEntryFeesGlobal()
+    {
+        return $this->entry_fees_global;
+    }
+/**
      * Set open
      *
      * @param boolean $open
@@ -714,5 +815,29 @@ class Race
     public function getMaximalYear()
     {
         return $this->maximal_year;
+    }
+
+    /**
+     * Set minimalYear.
+     *
+     * @param int $minimalYear
+     *
+     * @return Race
+     */
+    public function setMinimalYear($minimalYear)
+    {
+        $this->minimal_year = $minimalYear;
+
+        return $this;
+    }
+
+    /**
+     * Get minimalYear.
+     *
+     * @return int
+     */
+    public function getMinimalYear()
+    {
+        return $this->minimal_year;
     }
 }

@@ -1,0 +1,54 @@
+{{ form_row(form.title) }}
+{{ form_row(form.slug) }}
+{{ form_row(form.type) }}
+{% if race.illustration %}
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <a href="/{{ race.illustration.webPath }}" class="thumbnail" data-toggle="lightbox">
+                <img src="/{{ race.illustration.webPath }}" alt="{{ race.title }}">
+            </a>
+        </div>
+    </div>
+{% endif %}
+<div class="col-md-6">
+    {{ form_row(form.illustration) }}
+</div>
+<div class="col-md-6">
+    {{ form_row(form.rules) }}
+</div>
+<div class="clearfix"></div>
+<div class="col-md-6">
+    {{ form_row(form.date) }}
+    {{ form_row(form.entry_fees) }}
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_row(form.entry_fees_global) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.public) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.document_required) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.open) }}
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    {{ form_row(form.minimal_year) }}
+    {{ form_row(form.maximal_year) }}
+</div>
+<div class="clearfix"></div>
+{{ include('/_partial/wysiwyg.html.twig', { 'field': form.description,'id': 'race_description' }) }}
+
+<div class="col-md-6">
+    {{ form_row(form.max_attendee) }}
+    {{ form_row(form.number_of_athlete) }}
+    {{ form_row(form.max_number_of_athlete) }}
+</div>
+<div class="col-md-6">
+    {{ form_row(form.distance) }}
+    {{ form_row(form.elevation) }}
+    {{ form_row(form.time_duration) }}
+</div>

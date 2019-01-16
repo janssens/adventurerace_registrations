@@ -30,26 +30,25 @@
         <hr>
     {% endif %}
 
-    <h2>&Eacute;vénements en cours</h2>
-    <div class="events-list  row">
-        {% for event in events_with_public_races %}
-            {{ include('event/event_details.html.twig', { 'event': event }) }}
-        {% endfor %}
-    </div>
-
-    <h2>&Eacute;vénements passés</h2>
-    {#<div class="events-list  row">#}
-        {#{% for event in past_events %}#}
-            {#{{ include('event/event_details.html.twig', { 'event': event }) }}#}
-        {#{% endfor %}#}
-    {#</div>#}
-    <table class="table">
-        <tbody>
-            {% for event in past_events %}
-                {{ include('event/event_details_row.html.twig', { 'event': event }) }}
+    {% if events_with_public_races | length %}
+        <h2>&Eacute;vénements en cours</h2>
+        <div class="events-list  row">
+            {% for event in events_with_public_races %}
+                {{ include('event/event_details.html.twig', { 'event': event }) }}
             {% endfor %}
-        </tbody>
-    </table>
+        </div>
+    {% endif %}
+
+    {% if past_events | length %}
+        <h2>&Eacute;vénements passés</h2>
+        <table class="table">
+            <tbody>
+                {% for event in past_events %}
+                    {{ include('event/event_details_row.html.twig', { 'event': event }) }}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 
     {% if is_granted('ROLE_SUPER_ADMIN') %}
         <h2>[SUPER_ADMIN] Tous les événements</h2>

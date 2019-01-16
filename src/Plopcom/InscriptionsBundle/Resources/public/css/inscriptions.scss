@@ -1,0 +1,126 @@
+/**
+*
+**/
+
+body{
+    padding-top: 50px;
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+.grab{
+    cursor: pointer;
+}
+.event-details{
+    .thumbnail {
+        img{
+            height: 160px !important;
+            width: 100%;
+            background: grey;
+            text-align: center;
+        }
+        .caption .description{
+            height: 100px;
+            overflow: hidden;
+            position: relative;
+            &:after{
+                content: '';
+                display: block;
+                width: 100%;
+                height: 40px;
+                position: absolute;
+                bottom: 0px;
+                /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+100 */
+                background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+                background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+                background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+            }
+        }
+    }
+}
+.races-list .thumbnail > a{
+    padding: 0;
+    border: 0;
+}
+.races-list .thumbnail .caption .description{
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+}
+.races-list .thumbnail .caption .description:after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    bottom: 0px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,1+100 */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+}
+th.sort-asc::after,th.sort-desc::after{
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    display: block;
+    float: right;
+}
+th.sort-asc::after{
+    content: "\f0de";
+}
+th.sort-desc::after{
+    content: "\f0dd";
+}
+div[data-role="editor-toolbar"] .color{
+    width: 30px;
+    height: 30px;
+    float: left;
+    box-sizing: border-box;
+    transition: ease 0.25s;
+}
+div[data-role="editor-toolbar"] .color:hover{
+    border: 5px solid rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+.color.white{background:#FFFFFF}.color.black{background:#000000}.color.turquoise{background:#1ABC9C}.color.green-sea{background:#16A085}.color.emerland{background:#2ECC71}.color.nephritis{background:#27AE60}.color.peter-river{background:#3498DB}.color.belize-hole{background:#2980B9}.color.amethyst{background:#9B59B6}.color.wisteria{background:#8E44AD}.color.wet-asphalt{background:#34495E}.color.midnight-blue{background:#2C3E50}.color.sun-flower{background:#F1C40F}.color.orange{background:#F39C12}.color.carrot{background:#E67E22}.color.pumpkin{background:#D35400}.color.alizarin{background:#E74C3C}.color.pomegranate{background:#C0392B}.color.clouds{background:#ECF0F1;color:#bdc3c7}.color.silver{background:#BDC3C7}.color.concrete{background:#95A5A6}.color.asbestos{background:#7F8C8D}
+
+#event_description_wysiwyg,#race_description_wysiwyg,#configuration_content_wysiwyg {
+    overflow:scroll;
+    max-height:600px;
+    min-height: 300px;
+    border: 1px #cccccc solid;
+    padding: 10px;
+    box-sizing: border-box
+}
+
+.thumbnail .caption h3 {
+    overflow: hidden;
+    height: 90px;
+}
+#panorama {
+    height: 200px;
+    background-color: #000000;
+    background-size: cover;
+    background-position: center;
+}
+input[type="radio"], input[type="checkbox"] {
+    margin-left: 20px;
+}

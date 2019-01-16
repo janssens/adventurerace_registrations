@@ -6,6 +6,6 @@ Nouvel événement
 
 {% block body %}
     <h1>Créer un nouvel événement</h1>
-    {{ include('event/form.html.twig', { 'form': form }) }}
+    {{ include('event/_partial/form.html.twig', { 'form': form }) }}
     <a href="{{ path('event_index') }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour</a>
 {% endblock %}

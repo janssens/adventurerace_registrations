@@ -20,42 +20,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Editer course</h1>
+    <h1>Editer une course</h1>
 
     {{ form_start(edit_form) }}
-        {{ form_row(edit_form.title) }}
-        {{ form_row(edit_form.slug) }}
-        {{ form_row(edit_form.type) }}
-        {% if race.illustration %}
-        <div class="row">
-            <div class="col-xs-6 col-md-3">
-                <a href="/{{ race.illustration.webPath }}" class="thumbnail" data-toggle="lightbox">
-                    <img src="/{{ race.illustration.webPath }}" alt="{{ race.title }}">
-                </a>
-            </div>
-        </div>
-        {% endif %}
-        {{ form_row(edit_form.illustration) }}
-        <div class="clearfix"></div>
-        <div class="col-md-4 col-md-offset-4">
-            {{ form_row(edit_form.date) }}
-            {{ form_row(edit_form.entry_fees) }}
-            {{ form_row(edit_form.public) }}
-            {{ form_row(edit_form.open) }}
-            {{ form_row(edit_form.maximal_year) }}
-            {{ form_row(edit_form.document_required) }}
-        </div>
-        <div class="clearfix"></div>
-        {{ include('default/wysiwyg.html.twig', { 'field': edit_form.description,'id': 'race_description' }) }}
-
-        {{ form_row(edit_form.max_attendee) }}
-        {{ form_row(edit_form.number_of_athlete) }}
-        {{ form_row(edit_form.distance) }}
-        {{ form_row(edit_form.elevation) }}
-        {{ form_row(edit_form.rules) }}
-    <br>
+        {% include 'race/_partial/form.html.twig' with { 'form': edit_form, 'race' : race } only %}
         <button type="submit" class="btn btn-primary" >Sauver</button>
-    <br>
     {{ form_end(edit_form) }}
 
     <table>
@@ -70,4 +39,5 @@
             </td>
         </tr>
     </table>
+
 {% endblock %}

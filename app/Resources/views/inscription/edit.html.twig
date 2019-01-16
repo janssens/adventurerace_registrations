@@ -28,3 +28,13 @@
     <a href="{{ path('race_show',{"slug":inscription.race.slug}) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à la course</a>
     <a href="{{ path('inscription_show', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-default"><i class="fa fa-fw fa-chevron-left"></i>Retour à l'inscription</a>
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        jQuery(function ($) {
+            $(".athlete.optional").each(function () {
+                checkEmpty($(this));
+            });
+        });
+    </script>
+{% endblock %}

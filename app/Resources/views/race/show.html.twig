@@ -41,8 +41,12 @@
             {% endif %}
             <th>#</th>
             <th>Team</th>
-            {% for i in 1..race.numberOfAthlete %}
-                <th>Athlete {% if race.numberOfAthlete > 1 %}{{ loop.index }}{% endif %}</th>
+            {% set max = race.numberOfAthlete %}
+            {% if (race.maxNumberOfAthlete > race.numberOfAthlete) %}
+                {% set max = race.maxNumberOfAthlete %}
+            {% endif %}
+            {% for i in 1..max %}
+                <th>Athlete&nbsp;{% if max > 1 %}{{ loop.index }}{% endif %}</th>
             {% endfor %}
             <th>Catégorie</th>
             <th>Inscrit le</th>
@@ -65,6 +69,12 @@
                 {% for athlete in inscription.athletes %}
                     <td>{{ athlete.firstname|lower|capitalize }} {{ athlete.lastname|upper }}</td>
                 {% endfor %}
+                {% if (inscription.athletes | length < race.maxNumberOfAthlete) %}
+                    {% set a = inscription.athletes.count %}
+                    {% for i in a..race.maxNumberOfAthlete %}
+                        <td></td>
+                    {% endfor %}
+                {% endif %}
                 <td>{% if race.numberOfAthlete > 1 %}{{ inscription.categorie }}{% else %}{{ inscription.categorieLetter }}{% endif %}</td>
                 <td>{% if inscription.created %}{{ inscription.created|date('d/m/Y H:i:s') }}{% endif %}</td>
                 <td>{% if inscription.adminComment %}

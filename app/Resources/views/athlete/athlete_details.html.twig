@@ -1,9 +1,11 @@
-<div class="panel panel-default col-xs-6 col-md-4">
-    <div class="panel-heading">{% if athlete.gender == constant('MALE', athlete) %}<i class="fa fa-fw fa-male"></i>{% else %}<i class="fa fa-fw fa-female"></i>{% endif %}{{ athlete.firstname|lower|capitalize }} {{ athlete.lastname|upper }}</div>
-    <div class="panel-body">
-        <p><i class="fa fa-envelope-o fa-fw"></i>{{ athlete.email|lower }}</p>
-        <p>né le {{ athlete.dob|date('d/m/Y') }}</p>
-        <p><i class="fa fa-phone fa-fw"></i>{{ athlete.phone }}</p>
-        {{ include('address/address_details.html.twig', { 'address': athlete.address }) }}
+<div class="col-xs-6 col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">{% if athlete.gender == constant('MALE', athlete) %}<i class="fa fa-fw fa-male"></i>{% else %}<i class="fa fa-fw fa-female"></i>{% endif %}{{ athlete.firstname|lower|capitalize }} {{ athlete.lastname|upper }}</div>
+        <div class="panel-body">
+            <p><i class="fa fa-envelope-o fa-fw"></i>{{ athlete.email|lower }}</p>
+            <p>né le {{ athlete.dob|date('d/m/Y') }}</p>
+            <p><i class="fa fa-phone fa-fw"></i>{{ athlete.phone }}</p>
+            {{ include('address/address_details.html.twig', { 'address': athlete.address }) }}
+        </div>
     </div>
 </div>
