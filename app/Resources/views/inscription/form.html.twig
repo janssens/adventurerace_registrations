@@ -3,19 +3,22 @@
     <div class="col-md-12">
         {{ form_row(form.title) }}
     </div>
+    <div class="col-md-12">
     {% for option in form.options %}
         {{ form_widget(option) }}
     {% endfor %}
     {{ form_widget(form.options) }}
+    </div>
     {% if not inscription.id %}
     <div style="display: none">
         {% endif %}
         {% if is_granted("ROLE_ADMIN") %}
             <hr>
-            <div style="display: none;"></div>
+        <div class="col-md-6 col-md-offset-3">
             <div class="col-md-6">{{ form_row(form.status) }}</div>
             <div class="col-md-6">{{ form_row(form.payement_status) }}</div>
             <div class="col-md-12">{{ form_row(form.admin_comment) }}</div>
+        </div>
             <hr>
         {% endif %}
         {% if not inscription.id %}
@@ -65,32 +68,30 @@
                     {% endif %}
                 </div>
                 <div class="clearfix"></div>
-
-                {% for option in athlete.options %}
-                    {{ form_widget(option) }}
-                {% endfor %}
-                {{ form_widget(athlete.options) }}
+                <div class="col-md-12">
+                    {% for option in athlete.options %}
+                        {{ form_widget(option) }}
+                    {% endfor %}
+                    {{ form_widget(athlete.options) }}
+                </div>
             </div>
         {% endfor %}
     </div>
     <hr>
-    {% for option in form.options %}
-        {{ form_widget(option) }}
-    {% endfor %}
-
-    {{ form_row(form.signed) }}
-
+    <div class="col-md-12">
+        {{ form_row(form.signed) }}
+    </div>
     {{ form_widget(form) }}
-
-    {{ form_row(form.save) }}
-    {{ form_row(form.reset) }}
-    {% if inscription.id %}
-        {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN") %}
-            {% if (inscription.race.event.owner == app.user) or is_granted("ROLE_SUPER_ADMIN") %}
-                <a href="{{ path('inscription_delete', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Supprimer</a>
+    <div class="col-md-12">
+        {{ form_row(form.save) }}
+        {{ form_row(form.reset) }}
+        {% if inscription.id %}
+            {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN") %}
+                {% if (inscription.race.event.owner == app.user) or is_granted("ROLE_SUPER_ADMIN") %}
+                    <a href="{{ path('inscription_delete', { 'id': inscription.id , 'secret' : inscription.salt }) }}" class="btn btn-danger"><i class="fa fa-trash fa-fw"></i>Supprimer</a>
+                {% endif %}
             {% endif %}
         {% endif %}
-    {% endif %}
-
+    </div>
     {{ form_end(form) }}
 </div>
