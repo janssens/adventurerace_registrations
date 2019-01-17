@@ -169,10 +169,12 @@ class Race
             $r = ($this->getDistance()/1000)."km".$r;
         }
         if ($this->getElevation() > 0){
-            $r = ($r) ? $r.' & ' : ''.$this->getElevation()."m d+";
+            $r = (($r) ? $r.' & ' : '');
+            $r .= $this->getElevation()."m d+";
         }
         if ($this->getTimeDuration() > 0){
-            $r = ($r) ? $r.' & ' : ''.gmdate("H\hi", ($this->getTimeDuration() * 60));
+            $r = (($r) ? $r.', ' : '');
+            $r .= gmdate("H\hi", ($this->getTimeDuration() * 60));
         }
         return $r;
     }
