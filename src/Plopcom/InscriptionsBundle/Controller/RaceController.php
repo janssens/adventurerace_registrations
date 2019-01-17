@@ -299,7 +299,7 @@ class RaceController extends Controller
                 $illu->upload();
                 $race->setIllustration($illu);
             }else{
-                $race->setIllustration(null);
+                //$race->setIllustration(null);
             }
 
             $rules = $race->getRules();
