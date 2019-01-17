@@ -98,6 +98,17 @@ class Event
         return $this->title;
     }
 
+    public function getDate()
+    {
+        $date = null;
+        foreach ($this->getRaces() as $race){
+            if (!$date or $race->getDate()<$date){
+                $date = $race->getDate();
+            }
+        }
+        return $date;
+    }
+
     /**
      * Set description
      *

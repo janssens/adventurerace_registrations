@@ -18,8 +18,21 @@ body {
 .grab{
     cursor: pointer;
 }
+.spacer{
+    width: 100%;
+    &.h50{
+        height: 50px;
+    }
+}
 .event-details{
     .thumbnail {
+        position: relative;
+        h3 > a{
+            position: absolute;
+            top: 140px;
+            right: 0;
+            display: block;
+        }
         img{
             height: 160px !important;
             width: 100%;

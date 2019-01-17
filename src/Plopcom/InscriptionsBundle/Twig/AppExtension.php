@@ -11,6 +11,7 @@ class AppExtension extends \Twig_Extension
             new \Twig_SimpleFilter('human_status', array($this, 'humanStatus')),
             new \Twig_SimpleFilter('human_payement_status', array($this, 'humanPaymentStatus')),
             new \Twig_SimpleFilter('is_paid', array($this, 'isPaid')),
+            new \Twig_SimpleFilter('truncate', array($this, 'truncate')),
             new \Twig_SimpleFilter('ext', array($this, 'ext')),
             new \Twig_SimpleFilter('ext_type', array($this, 'ext_type')),
             new \Twig_SimpleFilter('email_encode',array($this, 'encodeText')),
@@ -89,6 +90,10 @@ class AppExtension extends \Twig_Extension
     public function ext($filepath){
         $ext = pathinfo($filepath, PATHINFO_EXTENSION);
         return $ext;
+    }
+
+    public function truncate($content,$length=50,$postStr=' ...'){
+        return substr($content, 0,$length).$postStr;
     }
 
     public function ext_type($ext){

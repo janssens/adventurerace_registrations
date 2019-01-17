@@ -1,11 +1,15 @@
 <tr>
     <td>
+        {% if event.date %}{{ event.date|date('d-m-Y') }}{% endif %}
+    </td>
+    <td>
         {% if event.races | length %}
-                {% for race in event.races %}
-                            {% if race.illustration %}
-                                <img src="{{ (race.illustration.webPath) | imagine_filter('my_thumb_race_event') }}" class="img-responsive thumbnail" alt="{{ race.title }}">
-                            {% endif %}
-                {% endfor %}
+            {{ event.races | length }}x<i class="fa fa-fw fa-calendar"></i>
+                {#{% for race in event.races %}#}
+                            {#{% if race.illustration %}#}
+                                {#<img src="{{ (race.illustration.webPath) | imagine_filter('my_thumb_race_event') }}" class="img-responsive thumbnail" alt="{{ race.title }}">#}
+                            {#{% endif %}#}
+                {#{% endfor %}#}
         {% endif %}
     </td>
     <td>
@@ -20,7 +24,7 @@
         {% endfor %}
     </td>
     <td class="description">
-        {{ event.description|striptags|raw }}
+        {{ event.description|striptags|raw|truncate(100) }}
     </td>
     <td>
         <a href="{{ path('event_show', { 'slug': event.slug }) }}" class="btn btn-sm btn-default"><i class="fa fa-search fa-fw"></i>Détails</a>

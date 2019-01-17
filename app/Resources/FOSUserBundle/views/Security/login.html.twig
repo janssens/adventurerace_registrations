@@ -1,0 +1,21 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+{% endblock fos_user_content %}
+
+{% block stylesheets %}
+    <style>
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        body{
+            background-image: url('/bundles/plopcominscriptions/alexandre-godreau-203580-unsplash.jpg');
+            background-size: cover;
+        }
+        footer{
+            opacity: 0.8;
+        }
+    </style>
+{% endblock stylesheets %}

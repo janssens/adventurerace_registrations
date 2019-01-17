@@ -27,7 +27,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $events = $em->getRepository('PlopcomInscriptionsBundle:Event')->findAll();
+        $events = $em->getRepository('PlopcomInscriptionsBundle:Event')->findBy(array(),array('id'=>'DESC'));
 
         $events_with_public_races = array();
         $past_events = array();
@@ -194,6 +194,34 @@ class DefaultController extends Controller
         }
         return $this->redirectToRoute("default_index");
     }
+
+    /**
+     * test mail.
+     *
+     * @Route("/admin/testmail", name="default_test_mail")
+     * @Method({"GET"})
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+     */
+    public function testmailAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $conf = $em->getRepository('PlopcomInscriptionsBundle:Configuration')->getInstance();
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Test mail from')
+            ->setFrom(array($conf->getContactEmail() => $conf->getPageTitle()))
+            ->setReplyTo(array($conf->getContactEmail() => $conf->getPageTitle()))
+            ->setTo($conf->getContactEmail())
+            ->setBody(
+                $this->renderView(
+                    'Emails/test.html.twig'
+                ),
+                'text/html'
+            );
+        $this->get('mailer')->send($message);
+        $this->get('session')->getFlashBag()->add('success', 'mail test envoyé à '.$conf->getContactEmail());
+        return $this->redirectToRoute("app_config");
+    }
+
 
     /**
      * Edit app.
