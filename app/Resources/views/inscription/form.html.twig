@@ -14,11 +14,9 @@
         {% endif %}
         {% if is_granted("ROLE_ADMIN") %}
             <hr>
-        <div class="col-md-6 col-md-offset-3">
             <div class="col-md-6">{{ form_row(form.status) }}</div>
             <div class="col-md-6">{{ form_row(form.payement_status) }}</div>
             <div class="col-md-12">{{ form_row(form.admin_comment) }}</div>
-        </div>
             <hr>
         {% endif %}
         {% if not inscription.id %}
