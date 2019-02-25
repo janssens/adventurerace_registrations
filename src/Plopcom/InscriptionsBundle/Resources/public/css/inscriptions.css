@@ -248,4 +248,8 @@ input[type=radio], input[type=checkbox] {
   margin-left: 20px;
 }
 
+.athlete-details .panel-heading a {
+  float: right;
+}
+
 /*# sourceMappingURL=inscriptions.css.map */

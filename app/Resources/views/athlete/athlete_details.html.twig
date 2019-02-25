@@ -1,6 +1,13 @@
-<div class="col-xs-6 col-md-4">
+<div class="col-xs-6 col-md-4 athlete-details">
     <div class="panel panel-default">
-        <div class="panel-heading">{% if athlete.gender == constant('MALE', athlete) %}<i class="fa fa-fw fa-male"></i>{% else %}<i class="fa fa-fw fa-female"></i>{% endif %}{{ athlete.firstname|lower|capitalize }} {{ athlete.lastname|upper }}</div>
+        <div class="panel-heading">
+            {% if athlete.gender == constant('MALE', athlete) %}<i class="fa fa-fw fa-male"></i>{% else %}<i class="fa fa-fw fa-female"></i>{% endif %}{{ athlete.firstname|lower|capitalize }} {{ athlete.lastname|upper }}
+            {% if athlete.document %}
+                <a href="{{ app.request.getBaseURL() }}/uploads/documents/{{ athlete.document.path }}" {% if athlete.document.path|ext|ext_type == 'image' %} data-toggle="lightbox" data-type="image"{% else %} target="_blank" data-type="url"{% endif %}>
+                    <i class="fa fa-fw fa-file-{{ athlete.document.path|ext|ext_type }}-o"></i>
+                </a>
+            {% endif %}
+        </div>
         <div class="panel-body">
             <p><i class="fa fa-envelope-o fa-fw"></i>{{ athlete.email|lower }}</p>
             <p>né le {{ athlete.dob|date('d/m/Y') }}</p>
