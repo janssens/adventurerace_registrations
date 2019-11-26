@@ -30,21 +30,6 @@ class EventController extends Controller
 
         return $response;
 
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $events = $em->getRepository('PlopcomInscriptionsBundle:Event')->findAll();
-//        $my_events = array();
-//
-//        $user = $this->getUser();
-//        if ($user){
-//            $my_events = $em->getRepository('PlopcomInscriptionsBundle:Event')->findByOwner($user);
-//
-//        }
-//
-//        return $this->render('event/index.html.twig', array(
-//            'my_events' => $my_events,
-//            'events' => $events
-//        ));
     }
 
     /**

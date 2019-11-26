@@ -217,16 +217,6 @@ class RaceController extends Controller
      */
     public function showAction(Request $request,Race $race)
     {
-        /*if (!$race->getOpen()) //not open
-        {
-            if (!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
-                if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-                    throw $this->createAccessDeniedException();
-                }else if($race->getEvent()->getOwner() != $this->getUser()){
-                    throw $this->createAccessDeniedException();
-                }
-            }
-        }*/
 
         $deleteForm = $this->createDeleteForm($race);
 
@@ -244,6 +234,17 @@ class RaceController extends Controller
                     $this->get('session')->getFlashBag()->add('success', 'Votre payement a été enregistré, merci.');
                     break;
             }
+        }
+
+        if ($race->isPast() && !(
+            (
+                $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN') and $race->getEvent()->getOwner() == $this->getUser())
+            or
+                $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))
+        ){
+            $router = $this->get('router');
+            $url = $router->generate('event_show', $router->getSlug());
+            return $this->redirect($url,301);
         }
 
         return $this->render('race/show.html.twig', array(

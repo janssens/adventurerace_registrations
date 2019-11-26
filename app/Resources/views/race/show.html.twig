@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block meta %}
+    {% if race.isPast %}
+        <meta name="robots" content="noindex">
+        <meta name="googlebot" content="noindex">
+    {% endif %}
+{% endblock %}
+
 {% block stylesheets %}
     {% if (is_granted('ROLE_ADMIN') and race.event.owner == app.user) or is_granted('ROLE_SUPER_ADMIN') %}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
