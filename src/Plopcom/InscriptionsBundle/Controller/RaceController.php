@@ -242,9 +242,8 @@ class RaceController extends Controller
             or
                 $this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))
         ){
-            $router = $this->get('router');
-            $url = $router->generate('event_show', $router->getSlug());
-            return $this->redirect($url,301);
+            return $this->redirectToRoute('event_show', array('slug' => $race->getEvent()->getSlug()),301);
+
         }
 
         return $this->render('race/show.html.twig', array(
