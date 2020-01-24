@@ -3,7 +3,10 @@ phpunit.xml*
 var/
 vendor/
 web/media/
-web/uploads/
+web/uploads/*
+!web/uploads/documents/
+web/uploads/documents/*
+!web/uploads/documents/removed.png
 web/bundles/
 .idea/
 dploy.yaml

@@ -98,6 +98,9 @@ class Event
         return $this->title;
     }
 
+    /**
+     * @return \DateTime|null
+     */
     public function getDate()
     {
         $date = null;
